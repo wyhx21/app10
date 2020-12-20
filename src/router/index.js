@@ -1,26 +1,36 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import { createRouter, createWebHashHistory } from 'vue-router';
+import store from '@store/index.js'
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
+  {path: '/', redirect: '/container'},
+  { path: '/login', name: 'login', component: () => import('@com/system/Login.vue')},
+  { path: '/container', name: 'container', component: () => import('@com/common/Container.vue'), 
+    children: [
+      { path: '', name: 'messager', component: () => import('@com/system/Messager.vue')},
+      { path: 'menu', name: 'menu', component: () => import('@com/system/MenuInfo.vue')},
+    ]
   },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
-];
+  { path: '/base/product', name: 'base_product', component: () => import('@com/base/product/Index.vue')},
+  { path: '/base/productDetail', name: 'base_product_detail', component: () => import('@com/base/product/ProdDetail.vue')},
+  { path: '/base/productEditor', name: 'base_product_editor', component: () => import('@com/base/product/ProdEditor.vue')},
+]
 
-const router = createRouter({
-  history: createWebHashHistory(),
+const route = createRouter({
+  history: new createWebHashHistory(),
   routes
-});
+})
 
-export default router;
+route.beforeEach((to, from, next) => {
+  if(to.name === 'login') {
+    store.commit('account/loginInfo',{})
+    return next()
+  } else if(to.matched.length < 1) {
+    return next('/container')
+  } else {
+    next()
+  }
+})
+
+// route.isReady().then(succ => console.log(succ)).catch(err => console.log(err))
+
+export default route
