@@ -1,0 +1,17 @@
+@import '@style/variable.scss';
+
+.app-login {
+  height: 100%;
+  background-image: url('~@img/01.jpg');
+
+  .app-login-head {
+    height: 30vh;
+  }
+  
+  .van-form {
+    width: calc(100% - 40px);
+    padding: 20px;
+    border-radius: 20px;
+    background-color: $app-color-white;
+  }
+}

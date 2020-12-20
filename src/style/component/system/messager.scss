@@ -1,0 +1,17 @@
+
+@import '@style/variable.scss';
+.app-messager{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+
+  h4 {
+    text-align: center;
+    margin: 0;
+  }
+
+  P {
+    text-indent: 2em;
+    font-size: 1em;
+  }
+}

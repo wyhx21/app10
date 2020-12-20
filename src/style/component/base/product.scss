@@ -1,0 +1,44 @@
+@import '@style/variable.scss';
+
+.app-product-form {
+  .app-button {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+    button {
+      margin-top: 5px;
+    }
+  }
+}
+
+.app-product-search {
+  height: $page-search-height;
+  line-height: $page-search-height;
+  background-color: $app-color-white;
+  text-align: center;
+
+  span {
+    display: inline-block;
+    margin-left: $page-search-height / 2;
+    margin-right: $page-search-height / 2;
+  }
+}
+.app-product-container {
+  height: calc(100% - 30px);
+  overflow: auto;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    td {
+      width: 35%;
+      text-align: left;
+    }
+  }
+
+  .app-prod-name {
+    color: red;
+    font-weight: 900;
+  }
+}
