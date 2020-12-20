@@ -39,7 +39,7 @@ module.exports = {
           '@style': resolve('src/style'),
           '@utils': resolve('src/utils'),
           '@axios': resolve('src/axios'),
-          '@img': resolve('src/img')
+          '@img': resolve('src/assets/img')
         }
       }
     })
