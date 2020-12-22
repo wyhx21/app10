@@ -2,11 +2,7 @@
   <app-page-container>
     
     <van-form class="app-data-detail">
-      <van-field name="prodCode" label="商品编码">
-        <template #input>
-          <span>{{prodRow['prodCode']}}</span>
-        </template>
-      </van-field>
+      <van-field name="prodCode" v-model="prodRow['prodCode']" label="商品编码"/>
       <van-field v-model="prodRow['prodName']" name="prodName" label="商品名称"/>
       <van-field name="prodType" label="商品类型">
         <template #input>
@@ -43,7 +39,7 @@
         show-word-limit/>
     </van-form>
     <div class="app-data-editor">
-      <span @click="confirmEditor"><van-icon name="more-o" v-if="loading"/>确认</span>
+      <span @click="confirmEditor" v-if="perMerge"><van-icon name="more-o" v-if="loading"/>确认</span>
       <span @click="cancelEditor">取消</span>
     </div>
   </app-page-container>
@@ -58,34 +54,30 @@ export default {
     AppPageContainer,AppFianceNum
   },
   computed: {
-    ...mapGetters('page/product',['currentProduct','prodTypes']),
+    ...mapGetters('page/product',['prodTypes','perMerge']),
   },
   data () {
     return {
-      prodRow: {},
+      prodRow: {
+        id: 0,
+        deleted: false,
+        purchPrice: '0',
+        salePrice: '0'
+      },
       saleShow: false,
       purchShow: false,
       loading: false
     }
   },
-  watch: {
-    currentProduct: {
-      handler (val) {
-        this.prodRow = {...val}
-        this.prodRow.deleted = (val.deleted == 1)
-      },
-      immediate: true
-    }
-  },
   methods: {
-    ...mapActions('page/product',['prodMerge']),
+    ...mapActions('page/product',['prodPersist']),
     confirmEditor(val) {
       if(this.loading == true) {
         Message({message:'请不要重复点击'});
       } else {
-        Confirm({message:'确认保存修改?'}).then(() => {
+        Confirm({message:'确认保存?'}).then(() => {
           this.loading = true;
-          this.prodMerge(this.prodRow).then(() => {
+          this.prodPersist(this.prodRow).then(() => {
             this.$router.replace('/base/product');
             this.loading = false;
           }).catch(() => {
@@ -95,8 +87,8 @@ export default {
       }
     },
     cancelEditor () {
-      Confirm({message:'确认取消修改?'}).then(() => {
-        this.$router.replace('/base/productDetail')
+      Confirm({message:'确认取消新增?'}).then(() => {
+        this.$router.replace('/base/product')
       }).catch(() => {})
     }
   }

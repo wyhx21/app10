@@ -26,6 +26,9 @@ export default {
   methods: {
     goPrePage() {
       goBack()
+    },
+    goMainPage() {
+      toMainPage()
     }
   }
 }

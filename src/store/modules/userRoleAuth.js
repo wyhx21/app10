@@ -44,6 +44,11 @@ export default {
         return []
       }
       return _state.roleMenu['children']
+    },
+    pageRoleAuth: _state => code => {
+      const auth1 = _state.roleAuth[code]
+      if(!auth1) {return []}
+      return auth1
     }
   },
   mutations: {

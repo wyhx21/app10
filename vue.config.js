@@ -20,10 +20,10 @@ module.exports = {
           open: false,
           proxy: {
             '/api': {
-              target: 'http://localhost:8080'
+              target: process.env.VUE_APP_PROXY_TARGET
             },
             '/font': {
-              target: 'http://localhost:8080'
+              target: process.env.VUE_APP_PROXY_TARGET
             },
           }
         }

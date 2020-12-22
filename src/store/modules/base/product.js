@@ -1,4 +1,4 @@
-import { queryPage,prodType } from '@axios/base/product.js';
+import { queryPage,prodType,prodMerge,prodPersist } from '@axios/base/product.js';
 const defaultPageSize = 10;
 
 export default {
@@ -38,6 +38,14 @@ export default {
       return prods
     },
     currentProduct: _state => _state.currentProduct,
+    perMerge: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters['userRoleAuth/pageRoleAuth']('h5_prod_setting')
+      return arr.includes('h5_prod_setting_merge')
+    },
+    perPersist: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters['userRoleAuth/pageRoleAuth']('h5_prod_setting')
+      return arr.includes('h5_prod_setting_persist')
+    }
   },
   mutations: {
     pageInfo: (_state, {page = 1, size = defaultPageSize} = {}) => _state.pageInfo = {page, size},
@@ -95,6 +103,12 @@ export default {
           resolve()
         }).catch(() => resolve())
       })
+    },
+    prodMerge: async ({commit},val) => {
+      return prodMerge(val);
+    },
+    prodPersist: async ({commit}, val) => {
+      return prodPersist(val)
     }
   }
 }

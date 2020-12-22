@@ -40,23 +40,27 @@ html,body,#app {
 }
 
 .app-data-editor {
-  background-color:  $app-color-link-base;
-  color: $app-color-white;
-  border-radius: 10px;
   text-align: center;
   position: fixed;
   display: inline-block;
-  width: 50px;
   height:$page-search-height;
   line-height: $page-search-height;
   bottom: 20px;
   right: 30px;
 
-  &:hover {
-    color: $app-color-link-hover;
-  }
-
-  &:active {
-    color: $app-color-link-active;
+  span {
+    background-color:  $app-color-link-base;
+    line-height: $page-search-height;
+    color: $app-color-white;
+    border-radius: 10px;
+    margin: 3px;
+    padding: 5px;
+    &:hover {
+      color: $app-color-link-hover;
+    }
+  
+    &:active {
+      color: $app-color-link-active;
+    }
   }
 }

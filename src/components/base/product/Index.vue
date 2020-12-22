@@ -1,7 +1,8 @@
 <template>
   <app-page-container>
     <div class="app-product-search">
-      <span class="app-link" @click="showQueryInfo">筛选</span> <span class="app-link">新增</span>
+      <span class="app-link" @click="showQueryInfo">筛选</span>
+      <span class="app-link" @click="persistData" v-if="perPersist">新增</span>
     </div>
     <div class="app-product-container">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
@@ -41,7 +42,7 @@ export default {
     AppPageContainer,AppFianceNum,AppQueryParam
   },
   computed: {
-    ...mapGetters('page/product',['productList']),
+    ...mapGetters('page/product',['productList','perPersist']),
   },
   data() {
     return {
@@ -88,6 +89,9 @@ export default {
     gotoDetail (row) {
       this.currentProduct(row)
       this.$router.push('/base/productDetail')
+    },
+    persistData() {
+      this.$router.push('/base/productPersist')
     }
   }
 }

@@ -53,7 +53,7 @@ axios.interceptors.response.use(
         case 403: message = '拒绝访问'; break;
         case 404: message = `请求地址出错: ${error.response.config.url}`; break;
         case 408: message = '请求超时'; break;
-        case 500: message = '服务器内部错误'; break;
+        case 500: message = "请刷新页面重试"; break;
         case 501: message = '服务未实现'; break;
         case 502: message = '网关错误'; break;
         case 503: message = '服务不可用'; break;

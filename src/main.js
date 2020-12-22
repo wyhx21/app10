@@ -4,7 +4,7 @@ import App from "./App.vue";
 import router from "@router";
 import store from "@store";
 import {Icon,Form,Button,Field,NoticeBar,NavBar,Tabbar,TabbarItem,Popup,Switch,Radio,RadioGroup,
-  ActionSheet,Divider,Grid,GridItem,Tag,PullRefresh,List,DropdownMenu, DropdownItem} from "vant";
+  ActionSheet,Divider,Grid,GridItem,Tag,PullRefresh,List,DropdownMenu, DropdownItem,NumberKeyboard} from "vant";
 
 const app = createApp(App);
 
@@ -29,6 +29,7 @@ app.use(DropdownMenu);
 app.use(DropdownItem);
 app.use(Radio);
 app.use(RadioGroup);
+app.use(NumberKeyboard);
 
 app.use(store);
 app.use(router);

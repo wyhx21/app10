@@ -33,9 +33,6 @@ export default {
 
   },
   methods: {
-    menuClick(event) {
-      console.log(event)
-    }
   }
 }
 </script>

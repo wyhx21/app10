@@ -3,12 +3,12 @@
     <div class="app-data-detail">
       <table style="width:100%">
         <tr>
-          <td class="app-table-lable4">商品名称</td>
-          <td><span>{{currentProduct['prodName']}}</span></td>
-        </tr>
-        <tr>
           <td class="app-table-lable4">商品编码</td>
           <td><span>{{currentProduct['prodCode']}}</span></td>
+        </tr>
+        <tr>
+          <td class="app-table-lable4">商品名称</td>
+          <td><span>{{currentProduct['prodName']}}</span></td>
         </tr>
         <tr>
           <td class="app-table-lable4">商品类型</td>
@@ -36,7 +36,9 @@
         </tr>
       </table>
     </div>
-    <span class="app-data-editor" @click="editorProd">编辑</span>
+    <div class="app-data-editor">
+      <span  @click="editorProd" v-if="perMerge">编辑</span>
+    </div>
   </app-page-container>
 </template>
 <script>
@@ -48,7 +50,7 @@ export default {
     AppPageContainer,AppFianceNum
   },
   computed: {
-    ...mapGetters('page/product',['currentProduct']),
+    ...mapGetters('page/product',['currentProduct','perMerge']),
   },
   methods: {
     editorProd() {
