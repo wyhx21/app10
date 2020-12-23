@@ -57,6 +57,19 @@ html,body,#app {
   overflow: auto;
 }
 
+.app-data-item{
+  margin: $app-length-row/4 $app-length-row/2;
+  padding: $app-length-row/4;
+  border: $app-color-border-msg 2px solid;
+  border-radius: $app-length-row/4;
+  background-color: $app-color-white;
+}
+
+.app-data-item_cur {
+  border-style: dotted;
+  border-color: $app-color-link-hover;
+}
+
 .app-data-editor {
   text-align: center;
   position: fixed;
@@ -94,3 +107,4 @@ html,body,#app {
     }
   }
 }
+

@@ -1,18 +1,18 @@
 <template>
   <van-form @submit="onSubmit" class="app-param-form">
 
-    <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">编号</van-divider>
+    <van-divider dashed :style="dividerStyle">编号</van-divider>
     <van-field v-model="prodCode" name="prodCode" placeholder="商品编号" clearable/>
 
-    <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">名称</van-divider>
+    <van-divider dashed :style="dividerStyle">名称</van-divider>
     <van-field v-model="productName" name="productName" placeholder="商品名称" clearable/>
 
-    <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">类型</van-divider>
+    <van-divider dashed :style="dividerStyle">类型</van-divider>
     <van-dropdown-menu>
       <van-dropdown-item v-model="prodType" :options="prodTypeList" />
     </van-dropdown-menu>
 
-    <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">是否有效</van-divider>
+    <van-divider dashed :style="dividerStyle">是否有效</van-divider>
     <van-radio-group v-model="deleted" direction="horizontal">
       <van-radio name="1">有效</van-radio>
       <van-radio name="0">无效</van-radio>
@@ -29,6 +29,7 @@ import {mapGetters,mapMutations} from 'vuex';
 export default {
   computed: {
     ...mapGetters('page/product',['prodTypeList']),
+    ...mapGetters('page',['dividerStyle']),
   },
   data() {
     return {

@@ -6,5 +6,15 @@ export default {
   modules: {
     product,
     customer
+  },
+  state: {
+    style: {
+      dividerStyle: {
+        color: '#1989fa', borderColor: '#1989fa', padding: '0 16px'
+      }
+    }
+  },
+  getters: {
+    dividerStyle: _state => _state.style.dividerStyle
   }
 }

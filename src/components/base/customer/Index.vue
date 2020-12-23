@@ -8,7 +8,8 @@
     <div class="app-data-container">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <van-list v-model:loading="listLoading" :finished="listFinished" :finished-text="finishedText" @load="loadList" >
-          <div v-for="cus of customerList" :key="cus['id']" class="app-data-item">
+          <div v-for="cus of customerList" :key="cus['id']" class="app-data-item" 
+          :class="{'app-data-item_cur': cus['id'] == currentDataId}" @click="currentDataId = cus['id']">
             {{cus['cusName']}}
           </div>
         </van-list>
@@ -37,6 +38,7 @@ export default {
       listFinished: false,
       finishedText: '我也是有底线的...',
       queryInfoShow: false,
+      currentDataId: null,
     }
   },
   mounted() {

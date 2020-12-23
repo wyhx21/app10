@@ -1,10 +1,10 @@
 <template>
   <div :style="{height: 'calc(100% - 56px)'}">
-    <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">用户</van-divider>
+    <van-divider dashed :style="dividerStyle">用户</van-divider>
     <div class="app-one-row">{{userName}}</div>
-    <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">系统</van-divider>
+    <van-divider dashed :style="dividerStyle">系统</van-divider>
     <div class="app-one-row">{{system['value']}}</div>
-    <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">角色</van-divider>
+    <van-divider dashed :style="dividerStyle">角色</van-divider>
     <div class="app-one-row">{{roleName}}</div>
   </div>
   <van-button @click="exitLogin" plain hairline type="primary" class="app-one-row" :loading='loading'>退出登录</van-button>
@@ -17,6 +17,7 @@ export default {
   computed: {
     ...mapGetters('account',['userName']),
     ...mapGetters('userRoleAuth',['system','roleName']),
+    ...mapGetters('page',['dividerStyle']),
   },
   data() {
     return {
