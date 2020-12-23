@@ -14,6 +14,8 @@ const routes = [
   { path: '/base/productPersist', name: 'base_product_persist', component: () => import('@com/base/product/ProdPersist.vue')},
   { path: '/base/productDetail', name: 'base_product_detail', component: () => import('@com/base/product/ProdDetail.vue')},
   { path: '/base/productEditor', name: 'base_product_editor', component: () => import('@com/base/product/ProdEditor.vue')},
+
+  { path: '/base/customer', name: 'base_customer', component: () => import('@com/base/customer/Index.vue')},
 ]
 
 const route = createRouter({

@@ -22,9 +22,6 @@ module.exports = {
             '/api': {
               target: process.env.VUE_APP_PROXY_TARGET
             },
-            '/font': {
-              target: process.env.VUE_APP_PROXY_TARGET
-            },
           }
         }
       })

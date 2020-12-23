@@ -4,45 +4,31 @@
       <span class="app-link" @click="showQueryInfo">筛选</span>
       <span class="app-link" @click="persistData" v-if="perPersist">新增</span>
     </div>
-    <div class="app-product-container">
+
+    <div class="app-data-container">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <van-list v-model:loading="listLoading" :finished="listFinished" :finished-text="finishedText" @load="loadList" >
-          <div v-for="prod of productList" :key="prod['id']" class="app-data-item">
-            <table>
-              <tr>
-                <td><span class="app-prod-name">{{prod['prodCode']}}</span></td>
-                <td><span class="app-prod-name">{{prod['prodName']}}</span></td>
-                <td><span>{{prod['prodUnit']}}</span></td>
-              </tr>
-              <tr>
-                <td><span>{{prod['prodTypeName']}}</span></td>
-                <td><span>{{prod['enable']}}</span></td>
-                <td><span class="app-link" @click="gotoDetail(prod)">详情</span></td>
-              </tr>
-            </table>
+          <div v-for="cus of customerList" :key="cus['id']" class="app-data-item">
+            {{cus['cusName']}}
           </div>
         </van-list>
       </van-pull-refresh>
     </div>
-
     <van-popup v-model:show="queryInfoShow" position="right" round :style="{ height: '100%',width:'70%'}">
       <app-query-param @refreshData = 'onRefresh'/>
     </van-popup>
-
   </app-page-container>
 </template>
-
 <script>
-import AppPageContainer from '@com/common/PageContainer.vue'
-import AppFianceNum from '@com/common/FianceNum.vue'
-import AppQueryParam from './QueryParam.vue'
 import {mapActions,mapGetters,mapMutations} from 'vuex'
+import AppPageContainer from '@com/common/PageContainer.vue';
+import AppQueryParam from './QueryParam.vue'
 export default {
   components: {
-    AppPageContainer,AppFianceNum,AppQueryParam
+    AppPageContainer,AppQueryParam
   },
   computed: {
-    ...mapGetters('page/product',['productList','perPersist']),
+    ...mapGetters('page/customer',['customerList','perPersist']),
   },
   data() {
     return {
@@ -56,11 +42,10 @@ export default {
   mounted() {
     this.queryParam()
     this.onRefresh()
-    this.queryProdType()
   },
   methods: {
-    ...mapActions('page/product',['queryPage','addNextPage','queryProdType']),
-    ...mapMutations('page/product',['queryParam','currentProduct']),
+    ...mapActions('page/customer',['queryPage','addNextPage']),
+    ...mapMutations('page/customer',['queryParam']),
     onRefresh() {
       this.listLoading = true
       this.queryPage(true)
@@ -86,17 +71,9 @@ export default {
     showQueryInfo () {
       this.queryInfoShow = true
     },
-    gotoDetail (row) {
-      this.currentProduct(row)
-      this.$router.push('/base/productDetail')
-    },
-    persistData() {
-      this.$router.push('/base/productPersist')
+    persistData () {
+
     }
   }
 }
 </script>
-
-<style lang="scss">
-  @import '@style/component/base/product.scss';
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <van-form @submit="onSubmit" class="app-product-form">
+  <van-form @submit="onSubmit" class="app-param-form">
 
     <van-divider dashed :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">编号</van-divider>
     <van-field v-model="prodCode" name="prodCode" placeholder="商品编号" clearable/>

@@ -39,6 +39,24 @@ html,body,#app {
   }
 }
 
+.app-data-search {
+  height: $page-search-height;
+  line-height: $page-search-height;
+  background-color: $app-color-white;
+  text-align: center;
+
+  span {
+    display: inline-block;
+    margin-left: $page-search-height / 2;
+    margin-right: $page-search-height / 2;
+  }
+}
+
+.app-data-container {
+  height: calc(100% - 30px);
+  overflow: auto;
+}
+
 .app-data-editor {
   text-align: center;
   position: fixed;
@@ -61,6 +79,18 @@ html,body,#app {
   
     &:active {
       color: $app-color-link-active;
+    }
+  }
+}
+
+.app-param-form {
+  .app-button {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+    button {
+      margin-top: 5px;
     }
   }
 }
