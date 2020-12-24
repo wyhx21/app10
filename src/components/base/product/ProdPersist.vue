@@ -39,7 +39,7 @@
         show-word-limit/>
     </van-form>
     <div class="app-data-editor">
-      <span @click="confirmEditor" v-if="perMerge"><van-icon name="more-o" v-if="loading"/>确认</span>
+      <span @click="confirmEditor" v-if="perPersist"><van-icon name="more-o" v-if="loading"/>确认</span>
       <span @click="cancelEditor">取消</span>
     </div>
   </app-page-container>
@@ -54,7 +54,7 @@ export default {
     AppPageContainer,AppFianceNum
   },
   computed: {
-    ...mapGetters('page/product',['prodTypes','perMerge']),
+    ...mapGetters('page/product',['prodTypes','perPersist']),
   },
   data () {
     return {

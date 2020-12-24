@@ -63,6 +63,24 @@ html,body,#app {
   border: $app-color-border-msg 2px solid;
   border-radius: $app-length-row/4;
   background-color: $app-color-white;
+  position: relative;
+
+  .app-data-item_disable {
+    position: absolute;
+    border-radius: 0 $app-length-row/4 0 $app-length-row/4;
+    color: $app-color-white;
+    font-size: .8em;
+    padding: 2px;
+    right: 0;
+    top: 0;
+  }
+
+  .app-data-item_effect {
+    background-color: $app-color-data_item_effect;
+  }
+  .app-data-item_ineffect {
+    background-color: $app-color-data_item_in_effect;
+  }
 }
 
 .app-data-item_cur {

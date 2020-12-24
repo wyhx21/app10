@@ -1,4 +1,4 @@
-import { queryPage } from '@axios/base/customer.js';
+import { queryPage, customerMerge,customerPersist } from '@axios/base/customer.js';
 const defaultPageSize = 10;
 
 export default {
@@ -38,7 +38,8 @@ export default {
     perPersist: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters['userRoleAuth/pageRoleAuth']('h5_prod_customer')
       return arr.includes('h5_prod_customer_persist')
-    }
+    },
+    currentCustomer: _state => _state.currentCustomer,
   },
   mutations: {
     pageInfo: (_state, {page = 1, size = defaultPageSize} = {}) => _state.pageInfo = {page, size},
@@ -49,6 +50,7 @@ export default {
     nextPage: _state => _state.pageInfo.page++,
     customerClear: _state => _state.customerList = [],
     customerList: (_state, list = []) => _state.customerList.push(...list),
+    currentCustomer: (_state, customer = {}) => _state.currentCustomer = customer,
   },
   actions: {
     initData: async ({commit}, initData = false) => {
@@ -82,6 +84,12 @@ export default {
           resolve(false)
         }
       })
+    },
+    dataMerge: async ({commit},val = {}) => {
+      return customerMerge(val);
+    },
+    dataPersist: async ({commit},val = {}) => {
+      return customerPersist(val);
     },
   }
 }

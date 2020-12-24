@@ -10,7 +10,7 @@
         <van-list v-model:loading="listLoading" :finished="listFinished" :finished-text="finishedText" @load="loadList" >
           <div v-for="cus of customerList" :key="cus['id']" class="app-data-item" 
           :class="{'app-data-item_cur': cus['id'] == currentDataId}" @click="currentDataId = cus['id']">
-            {{cus['cusName']}}
+            <app-row-data :data='cus'/>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -21,12 +21,13 @@
   </app-page-container>
 </template>
 <script>
-import {mapActions,mapGetters,mapMutations} from 'vuex'
+import {mapActions,mapGetters,mapMutations} from 'vuex';
 import AppPageContainer from '@com/common/PageContainer.vue';
-import AppQueryParam from './QueryParam.vue'
+import AppQueryParam from './QueryParam.vue';
+import AppRowData from './RowData.vue';
 export default {
   components: {
-    AppPageContainer,AppQueryParam
+    AppPageContainer,AppQueryParam,AppRowData
   },
   computed: {
     ...mapGetters('page/customer',['customerList','perPersist']),
@@ -74,7 +75,7 @@ export default {
       this.queryInfoShow = true
     },
     persistData () {
-
+      this.$router.push('/base/customerPersist')
     }
   }
 }

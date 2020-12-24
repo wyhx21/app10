@@ -9,16 +9,18 @@
         <van-list v-model:loading="listLoading" :finished="listFinished" :finished-text="finishedText" @load="loadList" >
           <div v-for="prod of productList" :key="prod['id']" class="app-data-item" 
             :class="{'app-data-item_cur': prod['id'] == currentDataId}" @click="currentDataId = prod['id']">
+            <span class="app-data-item_disable" :class="prod['deleted'] == 1 ? 'app-data-item_effect' : 'app-data-item_ineffect'">
+              {{prod['enable']}}
+            </span>
             <table>
               <tr>
-                <td><span class="app-prod-name">{{prod['prodCode']}}</span></td>
-                <td><span class="app-prod-name">{{prod['prodName']}}</span></td>
-                <td><span>{{prod['prodUnit']}}</span></td>
+                <td width='30%'><span class="app-prod-name">{{prod['prodCode']}}</span></td>
+                <td width='55%'><span class="app-prod-name">{{prod['prodName']}}</span></td>
+                <td rowspan="2"><span class="app-link" @click="gotoDetail(prod)">详情</span></td>
               </tr>
               <tr>
+                <td><span>{{prod['prodUnit']}}</span></td>
                 <td><span>{{prod['prodTypeName']}}</span></td>
-                <td><span>{{prod['enable']}}</span></td>
-                <td><span class="app-link" @click="gotoDetail(prod)">详情</span></td>
               </tr>
             </table>
           </div>
