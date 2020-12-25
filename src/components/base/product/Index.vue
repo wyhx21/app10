@@ -59,7 +59,7 @@
       v-model:show="queryInfoShow"
       position="right"
       round
-      :style="{ height: '100%', width: '70%' }"
+      :style="popupQueryParamStyle"
     >
       <app-query-param @refreshData="onRefresh" />
     </van-popup>
@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     ...mapGetters("page/product", ["productList", "perPersist"]),
-    ...mapGetters("page", ["finishedText"])
+    ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
     return {

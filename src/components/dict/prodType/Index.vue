@@ -47,7 +47,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/supplier", ["dataList", "perPersist"]),
+    ...mapGetters("page/prodType", ["dataList", "perPersist"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -64,8 +64,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/supplier", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/supplier", ["queryParam"]),
+    ...mapActions("page/prodType", ["queryPage", "addNextPage"]),
+    ...mapMutations("page/prodType", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)
@@ -94,7 +94,7 @@ export default {
       this.queryInfoShow = true;
     },
     persistData() {
-      this.$router.push("/base/supplierPersist");
+      this.$router.push("/dict/prodTypePersist");
     }
   }
 };

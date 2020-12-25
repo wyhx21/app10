@@ -86,6 +86,27 @@ const routes = [
     path: "/base/supplierPersist",
     name: "base_supplier_persist",
     component: () => import("@com/base/supplier/Persist.vue")
+  },
+
+  {
+    path: "/dict/prodType",
+    name: "dict_prodType",
+    component: () => import("@com/dict/prodType/Index.vue")
+  },
+  {
+    path: "/dict/prodTypeDetail",
+    name: "dict_prodType_detail",
+    component: () => import("@com/dict/prodType/Detail.vue")
+  },
+  {
+    path: "/dict/prodTypeEditor",
+    name: "dict_prodType_editor",
+    component: () => import("@com/dict/prodType/Editor.vue")
+  },
+  {
+    path: "/dict/prodTypePersist",
+    name: "dict_prodType_persist",
+    component: () => import("@com/dict/prodType/Persist.vue")
   }
 ];
 
