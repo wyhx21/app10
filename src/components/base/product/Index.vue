@@ -6,21 +6,48 @@
     </div>
     <div class="app-product-container">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-        <van-list v-model:loading="listLoading" :finished="listFinished" :finished-text="finishedText" @load="loadList" >
-          <div v-for="prod of productList" :key="prod['id']" class="app-data-item" 
-            :class="{'app-data-item_cur': prod['id'] == currentDataId}" @click="currentDataId = prod['id']">
-            <span class="app-data-item_disable" :class="prod['deleted'] == 1 ? 'app-data-item_effect' : 'app-data-item_ineffect'">
-              {{prod['enable']}}
+        <van-list
+          v-model:loading="listLoading"
+          :finished="listFinished"
+          :finished-text="finishedText"
+          @load="loadList"
+        >
+          <div
+            v-for="prod of productList"
+            :key="prod['id']"
+            class="app-data-item"
+            :class="{ 'app-data-item_cur': prod['id'] == currentDataId }"
+            @click="currentDataId = prod['id']"
+          >
+            <span
+              class="app-data-item_disable"
+              :class="
+                prod['deleted'] == 1
+                  ? 'app-data-item_effect'
+                  : 'app-data-item_ineffect'
+              "
+            >
+              {{ prod["enable"] }}
             </span>
             <table>
               <tr>
-                <td width='30%'><span class="app-prod-name">{{prod['prodCode']}}</span></td>
-                <td width='55%'><span class="app-prod-name">{{prod['prodName']}}</span></td>
-                <td rowspan="2"><span class="app-link" @click="gotoDetail(prod)">详情</span></td>
+                <td width="30%">
+                  <span class="app-prod-name">{{ prod["prodCode"] }}</span>
+                </td>
+                <td width="55%">
+                  <span class="app-prod-name">{{ prod["prodName"] }}</span>
+                </td>
+                <td rowspan="2">
+                  <span class="app-link" @click="gotoDetail(prod)">详情</span>
+                </td>
               </tr>
               <tr>
-                <td><span>{{prod['prodUnit']}}</span></td>
-                <td><span>{{prod['prodTypeName']}}</span></td>
+                <td>
+                  <span>{{ prod["prodUnit"] }}</span>
+                </td>
+                <td>
+                  <span>{{ prod["prodTypeName"] }}</span>
+                </td>
               </tr>
             </table>
           </div>
@@ -28,79 +55,89 @@
       </van-pull-refresh>
     </div>
 
-    <van-popup v-model:show="queryInfoShow" position="right" round :style="{ height: '100%',width:'70%'}">
-      <app-query-param @refreshData = 'onRefresh'/>
+    <van-popup
+      v-model:show="queryInfoShow"
+      position="right"
+      round
+      :style="{ height: '100%', width: '70%' }"
+    >
+      <app-query-param @refreshData="onRefresh" />
     </van-popup>
-
   </app-page-container>
 </template>
 
 <script>
-import AppPageContainer from '@com/common/PageContainer.vue'
-import AppFianceNum from '@com/common/FianceNum.vue'
-import AppQueryParam from './QueryParam.vue'
-import {mapActions,mapGetters,mapMutations} from 'vuex'
+import AppPageContainer from "@com/common/PageContainer.vue";
+import AppQueryParam from "./QueryParam.vue";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   components: {
-    AppPageContainer,AppFianceNum,AppQueryParam
+    AppPageContainer,
+    AppQueryParam
   },
   computed: {
-    ...mapGetters('page/product',['productList','perPersist']),
+    ...mapGetters("page/product", ["productList", "perPersist"])
   },
   data() {
     return {
-      isLoading:true,
+      isLoading: true,
       listLoading: true,
       listFinished: false,
-      finishedText: '我也是有底线的...',
+      finishedText: "我也是有底线的...",
       queryInfoShow: false,
-      currentDataId: null,
-    }
+      currentDataId: null
+    };
   },
   mounted() {
-    this.queryParam()
-    this.onRefresh()
-    this.queryProdType()
+    this.queryParam();
+    this.onRefresh();
+    this.queryProdType();
   },
   methods: {
-    ...mapActions('page/product',['queryPage','addNextPage','queryProdType']),
-    ...mapMutations('page/product',['queryParam','currentProduct']),
+    ...mapActions("page/product", [
+      "queryPage",
+      "addNextPage",
+      "queryProdType"
+    ]),
+    ...mapMutations("page/product", ["queryParam", "currentProduct"]),
     onRefresh() {
-      this.listLoading = true
+      this.listLoading = true;
       this.queryPage(true)
         .then(res => {
-          this.queryInfoShow = false
-          this.listFinished = !res
-          this.isLoading = false
-          this.listLoading = false
+          this.queryInfoShow = false;
+          this.listFinished = !res;
+          this.isLoading = false;
+          this.listLoading = false;
         })
         .catch(() => {
-          this.isLoading = false
-          this.listLoading = false
-        })
+          this.isLoading = false;
+          this.listLoading = false;
+        });
     },
     loadList() {
-      this.addNextPage().then(res => {
-        this.listLoading = false
-        this.listFinished = !res
-      }).catch(() => {
-        this.listLoading = false
-      })
+      this.addNextPage()
+        .then(res => {
+          this.listLoading = false;
+          this.listFinished = !res;
+        })
+        .catch(() => {
+          this.listLoading = false;
+        });
     },
-    showQueryInfo () {
-      this.queryInfoShow = true
+    showQueryInfo() {
+      this.queryInfoShow = true;
     },
-    gotoDetail (row) {
-      this.currentProduct(row)
-      this.$router.push('/base/productDetail')
+    gotoDetail(row) {
+      this.currentProduct(row);
+      this.$router.push("/base/productDetail");
     },
     persistData() {
-      this.$router.push('/base/productPersist')
+      this.$router.push("/base/productPersist");
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  @import '@style/component/base/product.scss';
+@import "@style/component/base/product.scss";
 </style>

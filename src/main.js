@@ -3,8 +3,30 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "@router";
 import store from "@store";
-import {Icon,Form,Button,Field,NoticeBar,NavBar,Tabbar,TabbarItem,Popup,Switch,Radio,RadioGroup,
-  ActionSheet,Divider,Grid,GridItem,Tag,PullRefresh,List,DropdownMenu, DropdownItem,NumberKeyboard} from "vant";
+import {
+  Icon,
+  Form,
+  Button,
+  Field,
+  NoticeBar,
+  NavBar,
+  Tabbar,
+  TabbarItem,
+  Popup,
+  Switch,
+  Radio,
+  RadioGroup,
+  ActionSheet,
+  Divider,
+  Grid,
+  GridItem,
+  Tag,
+  PullRefresh,
+  List,
+  DropdownMenu,
+  DropdownItem,
+  NumberKeyboard
+} from "vant";
 
 const app = createApp(App);
 

@@ -1,9 +1,9 @@
 <template>
   <div class="app-fiance-num">
-    <span class="app-fiance_currency">{{currency}}</span>
-    <span class="app_fiance_integer">{{numInteger}}</span>
+    <span class="app-fiance_currency">{{ currency }}</span>
+    <span class="app_fiance_integer">{{ numInteger }}</span>
     <span>.</span>
-    <span class="app_fiance_decimal">{{numDecimal}}</span>
+    <span class="app_fiance_decimal">{{ numDecimal }}</span>
     <slot></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@
 export default {
   props: {
     currency: {
-      default: '¥'
+      default: "¥"
     },
     value: {
       default: 0
@@ -19,14 +19,14 @@ export default {
   },
   computed: {
     numInteger() {
-      return `${this.value}.00`.split(/\./g)[0]
+      return `${this.value}.00`.split(/\./g)[0];
     },
     numDecimal() {
-      return `${this.value}.00`.split(/\./g)[1].padEnd(2,'00')
+      return `${this.value}.00`.split(/\./g)[1].padEnd(2, "00");
     }
   }
-}
+};
 </script>
 <style lang="scss">
-  @import '@style/component/common/fianceNum.scss';
+@import "@style/component/common/fianceNum.scss";
 </style>
