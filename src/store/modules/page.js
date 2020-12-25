@@ -12,7 +12,8 @@ export default {
       dividerStyle: {
         color: "#1989fa",
         borderColor: "#1989fa",
-        padding: "0 16px"
+        padding: "0 16px",
+        margin: "5px"
       }
     }
   },

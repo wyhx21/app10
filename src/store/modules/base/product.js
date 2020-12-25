@@ -37,11 +37,7 @@ export default {
       return totalPage > currentPage;
     },
     prodTypeList: _state => _state.prodType,
-    prodTypes: _state => {
-      let all, prods;
-      [all, ...prods] = [..._state.prodType];
-      return prods;
-    },
+    prodTypes: _state => _state.prodType.filter((item, index) => index > 0),
     currentProduct: _state => _state.currentProduct,
     perMerge: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_prod_setting");
@@ -115,10 +111,10 @@ export default {
           .catch(() => resolve());
       });
     },
-    prodMerge: async ({ commit }, val) => {
+    prodMerge: async (args0, val) => {
       return prodMerge(val);
     },
-    prodPersist: async ({ commit }, val) => {
+    prodPersist: async (args0, val) => {
       return prodPersist(val);
     }
   }

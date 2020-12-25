@@ -10,7 +10,11 @@
       <van-field v-model="data['linkName']" name="linkName" label="联系人" />
       <van-field name="sex" label="性别">
         <template #input>
-          <van-radio-group v-model="data['sex']" direction="horizontal">
+          <van-radio-group
+            style="padding:0"
+            v-model="data['sex']"
+            direction="horizontal"
+          >
             <van-radio name="0">男</van-radio>
             <van-radio name="1">女</van-radio>
           </van-radio-group>

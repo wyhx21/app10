@@ -94,10 +94,10 @@ export default {
         }
       });
     },
-    dataMerge: async ({ commit }, val = {}) => {
+    dataMerge: async (args0, val = {}) => {
       return customerMerge(val);
     },
-    dataPersist: async ({ commit }, val = {}) => {
+    dataPersist: async (args0, val = {}) => {
       return customerPersist(val);
     }
   }
