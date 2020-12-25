@@ -10,10 +10,10 @@
   <table width="100%">
     <tr>
       <td width="30%">
-        <span class="app-data-item_blod">{{ data["cusCode"] }}</span>
+        <span class="app-data-item_blod">{{ data["supplierCode"] }}</span>
       </td>
       <td width="55%">
-        <span class="app-data-item_blod">{{ data["cusName"] }}</span>
+        <span class="app-data-item_blod">{{ data["supplierName"] }}</span>
       </td>
       <td rowspan="2">
         <span class="app-link" @click="gotoDetail()">详情</span>
@@ -35,10 +35,10 @@ import { mapMutations } from "vuex";
 export default {
   props: ["data"],
   methods: {
-    ...mapMutations("page/customer", ["currentCustomer"]),
+    ...mapMutations("page/supplier", ["currentData"]),
     gotoDetail() {
-      this.currentCustomer(this.data);
-      this.$router.push("/base/customerDetail");
+      this.currentData(this.data);
+      this.$router.push("/base/supplierDetail");
     }
   }
 };

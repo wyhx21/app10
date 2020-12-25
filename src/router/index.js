@@ -65,6 +65,27 @@ const routes = [
     path: "/base/customerPersist",
     name: "base_customer_persist",
     component: () => import("@com/base/customer/Persist.vue")
+  },
+
+  {
+    path: "/base/supplier",
+    name: "base_supplier",
+    component: () => import("@com/base/supplier/Index.vue")
+  },
+  {
+    path: "/base/supplierDetail",
+    name: "base_supplier_detail",
+    component: () => import("@com/base/supplier/Detail.vue")
+  },
+  {
+    path: "/base/supplierEditor",
+    name: "base_supplier_editor",
+    component: () => import("@com/base/supplier/Editor.vue")
+  },
+  {
+    path: "/base/supplierPersist",
+    name: "base_supplier_persist",
+    component: () => import("@com/base/supplier/Persist.vue")
   }
 ];
 

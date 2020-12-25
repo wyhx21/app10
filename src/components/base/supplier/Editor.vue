@@ -1,8 +1,16 @@
 <template>
   <app-page-container>
     <van-form class="app-data-detail">
-      <van-field v-model="data['cusCode']" name="cusCode" label="客户编码" />
-      <van-field v-model="data['cusName']" name="cusName" label="客户名称" />
+      <van-field name="supplierCode" label="供应商编码">
+        <template #input>
+          <span>{{ data["supplierCode"] }}</span>
+        </template>
+      </van-field>
+      <van-field
+        v-model="data['supplierName']"
+        name="supplierName"
+        label="供应商名称"
+      />
       <van-field v-model="data['linkName']" name="linkName" label="联系人" />
       <van-field name="sex" label="性别">
         <template #input>
@@ -44,7 +52,7 @@
       />
     </van-form>
     <div class="app-data-editor">
-      <span @click="confirmEditor" v-if="perPersist"
+      <span @click="confirmEditor"
         ><van-icon name="more-o" v-if="loading" />确认</span
       >
       <span @click="cancelEditor">取消</span>
@@ -60,30 +68,36 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/customer", ["perPersist"])
+    ...mapGetters("page/supplier", ["currentData"])
   },
   data() {
     return {
-      data: {
-        id: 0,
-        deleted: false,
-        sex: "0"
-      },
+      data: {},
       loading: false
     };
   },
+  watch: {
+    currentData: {
+      handler(val) {
+        this.data = { ...val };
+        this.data.deleted = val.deleted == 1;
+        this.data.sex = `${val["sex"]}`;
+      },
+      immediate: true
+    }
+  },
   methods: {
-    ...mapActions("page/customer", ["dataPersist"]),
+    ...mapActions("page/supplier", ["dataMerge"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });
       } else {
-        Confirm({ message: "确认保存?" })
+        Confirm({ message: "确认保存修改?" })
           .then(() => {
             this.loading = true;
-            this.dataPersist(this.data)
+            this.dataMerge(this.data)
               .then(() => {
-                this.$router.replace("/base/customer");
+                this.$router.replace("/base/supplier");
                 this.loading = false;
               })
               .catch(() => {
@@ -94,9 +108,9 @@ export default {
       }
     },
     cancelEditor() {
-      Confirm({ message: "确认取消新增?" })
+      Confirm({ message: "确认取消修改?" })
         .then(() => {
-          this.$router.replace("/base/customer");
+          this.$router.replace("/base/supplierDetail");
         })
         .catch(() => {});
     }

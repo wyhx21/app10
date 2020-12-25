@@ -1,20 +1,6 @@
 @import '@style/variable.scss';
+@import '@style/vant.scss';
 
-.van-form {
-  .van-dropdown-menu {
-    width: calc(100% - 20px);
-    height: 100%;
-    padding: 0 10px;
-  }
-  
-  .van-dropdown-menu__bar {
-    height: 100%;
-  }
-
-  .van-radio-group {
-    padding: 0 10px;
-  }
-}
 
 html,body,#app {
   height: 100%;
@@ -85,6 +71,17 @@ html,body,#app {
   }
   .app-data-item_ineffect {
     background-color: $app-color-data_item_in_effect;
+  }
+
+  .app-data-item_blod {
+    color: $app-color-link-base;
+    font-weight: 600;
+  }
+
+  .app-data-item_thin {
+    color:$app-main-font-color1;
+    font-size: .8em;
+    text-indent: 2em;
   }
 }
 

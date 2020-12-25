@@ -1,8 +1,16 @@
 <template>
   <app-page-container>
     <van-form class="app-data-detail">
-      <van-field v-model="data['cusCode']" name="cusCode" label="客户编码" />
-      <van-field v-model="data['cusName']" name="cusName" label="客户名称" />
+      <van-field
+        v-model="data['supplierCode']"
+        name="cusCode"
+        label="供应商编码"
+      />
+      <van-field
+        v-model="data['supplierName']"
+        name="cusName"
+        label="供应商名称"
+      />
       <van-field v-model="data['linkName']" name="linkName" label="联系人" />
       <van-field name="sex" label="性别">
         <template #input>
@@ -60,7 +68,7 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/customer", ["perPersist"])
+    ...mapGetters("page/supplier", ["perPersist"])
   },
   data() {
     return {
@@ -73,7 +81,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("page/customer", ["dataPersist"]),
+    ...mapActions("page/supplier", ["dataPersist"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });
@@ -83,7 +91,7 @@ export default {
             this.loading = true;
             this.dataPersist(this.data)
               .then(() => {
-                this.$router.replace("/base/customer");
+                this.$router.replace("/base/supplier");
                 this.loading = false;
               })
               .catch(() => {
@@ -96,7 +104,7 @@ export default {
     cancelEditor() {
       Confirm({ message: "确认取消新增?" })
         .then(() => {
-          this.$router.replace("/base/customer");
+          this.$router.replace("/base/supplier");
         })
         .catch(() => {});
     }

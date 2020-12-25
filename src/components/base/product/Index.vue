@@ -4,7 +4,7 @@
       <span class="app-link" @click="showQueryInfo">筛选</span>
       <span class="app-link" @click="persistData" v-if="perPersist">新增</span>
     </div>
-    <div class="app-product-container">
+    <div class="app-data-container">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <van-list
           v-model:loading="listLoading"
@@ -32,10 +32,10 @@
             <table>
               <tr>
                 <td width="30%">
-                  <span class="app-prod-name">{{ prod["prodCode"] }}</span>
+                  <span class="app-data-item_blod">{{ prod["prodCode"] }}</span>
                 </td>
                 <td width="55%">
-                  <span class="app-prod-name">{{ prod["prodName"] }}</span>
+                  <span class="app-data-item_blod">{{ prod["prodName"] }}</span>
                 </td>
                 <td rowspan="2">
                   <span class="app-link" @click="gotoDetail(prod)">详情</span>
@@ -76,14 +76,14 @@ export default {
     AppQueryParam
   },
   computed: {
-    ...mapGetters("page/product", ["productList", "perPersist"])
+    ...mapGetters("page/product", ["productList", "perPersist"]),
+    ...mapGetters("page", ["finishedText"])
   },
   data() {
     return {
       isLoading: true,
       listLoading: true,
       listFinished: false,
-      finishedText: "我也是有底线的...",
       queryInfoShow: false,
       currentDataId: null
     };
@@ -137,7 +137,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-@import "@style/component/base/product.scss";
-</style>

@@ -14,13 +14,13 @@
           @load="loadList"
         >
           <div
-            v-for="cus of customerList"
-            :key="cus['id']"
+            v-for="data of dataList"
+            :key="data['id']"
             class="app-data-item"
-            :class="{ 'app-data-item_cur': cus['id'] == currentDataId }"
-            @click="currentDataId = cus['id']"
+            :class="{ 'app-data-item_cur': data['id'] == currentDataId }"
+            @click="currentDataId = data['id']"
           >
-            <app-row-data :data="cus" />
+            <app-row-data :data="data" />
           </div>
         </van-list>
       </van-pull-refresh>
@@ -47,7 +47,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/customer", ["customerList", "perPersist"]),
+    ...mapGetters("page/supplier", ["dataList", "perPersist"]),
     ...mapGetters("page", ["finishedText"])
   },
   data() {
@@ -64,8 +64,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/customer", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/customer", ["queryParam"]),
+    ...mapActions("page/supplier", ["queryPage", "addNextPage"]),
+    ...mapMutations("page/supplier", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)
@@ -94,7 +94,7 @@ export default {
       this.queryInfoShow = true;
     },
     persistData() {
-      this.$router.push("/base/customerPersist");
+      this.$router.push("/base/supplierPersist");
     }
   }
 };
