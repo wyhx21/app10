@@ -2,6 +2,7 @@ import product from "@store/modules/base/product.js";
 import customer from "@store/modules/base/customer.js";
 import supplier from "@store/modules/base/supplier.js";
 import prodType from "@store/modules/dict/prodType.js";
+import verifyType from "@store/modules/dict/verifyType.js";
 
 export default {
   namespaced: true,
@@ -9,7 +10,8 @@ export default {
     product,
     customer,
     supplier,
-    prodType
+    prodType,
+    verifyType
   },
   state: {
     style: {
