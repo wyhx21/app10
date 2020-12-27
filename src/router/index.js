@@ -3,6 +3,7 @@ import store from "@store/index.js";
 import { system } from "@router/package/common.js";
 import { product, customer, supplier } from "@router/package/base.js";
 import { prodType, verifyType } from "@router/package/dict.js";
+import { storeSetting } from "@router/package/store.js";
 
 const routes = [
   ...system,
@@ -10,7 +11,8 @@ const routes = [
   ...customer,
   ...supplier,
   ...prodType,
-  ...verifyType
+  ...verifyType,
+  ...storeSetting
 ];
 
 const route = createRouter({
