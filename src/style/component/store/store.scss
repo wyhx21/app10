@@ -1,1 +1,77 @@
 @import '@style/variable.scss';
+
+.app-store-detail {
+  background-color: $app-color-white;
+  margin: $app-length-row/4 $app-length-row/2;
+  padding: $app-length-row/4;
+  width: calc(100% - 60px);
+  position: relative;
+  border-radius: 10px;
+
+  div {
+    padding: .3em;
+  }
+}
+
+.app-detail-content {
+  background-color: $app-color-white;
+  margin: $app-length-row/4 $app-length-row/2;
+  padding: $app-length-row/4;
+  width: calc(100% - 60px);
+  border-radius: 10px;
+
+  .app-detail-content_empty {
+    text-align: center;
+    color:$app-main-font-color1;
+    font-size: .8em;
+  }
+
+  .app-detail-content_item {
+    position: relative;
+    background-color: $app_store_detail_item_back;
+    border: 2px solid $app_store_detail_item_back;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+
+    div {
+      padding: .3em;
+    }
+  }
+
+  .app-detail-content_item_cur {
+    border-style: dotted;
+    border-color: $app-color-link-hover;
+  }
+}
+
+.app-store-enable {
+  border-radius: 10px;
+  position: absolute;
+  color: $app-color-white;
+  font-size: .8em;
+  padding: 2px;
+  top: 0;
+  right: 0;
+}
+
+.app-store-enable_effect {
+  background-color: $app-color-data_item_effect;
+}
+
+.app-store-enable_ineffect {
+  background-color: $app-color-data_item_in_effect;
+}
+
+.app-store-code {
+  display: inline-block;
+  width: 80px;
+}
+
+.app-store-remark {
+  margin: 0;
+  color:$app-main-font-color1;
+  font-size: .8em;
+  text-indent: 2em;
+  font-style: italic;
+}

@@ -7,4 +7,19 @@ const storeMerge = (data = {}) => axios.doPost("/store/store/merge", data);
 
 const storePersist = (data = {}) => axios.doPost("/store/store/persist", data);
 
-export { queryPage, storeMerge, storePersist };
+const areaList = (storeId = 0) =>
+  axios.doGet(`/store/storeArea/list/${storeId}`);
+
+const areaMerge = (data = {}) => axios.doPost("/store/storeArea/merge", data);
+
+const areaPersist = (data = {}) =>
+  axios.doPost("/store/storeArea/persist", data);
+
+export {
+  queryPage,
+  storeMerge,
+  storePersist,
+  areaList,
+  areaMerge,
+  areaPersist
+};
