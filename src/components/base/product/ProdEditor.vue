@@ -26,50 +26,20 @@
         name="prodUnit"
         label="商品单位"
       />
-      <van-field
-        name="purchPrice"
-        label="采购单价"
-        @touchstart.stop="
-          purchShow = true;
-          saleShow = false;
-        "
-      >
+      <van-field name="purchPrice" label="采购单价">
         <template #input>
-          <div>
-            <app-fiance-num :value="prodRow['purchPrice']" />
-            <van-number-keyboard
-              v-model="prodRow['purchPrice']"
-              :show="purchShow"
-              :title="`采购单价:${prodRow['purchPrice']}`"
-              theme="custom"
-              extra-key="."
-              close-button-text="完成"
-              @blur="purchShow = false"
-            />
-          </div>
+          <app-fiance-num
+            v-model="prodRow['purchPrice']"
+            placeholder="采购单价"
+          />
         </template>
       </van-field>
-      <van-field
-        name="salePrice"
-        label="销售单价"
-        @touchstart.stop="
-          saleShow = true;
-          purchShow = false;
-        "
-      >
+      <van-field name="salePrice" label="销售单价">
         <template #input>
-          <div>
-            <app-fiance-num :value="prodRow['salePrice']" />
-            <van-number-keyboard
-              v-model="prodRow['salePrice']"
-              :show="saleShow"
-              :title="`销售单价:${prodRow['salePrice']}`"
-              theme="custom"
-              extra-key="."
-              close-button-text="完成"
-              @blur="saleShow = false"
-            />
-          </div>
+          <app-fiance-num
+            v-model="prodRow['salePrice']"
+            placeholder="销售单价"
+          />
         </template>
       </van-field>
       <van-field name="deleted" label="是否有效">
@@ -111,9 +81,10 @@ export default {
   },
   data() {
     return {
-      prodRow: {},
-      saleShow: false,
-      purchShow: false,
+      prodRow: {
+        purchPrice: "",
+        salePrice: ""
+      },
       loading: false
     };
   },

@@ -28,6 +28,7 @@ export default {
   },
   actions: {
     queryAreaList: async ({ commit }, storeId) => {
+      commit("dataList");
       return new Promise((resolve, reject) => {
         areaList(storeId)
           .then(res => {

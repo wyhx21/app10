@@ -30,7 +30,8 @@
           <td class="app-table-lable4">采购单价</td>
           <td>
             <app-fiance-num
-              :value="currentProduct['purchPrice']"
+              v-model="currentProduct['purchPrice']"
+              disabled
             ></app-fiance-num>
           </td>
         </tr>
@@ -38,7 +39,8 @@
           <td class="app-table-lable4">销售单价</td>
           <td>
             <app-fiance-num
-              :value="currentProduct['salePrice']"
+              v-model="currentProduct['salePrice']"
+              disabled
             ></app-fiance-num>
           </td>
         </tr>

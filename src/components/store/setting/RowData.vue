@@ -27,10 +27,8 @@ export default {
   props: ["data"],
   methods: {
     ...mapMutations("page/store", ["currentData"]),
-    ...mapMutations("page/stroeArea", ["dataList"]),
     gotoDetail() {
       this.currentData(this.data);
-      this.dataList();
       this.$router.push("/store/storeDetail");
     }
   }

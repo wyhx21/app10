@@ -18,11 +18,11 @@
 
     <van-divider dashed :style="dividerStyle">订单金额</van-divider>
     <div class="app-order-param-row">
-      <div class="app-order-param-item" @click="showData = 1">
-        <app-fiance-num :value="orderAmountMin" placeholder="最小金额" />
+      <div class="app-order-param-item">
+        <app-fiance-num v-model="orderAmountMin" placeholder="最小金额" />
       </div>
-      <div class="app-order-param-item" @click="showData = 2">
-        <app-fiance-num :value="orderAmountMax" placeholder="最大金额" />
+      <div class="app-order-param-item">
+        <app-fiance-num v-model="orderAmountMax" placeholder="最大金额" />
       </div>
     </div>
 
@@ -49,25 +49,6 @@
       >
       <van-button block type="primary" native-type="submit">提交</van-button>
     </div>
-
-    <van-number-keyboard
-      v-model="orderAmountMin"
-      :show="showData == 1"
-      :title="`最小金额:${orderAmountMin}`"
-      theme="custom"
-      extra-key="."
-      close-button-text="完成"
-      @blur="showData = 0"
-    />
-    <van-number-keyboard
-      v-model="orderAmountMax"
-      :show="showData == 2"
-      :title="`最大金额:${orderAmountMax}`"
-      theme="custom"
-      extra-key="."
-      close-button-text="完成"
-      @blur="showData = 0"
-    />
 
     <van-popup v-model:show="show.beginDate" position="bottom">
       <van-datetime-picker
@@ -100,7 +81,6 @@ export default {
       orderStatus: "",
       orderTimeBegin: "",
       orderTimeEnd: "",
-      showData: 0,
       show: {
         beginDate: false
       }
