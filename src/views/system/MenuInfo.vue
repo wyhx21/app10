@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapGetters("userRoleAuth", ["roleMenu"])
@@ -39,7 +39,13 @@ export default {
       }
     };
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.purchaseOrderParam();
+  },
+  methods: {
+    ...mapMutations("page/purchaseOrder", {
+      purchaseOrderParam: "queryParam"
+    })
+  }
 };
 </script>

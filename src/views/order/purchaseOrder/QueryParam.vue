@@ -1,122 +1,148 @@
 <template>
-  <van-form @submit="onSubmit" class="app-param-form">
-    <van-divider dashed :style="dividerStyle">订单编号</van-divider>
-    <van-field
-      v-model="orderNo"
-      name="orderNo"
-      placeholder="订单编号"
-      clearable
-    />
-
-    <van-divider dashed :style="dividerStyle">供应商编码</van-divider>
-    <van-field
-      v-model="cusCode"
-      name="cusCode"
-      placeholder="供应商编码"
-      clearable
-    />
-
-    <van-divider dashed :style="dividerStyle">订单金额</van-divider>
-    <div class="app-order-param-row">
-      <div class="app-order-param-item">
-        <app-fiance-num v-model="orderAmountMin" placeholder="最小金额" />
-      </div>
-      <div class="app-order-param-item">
-        <app-fiance-num v-model="orderAmountMax" placeholder="最大金额" />
-      </div>
-    </div>
-
-    <van-divider dashed :style="dividerStyle">订单状态</van-divider>
-    <div class="app-order-param-row">
-      <van-dropdown-menu>
-        <van-dropdown-item v-model="orderStatus" :options="orderStatusList" />
-      </van-dropdown-menu>
-    </div>
-
-    <van-divider dashed :style="dividerStyle">生效时间</van-divider>
-    <div class="app-order-param-row">
-      <div class="app-order-param-item" @click="show.beginDate = true">
-        {{ orderTimeBegin }}
-      </div>
-      <div class="app-order-param-item" @click="show.beginDate = true">
-        {{ orderTimeEnd }}
-      </div>
-    </div>
-
-    <div class="app-button">
-      <van-button block plain type="primary" @click="resetParam"
-        >重置</van-button
-      >
-      <van-button block type="primary" native-type="submit">提交</van-button>
-    </div>
-
-    <van-popup v-model:show="show.beginDate" position="bottom">
-      <van-datetime-picker
-        type="datetime"
-        title="开始时间"
-        v-model="orderTimeBegin"
-        @confirm="onBeginDateConfirm"
-        @cancel="onBeginDateCancel"
+  <app-page-container>
+    <van-form
+      @submit="onSubmit"
+      class="app-param-form app-data-item app-order-param-container"
+    >
+      <van-divider dashed :style="dividerStyle">订单编号</van-divider>
+      <van-field
+        v-model="params.orderNo"
+        name="orderNo"
+        placeholder="订单编号"
+        clearable
       />
-    </van-popup>
-  </van-form>
+
+      <van-divider dashed :style="dividerStyle">供应商编码</van-divider>
+      <van-field
+        v-model="params.cusCode"
+        name="cusCode"
+        placeholder="供应商编码"
+        clearable
+      />
+
+      <van-divider dashed :style="dividerStyle">订单金额</van-divider>
+      <div class="app-order-param-row">
+        <div class="app-order-param-item">
+          <app-fiance-num
+            v-model="params.orderAmountMin"
+            placeholder="最小金额"
+          />
+        </div>
+        <div class="app-order-param-item">
+          <app-fiance-num
+            v-model="params.orderAmountMax"
+            placeholder="最大金额"
+          />
+        </div>
+      </div>
+
+      <van-divider dashed :style="dividerStyle">订单状态</van-divider>
+      <div class="app-order-param-row">
+        <van-dropdown-menu class="app-order-param-item">
+          <van-dropdown-item
+            v-model="params.orderStatus"
+            :options="orderStatusList"
+          />
+        </van-dropdown-menu>
+      </div>
+
+      <van-divider dashed :style="dividerStyle">生效时间</van-divider>
+      <div class="app-order-param-row" @click="show.dateSelect = true">
+        <div class="app-order-param-item">
+          {{ params.orderTimeBegin }}
+        </div>
+        <div class="app-order-param-item">
+          {{ params.orderTimeEnd }}
+        </div>
+      </div>
+
+      <van-calendar
+        v-model:show="show.dateSelect"
+        type="range"
+        color="#409eff"
+        :min-date="minDate"
+        :max-date="maxDate"
+        @confirm="dataSelect"
+      />
+
+      <div class="app-row-button">
+        <van-button type="primary" plain @click="resetParam">重置</van-button>
+        <van-button type="primary" @click="onSubmit">确认</van-button>
+      </div>
+    </van-form>
+  </app-page-container>
 </template>
 <script>
+import { DateUtils } from "yao-dateutils";
+import AppPageContainer from "@com/common/PageContainer.vue";
 import AppFianceNum from "@com/common/FianceNum.vue";
 import { mapGetters, mapMutations } from "vuex";
 export default {
   components: {
+    AppPageContainer,
     AppFianceNum
   },
   computed: {
     ...mapGetters("page", ["dividerStyle"]),
-    ...mapGetters("page/purchaseOrder", ["orderStatusList"])
+    ...mapGetters("page/purchaseOrder", {
+      orderStatusList: "orderStatusList",
+      currentParam: "params"
+    }),
+    maxDate() {
+      return DateUtils.addDay(this.currentDate, 1);
+    },
+    minDate() {
+      return DateUtils.addDay(this.currentDate, -93);
+    }
+  },
+  watch: {
+    currentParam: {
+      handler(val) {
+        this.params = { ...val };
+      },
+      immediate: true
+    }
   },
   data() {
     return {
-      orderNo: "",
-      cusCode: "",
-      orderAmountMax: "",
-      orderAmountMin: "",
-      orderStatus: "",
-      orderTimeBegin: "",
-      orderTimeEnd: "",
+      params: {
+        orderNo: "",
+        cusCode: "",
+        orderAmountMax: "",
+        orderAmountMin: "",
+        orderStatus: "",
+        orderTimeBegin: "",
+        orderTimeEnd: ""
+      },
       show: {
-        beginDate: false
-      }
+        dateSelect: false
+      },
+      currentDate: new Date()
     };
   },
   methods: {
     ...mapMutations("page/purchaseOrder", ["queryParam"]),
-    onSubmit(val) {
-      Object.assign(val, {
-        orderAmountMax: this.orderAmountMax,
-        orderAmountMin: this.orderAmountMin,
-        orderStatus: this.orderStatus,
-        orderTimeBegin: this.orderTimeBegin,
-        orderTimeEnd: this.orderTimeEnd
-      });
-      console.log(val);
-      this.queryParam(val);
-      this.$emit("refreshData");
+    dataSelect(val) {
+      let [begin, end] = [...val];
+      this.params.orderTimeBegin = DateUtils.format(begin, "yyyy-MM-dd");
+      this.params.orderTimeEnd = DateUtils.format(end, "yyyy-MM-dd");
+      this.show.dateSelect = false;
+    },
+    onSubmit() {
+      this.queryParam(this.params);
+      this.$router.push("/order/purchase");
     },
     resetParam() {
       this.queryParam();
-      this.orderNo = "";
-      this.cusCode = "";
-      this.orderAmountMax = "";
-      this.orderAmountMin = "";
-      this.orderStatus = "";
-      this.orderTimeBegin = "";
-      this.orderTimeEnd = "";
-    },
-    onBeginDateConfirm(val) {
-      this.orderTimeBegin = val;
-      this.show.beginDate = false;
-    },
-    onBeginDateCancel() {
-      this.orderTimeBegin = "";
-      this.show.beginDate = false;
+      this.params = {
+        orderNo: "",
+        cusCode: "",
+        orderAmountMax: "",
+        orderAmountMin: "",
+        orderStatus: "",
+        orderTimeBegin: "",
+        orderTimeEnd: ""
+      };
     }
   }
 };

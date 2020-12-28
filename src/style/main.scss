@@ -118,12 +118,20 @@ html,body,#app {
 
 .app-param-form {
   .app-button {
+    // width: 100%;
+    // position: fixed;
+    // bottom: 0;
+
     width: 100%;
-    position: fixed;
-    bottom: 0;
+    position: absolute;
+    bottom: 5px;
 
     button {
-      margin-top: 5px;
+      // margin-top: 5px;
+      width: calc(100% - 10px);
+      height: 34px;
+      border-radius: 17px;
+      margin: 5px;
     }
   }
 }

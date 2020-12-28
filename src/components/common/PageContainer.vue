@@ -6,6 +6,7 @@
           left-arrow
           :title="system['value']"
           @click-left="goPrePage"
+          @click-right="goMainPage"
         >
           <template #left>
             <van-icon name="arrow-left" size="20" />返回</template

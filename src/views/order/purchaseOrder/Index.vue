@@ -1,7 +1,7 @@
 <template>
   <app-page-container>
     <div class="app-data-search">
-      <span class="app-link" @click="showQueryInfo">筛选</span>
+      <span class="app-link" @click="toQueryParam">筛选</span>
       <span class="app-link" @click="persistData" v-if="perPersist">新增</span>
     </div>
 
@@ -25,42 +25,30 @@
         </van-list>
       </van-pull-refresh>
     </div>
-    <van-popup
-      v-model:show="queryInfoShow"
-      position="right"
-      round
-      :style="popupQueryParamStyle"
-    >
-      <app-query-param @refreshData="onRefresh" />
-    </van-popup>
   </app-page-container>
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
-import AppQueryParam from "./QueryParam.vue";
 import AppRowData from "./RowData.vue";
 export default {
   components: {
     AppPageContainer,
-    AppQueryParam,
     AppRowData
   },
   computed: {
     ...mapGetters("page/purchaseOrder", ["dataList", "perPersist"]),
-    ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
+    ...mapGetters("page", ["finishedText"])
   },
   data() {
     return {
       isLoading: true,
       listLoading: true,
       listFinished: false,
-      queryInfoShow: false,
       currentDataId: null
     };
   },
   mounted() {
-    this.queryParam();
     this.onRefresh();
   },
   methods: {
@@ -70,7 +58,6 @@ export default {
       this.listLoading = true;
       this.queryPage(true)
         .then(res => {
-          this.queryInfoShow = false;
           this.listFinished = !res;
           this.isLoading = false;
           this.listLoading = false;
@@ -90,8 +77,8 @@ export default {
           this.listLoading = false;
         });
     },
-    showQueryInfo() {
-      this.queryInfoShow = true;
+    toQueryParam() {
+      this.$router.push("/order/purchaseParam");
     },
     persistData() {
       this.$router.push("/order/purchasePersist");
