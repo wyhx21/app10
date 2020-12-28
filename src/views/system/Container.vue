@@ -50,7 +50,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import appUserInfo from "@views/system/UserInfo.vue";
+import appUserInfo from "./UserInfo.vue";
 import { toMainPage, goBack } from "@router/routerHelper.js";
 import { Confirm } from "@utils/messagerUtil.js";
 export default {
