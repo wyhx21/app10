@@ -4,6 +4,7 @@
   color: $app-color-fiance-num;
   margin-right: $app-color-fiance-margine;
   margin-left: $app-color-fiance-margine;
+  height: 1.5em;
 
   .app-fiance_currency {
     font-size: $app-font-fiance-currency;
@@ -19,4 +20,11 @@
     font-size: $app-font-fiance-currency;
     font-weight: $app-color-fiance-weight;
   }
+}
+
+.app-data-placeholder {
+  color: $app-main-font-color1;
+  text-align: left;
+  margin: .3em;
+  font-size: .8em;
 }

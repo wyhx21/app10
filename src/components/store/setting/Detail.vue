@@ -71,7 +71,7 @@ export default {
       currentStoreDetailId: null
     };
   },
-  mounted() {
+  created() {
     this.areaListQuery();
   },
   methods: {

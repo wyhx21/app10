@@ -1,0 +1,13 @@
+@import '@style/variable.scss';
+.app-order-param-row {
+  margin: 10px;
+  display: flex;
+  .app-order-param-item {
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+    border: 1px solid $app-main-font-color1;
+    height: 1.5em;
+    border-radius: 5px;
+  }
+}

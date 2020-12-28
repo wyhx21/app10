@@ -1,5 +1,8 @@
 <template>
-  <div class="app-fiance-num">
+  <div v-if="value.length < 1" class="app-fiance-num app-data-placeholder">
+    {{ placeholder }}
+  </div>
+  <div class="app-fiance-num" v-else>
     <span class="app-fiance_currency">{{ currency }}</span>
     <span class="app_fiance_integer">{{ numInteger }}</span>
     <span>.</span>
@@ -15,6 +18,9 @@ export default {
     },
     value: {
       default: 0
+    },
+    placeholder: {
+      default: "请输入金额"
     }
   },
   computed: {

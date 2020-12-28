@@ -5,6 +5,7 @@ import prodType from "@store/modules/dict/prodType.js";
 import verifyType from "@store/modules/dict/verifyType.js";
 import store from "@store/modules/store/store.js";
 import storeArea from "@store/modules/store/storeArea.js";
+import purchaseOrder from "@store/modules/order/purchaseOrder.js";
 
 export default {
   namespaced: true,
@@ -15,7 +16,8 @@ export default {
     prodType,
     verifyType,
     store,
-    storeArea
+    storeArea,
+    purchaseOrder
   },
   state: {
     style: {
