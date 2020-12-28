@@ -17,8 +17,8 @@
       </td>
     </tr>
     <tr>
-      <td><app-fiance-num v-model="data['orderAmount']" disabled /></td>
-      <td><app-fiance-num v-model="data['extraAmount']" disabled /></td>
+      <td><app-fiance-num :modelValue="data['orderAmount']" disabled /></td>
+      <td><app-fiance-num :modelValue="data['extraAmount']" disabled /></td>
     </tr>
   </table>
 
