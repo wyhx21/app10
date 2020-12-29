@@ -54,7 +54,7 @@ export default {
     pageResult: (_state, { toalPage = 2, total = 1 } = {}) => {
       _state.pageResult = { toalPage, total };
     },
-    queryParam: (_state, params = {}) => (_state.params = params),
+    queryParam: (_state, params = {orderStatus: ""}) => (_state.params = params),
     nextPage: _state => _state.pageInfo.page++,
     dataClear: _state => (_state.dataList = []),
     dataList: (_state, list = []) => _state.dataList.push(...list),
