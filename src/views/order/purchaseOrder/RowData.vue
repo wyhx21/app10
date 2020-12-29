@@ -4,7 +4,7 @@
       <td colspan="2">
         <span>{{ data["orderNo"] }}</span>
       </td>
-      <td rowspan="3">
+      <td rowspan="2">
         <span class="app-link" @click="gotoDetail()">详情</span>
       </td>
     </tr>
@@ -18,7 +18,15 @@
     </tr>
     <tr>
       <td><app-fiance-num :modelValue="data['orderAmount']" disabled /></td>
+      <td colspan="2">
+        <span>{{ data["createdDate"] }}</span>
+      </td>
+    </tr>
+    <tr>
       <td><app-fiance-num :modelValue="data['extraAmount']" disabled /></td>
+      <td colspan="2">
+        <span>{{ data["orderTime"] }}</span>
+      </td>
     </tr>
   </table>
 
