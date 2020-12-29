@@ -84,5 +84,5 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "@style/component/common/fianceNum.scss";
+@import "@style/component/common/component.scss";
 </style>

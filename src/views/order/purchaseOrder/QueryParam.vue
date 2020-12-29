@@ -20,6 +20,23 @@
         clearable
       />
 
+      <van-divider dashed :style="dividerStyle">订单状态</van-divider>
+      <div class="app-order-param-row">
+        <van-dropdown-menu class="app-order-param-item">
+          <van-dropdown-item
+            v-model="params.orderStatus"
+            :options="orderStatusList"
+          />
+        </van-dropdown-menu>
+      </div>
+
+      <van-divider dashed :style="dividerStyle">生效时间</van-divider>
+      <div class="app-order-param-row">
+        <div class="app-order-param-item">
+          <app-calendar-range v-model="dataRange"/>
+        </div>
+      </div>
+
       <van-divider dashed :style="dividerStyle">订单金额</van-divider>
       <div class="app-order-param-row">
         <div class="app-order-param-item">
@@ -36,35 +53,6 @@
         </div>
       </div>
 
-      <van-divider dashed :style="dividerStyle">订单状态</van-divider>
-      <div class="app-order-param-row">
-        <van-dropdown-menu class="app-order-param-item">
-          <van-dropdown-item
-            v-model="params.orderStatus"
-            :options="orderStatusList"
-          />
-        </van-dropdown-menu>
-      </div>
-
-      <van-divider dashed :style="dividerStyle">生效时间</van-divider>
-      <div class="app-order-param-row" @click="show.dateSelect = true">
-        <div class="app-order-param-item">
-          {{ params.orderTimeBegin }}
-        </div>
-        <div class="app-order-param-item">
-          {{ params.orderTimeEnd }}
-        </div>
-      </div>
-
-      <van-calendar
-        v-model:show="show.dateSelect"
-        type="range"
-        color="#409eff"
-        :min-date="minDate"
-        :max-date="maxDate"
-        @confirm="dataSelect"
-      />
-
       <div class="app-row-button">
         <van-button type="primary" plain @click="resetParam">重置</van-button>
         <van-button type="primary" @click="onSubmit">确认</van-button>
@@ -73,31 +61,27 @@
   </app-page-container>
 </template>
 <script>
-import { DateUtils } from "yao-dateutils";
 import AppPageContainer from "@com/common/PageContainer.vue";
 import AppFianceNum from "@com/common/FianceNum.vue";
 import { mapGetters, mapMutations } from "vuex";
+import AppCalendarRange from "@com/common/CalendarRange.vue";
 export default {
   components: {
     AppPageContainer,
-    AppFianceNum
+    AppFianceNum,
+    AppCalendarRange
   },
   computed: {
     ...mapGetters("page", ["dividerStyle"]),
     ...mapGetters("page/purchaseOrder", {
       orderStatusList: "orderStatusList",
       currentParam: "params"
-    }),
-    maxDate() {
-      return DateUtils.addDay(this.currentDate, 1);
-    },
-    minDate() {
-      return DateUtils.addDay(this.currentDate, -93);
-    }
+    })
   },
   watch: {
     currentParam: {
       handler(val) {
+        this.dataRange = [val.orderTimeBegin, val.orderTimeEnd];
         this.params = { ...val };
       },
       immediate: true
@@ -105,30 +89,23 @@ export default {
   },
   data() {
     return {
+      dataRange: ["", ""],
       params: {
         orderNo: "",
         cusCode: "",
         orderAmountMax: "",
         orderAmountMin: "",
-        orderStatus: "",
-        orderTimeBegin: "",
-        orderTimeEnd: ""
-      },
-      show: {
-        dateSelect: false
-      },
-      currentDate: new Date()
+        orderStatus: ""
+      }
     };
   },
   methods: {
     ...mapMutations("page/purchaseOrder", ["queryParam"]),
-    dataSelect(val) {
-      let [begin, end] = [...val];
-      this.params.orderTimeBegin = DateUtils.format(begin, "yyyy-MM-dd");
-      this.params.orderTimeEnd = DateUtils.format(end, "yyyy-MM-dd");
-      this.show.dateSelect = false;
-    },
     onSubmit() {
+      Object.assign(this.params, {
+        orderTimeBegin: this.dataRange[0],
+        orderTimeEnd: this.dataRange[1]
+      });
       this.queryParam(this.params);
       this.$router.push("/order/purchase");
     },
@@ -139,10 +116,9 @@ export default {
         cusCode: "",
         orderAmountMax: "",
         orderAmountMin: "",
-        orderStatus: "",
-        orderTimeBegin: "",
-        orderTimeEnd: ""
+        orderStatus: ""
       };
+      this.dataRange = ["", ""];
     }
   }
 };
