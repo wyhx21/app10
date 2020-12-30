@@ -31,6 +31,11 @@ html,body,#app {
   position: relative;
 }
 
+.app-data-item_cur {
+  border-style: dotted;
+  border-color: $app-color-item_cur;
+}
+
 .app-data-item_primary {
   color: $app-font-primary;
   font-weight: 600;
@@ -85,11 +90,6 @@ html,body,#app {
 .app-data-container {
   height: calc(100% - 30px);
   overflow: auto;
-}
-
-.app-data-item_cur {
-  border-style: dotted;
-  border-color: $app-color-link-hover;
 }
 
 .app-data-editor {
