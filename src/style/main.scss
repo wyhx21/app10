@@ -10,6 +10,18 @@ html,body,#app {
   font-family: $app-font-family;
 }
 
+.app-link{
+  color:$app-color-link-base;
+
+  &:hover {
+    color: $app-color-link-hover;
+  }
+
+  &:active {
+    color: $app-color-link-active;
+  }
+}
+
 .app-data-item {
   margin: $app-length-base $app-length-base*2;
   padding: $app-length-base;
@@ -17,29 +29,29 @@ html,body,#app {
   border-radius: $app-length-base;
   background-color: $app-color-item;
   position: relative;
+}
 
-  .app-data-item_disable {
-    position: absolute;
-    border-radius: 0 $app-length-row/4 0 $app-length-row/4;
-    color: $app-color-white;
-    font-size: .8em;
-    padding: 2px;
-    right: 0;
-    top: 0;
-  }
+.app-data-item_primary {
+  color: $app-font-primary;
+  font-weight: 600;
+}
 
-  .app-data-item_effect {
-    background-color: $app-color-data_item_effect;
-  }
-  .app-data-item_ineffect {
-    background-color: $app-color-data_item_in_effect;
-  }
+.app-data-item_deleted {
+  position: absolute;
+  border-radius: 0 $app-length-base 0 $app-length-base;
+  color: $app-font-color-white;
+  font-size: .8em;
+  padding: 2px;
+  right: 0;
+  top: 0;
+}
 
-  .app-data-item_blod {
-    color: $app-color-link-base;
-    font-weight: 600;
-  }
+.app-data-item_deleted_0 {
+  background-color: $app-back-waring;
+}
 
+.app-data-item_deleted_1 {
+  background-color: $app-back-primary;
 }
 
 .app-data-item_remark {
@@ -55,18 +67,6 @@ html,body,#app {
   height: $app-length-row;
   line-height: $app-length-row;
   text-align: center;
-}
-
-.app-link{
-  color:$app-color-link-base;
-
-  &:hover {
-    color: $app-color-link-hover;
-  }
-
-  &:active {
-    color: $app-color-link-active;
-  }
 }
 
 .app-data-search {

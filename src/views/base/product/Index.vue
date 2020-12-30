@@ -20,11 +20,11 @@
             @click="currentDataId = prod['id']"
           >
             <span
-              class="app-data-item_disable"
+              class="app-data-item_deleted"
               :class="
                 prod['deleted'] == 1
-                  ? 'app-data-item_effect'
-                  : 'app-data-item_ineffect'
+                  ? 'app-data-item_deleted_1'
+                  : 'app-data-item_deleted_0'
               "
             >
               {{ prod["enable"] }}
@@ -32,10 +32,14 @@
             <table>
               <tr>
                 <td width="30%">
-                  <span class="app-data-item_blod">{{ prod["prodCode"] }}</span>
+                  <span class="app-data-item_primary">{{
+                    prod["prodCode"]
+                  }}</span>
                 </td>
                 <td width="55%">
-                  <span class="app-data-item_blod">{{ prod["prodName"] }}</span>
+                  <span class="app-data-item_primary">{{
+                    prod["prodName"]
+                  }}</span>
                 </td>
                 <td rowspan="2">
                   <span class="app-link" @click="gotoDetail(prod)">详情</span>

@@ -1,8 +1,10 @@
 <template>
   <span
-    class="app-data-item_disable"
+    class="app-data-item_deleted"
     :class="
-      data['deleted'] == 1 ? 'app-data-item_effect' : 'app-data-item_ineffect'
+      data['deleted'] == 1
+        ? 'app-data-item_deleted_1'
+        : 'app-data-item_deleted_0'
     "
   >
     {{ data["enable"] }}
@@ -10,10 +12,10 @@
   <table width="100%">
     <tr>
       <td width="30%">
-        <span class="app-data-item_blod">{{ data["supplierCode"] }}</span>
+        <span class="app-data-item_primary">{{ data["supplierCode"] }}</span>
       </td>
       <td width="55%">
-        <span class="app-data-item_blod">{{ data["supplierName"] }}</span>
+        <span class="app-data-item_primary">{{ data["supplierName"] }}</span>
       </td>
       <td rowspan="2">
         <span class="app-link" @click="gotoDetail()">详情</span>

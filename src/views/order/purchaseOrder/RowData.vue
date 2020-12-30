@@ -40,7 +40,7 @@
     </tr>
   </table>
 
-  <span class="app-data-item_disable app-data-item_effect">{{
+  <span class="app-data-item_deleted app-data-item_deleted_1">{{
     data["statusValue"]
   }}</span>
 </template>
