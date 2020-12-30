@@ -31,6 +31,21 @@ html,body,#app {
   position: relative;
 }
 
+.app-data-item_detail {
+  position: relative;
+  background-color: $app-color-item_detail;
+  border: $app-color-item_detail $app-width-botder solid;
+  border-radius: $app-length-base;
+  padding: $app-length-base/2;
+  margin: $app-length-base/2;
+}
+
+.app-data-item_placeholder {
+  text-align: center;
+  color:$app-font-color-remark;
+  font-size: .8em;
+}
+
 .app-data-item_cur {
   border-style: dotted;
   border-color: $app-color-item_cur;

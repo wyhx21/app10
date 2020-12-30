@@ -14,7 +14,7 @@
     <tr>
       <td><app-fiance-num :modelValue="data['prodPrice']" disabled /></td>
       <td>
-        <app-number v-model="data['prodNum']" disabled></app-number>
+        <app-number :modelValue="data['prodNum']" disabled></app-number>
       </td>
       <td><app-fiance-num :modelValue="data['prodAmount']" disabled /></td>
     </tr>
@@ -30,7 +30,8 @@ import AppFianceNum from "@com/common/FianceNum.vue";
 import AppNumber from "@com/common/Number.vue";
 export default {
   components: {
-    AppFianceNum,AppNumber
+    AppFianceNum,
+    AppNumber
   },
   props: ["data"]
 };

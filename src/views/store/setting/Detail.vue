@@ -12,31 +12,31 @@
         <p class="app-data-item_remark">备注:{{ currentData["remark"] }}</p>
       </div>
       <span
-        class="app-store-enable"
+        class="app-data-item_deleted"
         :class="
           currentData['deleted'] == 1
-            ? 'app-store-enable_effect'
-            : 'app-store-enable_ineffect'
+            ? 'app-data-item_deleted_1'
+            : 'app-data-item_deleted_0'
         "
       >
         {{ currentData["enable"] }}
       </span>
     </div>
-    <div class="app-detail-content" v-if="perAreaList">
+    <div class="app-data-item" v-if="perAreaList">
       <div v-if="areaList.length > 0">
         <div
           v-for="item of areaList"
           :key="item['id']"
-          class="app-detail-content_item"
+          class="app-data-item_detail"
           @click="currentStoreDetailId = item['id']"
           :class="{
-            'app-detail-content_item_cur': currentStoreDetailId == item['id']
+            'app-data-item_cur': currentStoreDetailId == item['id']
           }"
         >
           <app-detail-item :data="item" />
         </div>
       </div>
-      <div v-else class="app-detail-content_empty">
+      <div v-else class="app-data-item_placeholder">
         暂无数据
       </div>
     </div>

@@ -7,7 +7,7 @@
     {{ placeholder }}
   </div>
   <div v-else @click="showKeyboard = true">
-    <span>{{modelValue}}</span>
+    <span>{{ modelValue }}</span>
   </div>
 
   <van-number-keyboard

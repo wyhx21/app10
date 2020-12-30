@@ -3,21 +3,21 @@
     <div class="app-data-item">
       <app-row-data :data="currentData" showDetail />
     </div>
-    <div class="app-detail-content">
+    <div class="app-data-item">
       <div v-if="perDetail">
         <div
           v-for="item of detailList"
           :key="item['id']"
-          class="app-detail-content_item"
+          class="app-data-item_detail"
           @click="currentDetailId = item['id']"
           :class="{
-            'app-detail-content_item_cur': currentDetailId == item['id']
+            'app-data-item_cur': currentDetailId == item['id']
           }"
         >
           <app-order-detail :data="item" />
         </div>
       </div>
-      <div class="app-detail-content_empty" v-else>
+      <div class="app-data-item_placeholder" v-else>
         暂无权限
       </div>
     </div>

@@ -8,11 +8,11 @@
   </div>
 
   <span
-    class="app-store-enable"
+    class="app-data-item_deleted"
     :class="
       data['deleted'] == 1
-        ? 'app-store-enable_effect'
-        : 'app-store-enable_ineffect'
+        ? 'app-data-item_deleted_1'
+        : 'app-data-item_deleted_0'
     "
   >
     {{ data["enable"] }}
