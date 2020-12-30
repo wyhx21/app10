@@ -53,7 +53,7 @@
         暂无数据
       </div>
     </div>
-    <div class="app-data-editor">
+    <div class="app-bottom-fixed-search-button">
       <span @click="persistArea" v-if="perAreaPersist">新增区域</span>
       <span @click="mergeArea" v-if="perAreaMerge">编辑区域</span>
       <span @click="editorData" v-if="perMerge">编辑仓库</span>

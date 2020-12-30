@@ -1,6 +1,6 @@
 <template>
   <app-page-container>
-    <div class="app-data-search">
+    <div class="app-top-tobar-search">
       <span class="app-link" @click="toQueryParam">筛选</span>
       <span class="app-link" @click="persistData" v-if="perPersist">新增</span>
     </div>

@@ -22,6 +22,16 @@ html,body,#app {
   }
 }
 
+.app-data-detail {
+  margin: $app-length-base $app-length-base*2;
+  padding: $app-length-base;
+  border: $app-color-item $app-width-botder solid;
+  border-radius: $app-length-base;
+  background-color: $app-color-item;
+  height: calc(100% - 44px);
+  overflow: auto;
+}
+
 .app-data-item {
   margin: $app-length-base $app-length-base*2;
   padding: $app-length-base;
@@ -82,6 +92,19 @@ html,body,#app {
   font-style: italic;
 }
 
+.app-top-tobar-search {
+  height: $app-length-base*3;
+  line-height: $app-length-base*3;
+  background-color: $app-back-white;
+  text-align: center;
+
+  span {
+    display: inline-block;
+    margin-left: $app-length-base*2;
+    margin-right: $app-length-base*2;
+  }
+}
+
 .app-bottom-fixed-button {
   width: calc(100% - 60px);
   position: fixed;
@@ -90,9 +113,32 @@ html,body,#app {
   
   button {
     width: calc(100% - 10px);
-    height: 34px;
-    border-radius: 17px;
+    height: $app-button-height;
+    border-radius: $app-button-height/2;
     margin: $app-length-base/2;
+  }
+}
+
+.app-bottom-fixed-search-button {
+  position: fixed;
+  display: inline-block;
+  bottom: $app-length-base;
+  right: $app-length-base*2;
+
+  span {
+    background-color: $app-color-link-base;
+    line-height: $app-button-height;
+    color: $app-font-color-white;
+    border-radius: $app-length-base;
+    margin: $app-length-base/5;
+    padding: $app-length-base/2;
+    &:hover {
+      color: $app-color-link-hover;
+    }
+  
+    &:active {
+      color: $app-color-link-active;
+    }
   }
 }
 
@@ -103,48 +149,9 @@ html,body,#app {
   text-align: center;
 }
 
-.app-data-search {
-  height: $page-search-height;
-  line-height: $page-search-height;
-  background-color: $app-color-white;
-  text-align: center;
-
-  span {
-    display: inline-block;
-    margin-left: $page-search-height / 2;
-    margin-right: $page-search-height / 2;
-  }
-}
-
 .app-data-container {
   height: calc(100% - 30px);
   overflow: auto;
-}
-
-.app-data-editor {
-  text-align: center;
-  position: fixed;
-  display: inline-block;
-  height:$page-search-height;
-  line-height: $page-search-height;
-  bottom: 20px;
-  right: 30px;
-
-  span {
-    background-color:  $app-color-link-base;
-    line-height: $page-search-height;
-    color: $app-color-white;
-    border-radius: 10px;
-    margin: 3px;
-    padding: 5px;
-    &:hover {
-      color: $app-color-link-hover;
-    }
-  
-    &:active {
-      color: $app-color-link-active;
-    }
-  }
 }
 
 .app-param-form {

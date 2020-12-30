@@ -36,7 +36,7 @@
         </tr>
       </table>
     </div>
-    <div class="app-data-editor">
+    <div class="app-bottom-fixed-search-button">
       <span @click="editorData" v-if="perMerge">编辑</span>
     </div>
   </app-page-container>

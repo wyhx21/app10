@@ -58,7 +58,7 @@
         show-word-limit
       />
     </van-form>
-    <div class="app-data-editor">
+    <div class="app-bottom-fixed-search-button">
       <span @click="confirmEditor"
         ><van-icon name="more-o" v-if="loading" />确认</span
       >
