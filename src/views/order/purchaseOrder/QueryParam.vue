@@ -52,12 +52,11 @@
           />
         </div>
       </div>
-
-      <div class="app-row-button">
-        <van-button type="primary" plain @click="resetParam">重置</van-button>
-        <van-button type="primary" @click="onSubmit">确认</van-button>
-      </div>
     </van-form>
+    <div class="app-bottom-fixed-button">
+      <van-button type="primary" plain @click="resetParam">重置</van-button>
+      <van-button type="primary" @click="onSubmit">确认</van-button>
+    </div>
   </app-page-container>
 </template>
 <script>

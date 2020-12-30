@@ -15,16 +15,3 @@
 .app-order-param-container {
   height: calc(100% - 44px);
 }
-
-.app-row-button {
-  width: calc(100% - 20px);
-  position: absolute;
-  bottom: 5px;
-  
-  button {
-    width: calc(100% - 10px);
-    height: 34px;
-    border-radius: 17px;
-    margin: 5px;
-  }
-}

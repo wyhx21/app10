@@ -1,11 +1,19 @@
 <template>
-  <div>
-    <span class="app-store-code">{{ data["areaCode"] }}</span>
-    <span>{{ data["areaName"] }}</span>
-  </div>
-  <div>
-    <p class="app-data-item_remark">备注:{{ data["remark"] }}</p>
-  </div>
+  <table width="100%">
+    <tr>
+      <td width="40%">
+        <span>{{ data["areaCode"] }}</span>
+      </td>
+      <td>
+        <span>{{ data["areaName"] }}</span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <p class="app-data-item_remark">{{ data["remark"] }}</p>
+      </td>
+    </tr>
+  </table>
 
   <span
     class="app-data-item_deleted"

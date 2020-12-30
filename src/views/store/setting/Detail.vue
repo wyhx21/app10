@@ -1,16 +1,29 @@
 <template>
   <app-page-container>
-    <div class="app-store-detail">
-      <div>
-        <span class="app-store-code">{{ currentData["storeCode"] }}</span
-        ><span>{{ currentData["storeName"] }}</span>
-      </div>
-      <div>
-        <p class="app-data-item_remark">地址:{{ currentData["address"] }}</p>
-      </div>
-      <div>
-        <p class="app-data-item_remark">备注:{{ currentData["remark"] }}</p>
-      </div>
+    <div class="app-data-item">
+      <table width="100%">
+        <tr>
+          <td width="40%">
+            <span>{{ currentData["storeCode"] }}</span>
+          </td>
+          <td>
+            <span>{{ currentData["storeName"] }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p class="app-data-item_remark">
+              地址:{{ currentData["address"] }}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p class="app-data-item_remark">备注:{{ currentData["remark"] }}</p>
+          </td>
+        </tr>
+      </table>
+
       <span
         class="app-data-item_deleted"
         :class="
@@ -108,6 +121,3 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-@import "@style/component/store/store.scss";
-</style>

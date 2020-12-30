@@ -82,6 +82,20 @@ html,body,#app {
   font-style: italic;
 }
 
+.app-bottom-fixed-button {
+  width: calc(100% - 60px);
+  position: fixed;
+  bottom: $app-length-base;
+  padding: 0 30px;
+  
+  button {
+    width: calc(100% - 10px);
+    height: 34px;
+    border-radius: 17px;
+    margin: $app-length-base/2;
+  }
+}
+
 .app-one-row {
   width: 100%;
   height: $app-length-row;
