@@ -5,9 +5,7 @@
         item1.menuName
       }}</van-divider>
       <div v-for="item2 of item1['children']" :key="item2['id']">
-        <p class="app-data-item_remark">{{
-          item2["menuName"]
-        }}</p>
+        <p class="app-data-item_remark">{{ item2["menuName"] }}</p>
         <van-grid :column-num="3" :gutter="10">
           <van-grid-item
             v-for="item3 of item2['children']"

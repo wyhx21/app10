@@ -6,7 +6,6 @@
           left-arrow
           :title="system['value']"
           @click-left="goPrePage"
-          @click-right="goMainPage"
         >
           <template #left>
             <van-icon name="arrow-left" size="20" />返回</template
@@ -17,6 +16,19 @@
     </slot>
     <div class="container-main">
       <slot></slot>
+    </div>
+
+    <div class="container-footer">
+      <van-tabbar v-model="activeTab">
+        <van-tabbar-item icon="chat-o" @click="goMainPage"
+          >主页</van-tabbar-item
+        >
+        <van-tabbar-item icon="fire-o" to="/container/menu"
+          >功能</van-tabbar-item
+        >
+        <van-tabbar-item icon="setting-o">角色</van-tabbar-item>
+        <van-tabbar-item icon="friends-o">用户</van-tabbar-item>
+      </van-tabbar>
     </div>
   </div>
 </template>
