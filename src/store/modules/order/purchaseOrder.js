@@ -1,4 +1,4 @@
-import { queryPage } from "@axios/order/purchaseOrder.js";
+import { queryPage, orderDetail } from "@axios/order/purchaseOrder.js";
 const defaultPageSize = 10;
 
 export default {
@@ -23,6 +23,7 @@ export default {
     },
     dataList: [],
     currentData: {},
+    detailList: [],
     orderStatusList: [
       { text: "全部", value: "" },
       { text: "创建", value: "0" },
@@ -41,12 +42,21 @@ export default {
       const currentPage = _state.pageInfo.page;
       return totalPage > currentPage;
     },
-    perPersist: (_state, _getters, _rootState, _rootGetters) => {
-      const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_store_setting");
-      return arr.includes("h5_store_setting_persist");
-    },
     currentData: _state => _state.currentData,
-    orderStatusList: _state => _state.orderStatusList
+    orderStatusList: _state => _state.orderStatusList,
+    detailList: _state => _state.detailList,
+    perPersist: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_persist");
+    },
+    perDetail: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_detail");
+    }
   },
   mutations: {
     pageInfo: (_state, { page = 1, size = defaultPageSize } = {}) =>
@@ -59,7 +69,8 @@ export default {
     nextPage: _state => _state.pageInfo.page++,
     dataClear: _state => (_state.dataList = []),
     dataList: (_state, list = []) => _state.dataList.push(...list),
-    currentData: (_state, data = {}) => (_state.currentData = data)
+    currentData: (_state, data = {}) => (_state.currentData = data),
+    detailList: (_state, list = []) => (_state.detailList = list)
   },
   actions: {
     initData: async ({ commit }, initData = false) => {
@@ -96,12 +107,17 @@ export default {
           resolve(false);
         }
       });
+    },
+    loadDetail: async ({ getters, commit }) => {
+      commit("detailList");
+      if (!getters.perDetail) {
+        return;
+      }
+      orderDetail(getters.currentData)
+        .then(res => {
+          commit("detailList", res);
+        })
+        .catch(() => {});
     }
-    // dataMerge: async (args0, val = {}) => {
-    //   return storeMerge(val);
-    // },
-    // dataPersist: async (args0, val = {}) => {
-    //   return storePersist(val);
-    // }
   }
 };

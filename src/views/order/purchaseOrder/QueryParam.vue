@@ -33,7 +33,7 @@
       <van-divider dashed :style="dividerStyle">生效时间</van-divider>
       <div class="app-order-param-row">
         <div class="app-order-param-item">
-          <app-calendar-range v-model="dataRange"/>
+          <app-calendar-range v-model="dataRange" />
         </div>
       </div>
 

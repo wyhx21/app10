@@ -78,11 +78,14 @@ html,body,#app {
     font-weight: 600;
   }
 
-  .app-data-item_thin {
-    color:$app-main-font-color1;
-    font-size: .8em;
-    text-indent: 2em;
-  }
+}
+
+.app-data-item_thin {
+  color:$app-font-color-remark;
+  margin: 0;
+  font-size: .8em;
+  text-indent: 2em;
+  font-style: italic;
 }
 
 .app-data-item_cur {

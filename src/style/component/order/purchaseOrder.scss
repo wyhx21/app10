@@ -28,3 +28,32 @@
     margin: 5px;
   }
 }
+
+.app-detail-content {
+  background-color: $app-color-white;
+  margin: $app-length-row/4 $app-length-row/2;
+  padding: $app-length-row/4;
+  width: calc(100% - 60px);
+  border-radius: 10px;
+
+  
+  .app-detail-content_item {
+    position: relative;
+    background-color: $app_store_detail_item_back;
+    border: 2px solid $app_store_detail_item_back;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  .app-detail-content_item_cur {
+    border-style: dotted;
+    border-color: $app-color-link-hover;
+  }
+
+  .app-detail-content_empty {
+    text-align: center;
+    color:$app-main-font-color1;
+    font-size: .8em;
+  }
+}

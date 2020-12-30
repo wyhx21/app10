@@ -6,10 +6,10 @@
         ><span>{{ currentData["storeName"] }}</span>
       </div>
       <div>
-        <p class="app-store-remark">地址:{{ currentData["address"] }}</p>
+        <p class="app-data-item_thin">地址:{{ currentData["address"] }}</p>
       </div>
       <div>
-        <p class="app-store-remark">备注:{{ currentData["remark"] }}</p>
+        <p class="app-data-item_thin">备注:{{ currentData["remark"] }}</p>
       </div>
       <span
         class="app-store-enable"

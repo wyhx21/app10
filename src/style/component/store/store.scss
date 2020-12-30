@@ -32,7 +32,7 @@
     border: 2px solid $app_store_detail_item_back;
     border-radius: 10px;
     padding: 5px;
-    margin: 10px;
+    margin: 5px;
 
     div {
       padding: .3em;
@@ -66,12 +66,4 @@
 .app-store-code {
   display: inline-block;
   width: 80px;
-}
-
-.app-store-remark {
-  margin: 0;
-  color:$app-main-font-color1;
-  font-size: .8em;
-  text-indent: 2em;
-  font-style: italic;
 }
