@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <td colspan="3">
-        <p class="app-data-item_thin">{{ data["remark"] }}</p>
+        <p class="app-data-item_remark">{{ data["remark"] }}</p>
       </td>
     </tr>
   </table>

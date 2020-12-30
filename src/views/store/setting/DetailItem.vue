@@ -4,7 +4,7 @@
     <span>{{ data["areaName"] }}</span>
   </div>
   <div>
-    <p class="app-data-item_thin">备注:{{ data["remark"] }}</p>
+    <p class="app-data-item_remark">备注:{{ data["remark"] }}</p>
   </div>
 
   <span

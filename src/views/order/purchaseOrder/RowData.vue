@@ -35,7 +35,7 @@
     </tr>
     <tr v-if="!showDetail">
       <td colspan="3">
-        <address class="app-data-item_thin">{{ data["remark"] }}</address>
+        <p class="app-data-item_remark">{{ data["remark"] }}</p>
       </td>
     </tr>
   </table>

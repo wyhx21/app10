@@ -25,7 +25,7 @@
     </tr>
     <tr>
       <td colspan="3">
-        <address class="app-data-item_thin">{{ data["address"] }}</address>
+        <p class="app-data-item_remark">{{ data["address"] }}</p>
       </td>
     </tr>
   </table>

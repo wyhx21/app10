@@ -10,6 +10,45 @@ html,body,#app {
   font-family: $app-font-family;
 }
 
+.app-data-item {
+  margin: $app-length-base $app-length-base*2;
+  padding: $app-length-base;
+  border: $app-color-item $app-width-botder solid;
+  border-radius: $app-length-base;
+  background-color: $app-color-item;
+  position: relative;
+
+  .app-data-item_disable {
+    position: absolute;
+    border-radius: 0 $app-length-row/4 0 $app-length-row/4;
+    color: $app-color-white;
+    font-size: .8em;
+    padding: 2px;
+    right: 0;
+    top: 0;
+  }
+
+  .app-data-item_effect {
+    background-color: $app-color-data_item_effect;
+  }
+  .app-data-item_ineffect {
+    background-color: $app-color-data_item_in_effect;
+  }
+
+  .app-data-item_blod {
+    color: $app-color-link-base;
+    font-weight: 600;
+  }
+
+}
+
+.app-data-item_remark {
+  color:$app-font-color-remark;
+  margin: 0;
+  font-size: .8em;
+  text-indent: 2em;
+  font-style: italic;
+}
 
 .app-one-row {
   width: 100%;
@@ -48,46 +87,6 @@ html,body,#app {
   overflow: auto;
 }
 
-.app-data-item{
-  margin: $app-length-row/4 $app-length-row/2;
-  padding: $app-length-row/4;
-  border: $app-color-border-msg 2px solid;
-  border-radius: $app-length-row/4;
-  background-color: $app-color-white;
-  position: relative;
-
-  .app-data-item_disable {
-    position: absolute;
-    border-radius: 0 $app-length-row/4 0 $app-length-row/4;
-    color: $app-color-white;
-    font-size: .8em;
-    padding: 2px;
-    right: 0;
-    top: 0;
-  }
-
-  .app-data-item_effect {
-    background-color: $app-color-data_item_effect;
-  }
-  .app-data-item_ineffect {
-    background-color: $app-color-data_item_in_effect;
-  }
-
-  .app-data-item_blod {
-    color: $app-color-link-base;
-    font-weight: 600;
-  }
-
-}
-
-.app-data-item_thin {
-  color:$app-font-color-remark;
-  margin: 0;
-  font-size: .8em;
-  text-indent: 2em;
-  font-style: italic;
-}
-
 .app-data-item_cur {
   border-style: dotted;
   border-color: $app-color-link-hover;
@@ -121,16 +120,12 @@ html,body,#app {
 
 .app-param-form {
   .app-button {
-    // width: 100%;
-    // position: fixed;
-    // bottom: 0;
 
     width: 100%;
     position: absolute;
     bottom: 5px;
 
     button {
-      // margin-top: 5px;
       width: calc(100% - 10px);
       height: 34px;
       border-radius: 17px;
