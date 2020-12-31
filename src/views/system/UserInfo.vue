@@ -1,55 +1,77 @@
 <template>
-  <div :style="{ height: 'calc(100% - 56px)' }">
-    <van-divider dashed :style="dividerStyle">用户</van-divider>
-    <div class="app-one-row">{{ userName }}</div>
-    <van-divider dashed :style="dividerStyle">系统</van-divider>
-    <div class="app-one-row">{{ system["value"] }}</div>
-    <van-divider dashed :style="dividerStyle">角色</van-divider>
-    <div class="app-one-row">{{ roleName }}</div>
-  </div>
-  <van-button
-    @click="exitLogin"
-    plain
-    hairline
-    type="primary"
-    class="app-one-row"
-    :loading="loading"
-    >退出登录</van-button
+  <div
+    v-for="item of sysRoleList"
+    :key="item['roleId']"
+    @click="currentRoleId = item['roleId']"
+    :class="[
+      currentRoleId == item['roleId'] ? 'app-data-item_cur' : '',
+      roleId == item['roleId'] ? 'app-data-item_primary' : '',
+      'app-data-item'
+    ]"
   >
+    <table width="100%">
+      <tr>
+        <td width="40%">
+          <span>{{ item["sysName"] }}</span>
+        </td>
+        <td width="40%">
+          <span>{{ item["roleName"] }}</span>
+        </td>
+        <td>
+          <span
+            class="app-link"
+            v-if="roleId != item['roleId']"
+            @click="changeRole(item)"
+            >切换</span
+          >
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="app-bottom-fixed-search-button">
+    <span @click="exitLogin">退出登录</span>
+  </div>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { Confirm } from "@utils/messagerUtil.js";
-import { toLogin } from "@router/routerHelper.js";
+import { toLogin, toMainPage } from "@router/routerHelper.js";
 export default {
   computed: {
-    ...mapGetters("account", ["userName"]),
-    ...mapGetters("userRoleAuth", ["system", "roleName"]),
+    ...mapGetters("account", ["userName", "roleId"]),
+    ...mapGetters("userRoleAuth", ["sysRoleList", "roleSize"]),
     ...mapGetters("page", ["dividerStyle"])
   },
   data() {
     return {
-      loading: false
+      currentRoleId: null
     };
   },
   methods: {
     ...mapActions("account", ["logOut"]),
+    ...mapActions("userRoleAuth", ["roleChange"]),
     exitLogin() {
       Confirm({ message: "您确定退出登录?" })
         .then(() => {
-          this.loading = true;
           this.logOut()
             .then(() => {
               toLogin();
-              this.loading = false;
             })
-            .catch(() => {
-              this.loading = false;
-            });
+            .catch(() => {});
         })
-        .catch(() => {
-          this.loading = false;
-        });
+        .catch(() => {});
+    },
+    changeRole(row) {
+      Confirm({ message: "您确定切换该角色?" })
+        .then(() => {
+          this.roleChange(row)
+            .then(() => {
+              toMainPage();
+            })
+            .catch(() => {});
+        })
+        .catch(() => {});
     }
   }
 };

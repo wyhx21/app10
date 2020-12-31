@@ -44,16 +44,14 @@ export default {
       }
       return _roles[0]["value"];
     },
-    sysRoleList: (_state, _getters, _rootState, _rootGetters) => {
+    sysRoleList: _state => {
       const res = [];
       for (let _system of _state.roleInfo) {
         let sysName = _system["value"];
         for (let _role of _system["children"]) {
           let roleId = _role["code"];
           let roleName = _role["value"];
-          let name = `${sysName}-${roleName}`;
-          let color = _rootGetters["account/roleId"] == roleId ? "#F00" : "";
-          res.push({ roleId, name, color });
+          res.push({ roleId, sysName, roleName });
         }
       }
       return res;

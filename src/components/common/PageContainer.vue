@@ -10,7 +10,7 @@
           <template #left>
             <van-icon name="arrow-left" size="20" />返回</template
           >
-          <template #right> {{ roleName }} </template>
+          <template #right> {{ userName }} </template>
         </van-nav-bar>
       </div>
     </slot>
@@ -31,8 +31,9 @@
         <van-tabbar-item icon="fire-o" to="/container/menu"
           >功能</van-tabbar-item
         >
-        <van-tabbar-item icon="setting-o">角色</van-tabbar-item>
-        <van-tabbar-item icon="friends-o">用户</van-tabbar-item>
+        <van-tabbar-item icon="friends-o" to="/container/userInfo"
+          >角色</van-tabbar-item
+        >
       </van-tabbar>
     </div>
   </div>
@@ -44,7 +45,12 @@ export default {
   components: {},
   computed: {
     ...mapGetters("account", ["userName"]),
-    ...mapGetters("userRoleAuth", ["roleName", "system"])
+    ...mapGetters("userRoleAuth", ["system"])
+  },
+  data() {
+    return {
+      activeTab: 0
+    };
   },
   methods: {
     goPrePage() {

@@ -19,6 +19,11 @@ const system = [
         path: "menu",
         name: "menu",
         component: () => import("@views/system/MenuInfo.vue")
+      },
+      {
+        path: "userInfo",
+        name: "userInfo",
+        component: () => import("@views/system/UserInfo.vue")
       }
     ]
   }
