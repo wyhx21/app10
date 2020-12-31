@@ -1,8 +1,10 @@
 <template>
   <app-page-container>
-    <div class="app-data-item">
-      <app-row-data :data="currentData" showDetail />
-    </div>
+    <template #header>
+      <div class="app-data-item">
+        <app-row-data :data="currentData" showDetail />
+      </div>
+    </template>
     <div class="app-data-item">
       <div v-if="perDetail">
         <div

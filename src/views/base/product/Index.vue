@@ -1,63 +1,65 @@
 <template>
   <app-page-container>
-    <div class="app-top-tobar-search">
-      <span class="app-link" @click="showQueryInfo">筛选</span>
-      <span class="app-link" @click="persistData" v-if="perPersist">新增</span>
-    </div>
-    <div class="app-data-container">
-      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-        <van-list
-          v-model:loading="listLoading"
-          :finished="listFinished"
-          :finished-text="finishedText"
-          @load="loadList"
+    <template #header>
+      <div class="app-top-tobar-search">
+        <span class="app-link" @click="showQueryInfo">筛选</span>
+        <span class="app-link" @click="persistData" v-if="perPersist"
+          >新增</span
         >
-          <div
-            v-for="prod of productList"
-            :key="prod['id']"
-            class="app-data-item"
-            :class="{ 'app-data-item_cur': prod['id'] == currentDataId }"
-            @click="currentDataId = prod['id']"
+      </div>
+    </template>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <van-list
+        v-model:loading="listLoading"
+        :finished="listFinished"
+        :finished-text="finishedText"
+        @load="loadList"
+      >
+        <div
+          v-for="prod of productList"
+          :key="prod['id']"
+          class="app-data-item"
+          :class="{ 'app-data-item_cur': prod['id'] == currentDataId }"
+          @click="currentDataId = prod['id']"
+        >
+          <span
+            class="app-data-item_deleted"
+            :class="
+              prod['deleted'] == 1
+                ? 'app-data-item_deleted_1'
+                : 'app-data-item_deleted_0'
+            "
           >
-            <span
-              class="app-data-item_deleted"
-              :class="
-                prod['deleted'] == 1
-                  ? 'app-data-item_deleted_1'
-                  : 'app-data-item_deleted_0'
-              "
-            >
-              {{ prod["enable"] }}
-            </span>
-            <table>
-              <tr>
-                <td width="30%">
-                  <span class="app-data-item_primary">{{
-                    prod["prodCode"]
-                  }}</span>
-                </td>
-                <td width="55%">
-                  <span class="app-data-item_primary">{{
-                    prod["prodName"]
-                  }}</span>
-                </td>
-                <td rowspan="2">
-                  <span class="app-link" @click="gotoDetail(prod)">详情</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span>{{ prod["prodUnit"] }}</span>
-                </td>
-                <td>
-                  <span>{{ prod["prodTypeName"] }}</span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </van-list>
-      </van-pull-refresh>
-    </div>
+            {{ prod["enable"] }}
+          </span>
+          <table>
+            <tr>
+              <td width="30%">
+                <span class="app-data-item_primary">{{
+                  prod["prodCode"]
+                }}</span>
+              </td>
+              <td width="55%">
+                <span class="app-data-item_primary">{{
+                  prod["prodName"]
+                }}</span>
+              </td>
+              <td rowspan="2">
+                <span class="app-link" @click="gotoDetail(prod)">详情</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>{{ prod["prodUnit"] }}</span>
+              </td>
+              <td>
+                <span>{{ prod["prodTypeName"] }}</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </van-list>
+    </van-pull-refresh>
 
     <van-popup
       v-model:show="queryInfoShow"

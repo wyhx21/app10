@@ -14,9 +14,14 @@
         </van-nav-bar>
       </div>
     </slot>
+
+    <slot name="header"></slot>
+
     <div class="container-main">
       <slot></slot>
     </div>
+
+    <slot name="footer"></slot>
 
     <div class="container-footer">
       <van-tabbar v-model="activeTab">

@@ -1,35 +1,14 @@
 <template>
-  <div class="app-container">
-    <div>
-      <van-nav-bar left-arrow :title="system['value']" @click-left="goPrePage">
-        <template #left> <van-icon name="arrow-left" size="20" />返回</template>
-        <template #right> {{ roleName }} </template>
-      </van-nav-bar>
+  <app-page-container>
+    <template #header>
       <van-notice-bar
         left-icon="volume-o"
         v-if="showNoticeMsg"
         :text="noticeMsg"
       />
-    </div>
+    </template>
 
-    <div class="container-main">
-      <router-view />
-    </div>
-
-    <div class="container-footer">
-      <van-tabbar v-model="activeTab">
-        <van-tabbar-item icon="chat-o" @click="toHome">主页</van-tabbar-item>
-        <van-tabbar-item icon="fire-o" to="/container/menu"
-          >功能</van-tabbar-item
-        >
-        <van-tabbar-item icon="setting-o" @click="showRoleInfo"
-          >角色</van-tabbar-item
-        >
-        <van-tabbar-item @click="showUserInfo" icon="friends-o"
-          >用户</van-tabbar-item
-        >
-      </van-tabbar>
-    </div>
+    <router-view />
 
     <van-action-sheet
       v-model:show="roleShow"
@@ -46,16 +25,18 @@
     >
       <app-user-info />
     </van-popup>
-  </div>
+  </app-page-container>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
 import appUserInfo from "./UserInfo.vue";
 import { toMainPage, goBack } from "@router/routerHelper.js";
 import { Confirm } from "@utils/messagerUtil.js";
+import AppPageContainer from "@com/common/PageContainer.vue";
 export default {
   components: {
-    appUserInfo
+    appUserInfo,
+    AppPageContainer
   },
   computed: {
     ...mapGetters("account", ["userName"]),

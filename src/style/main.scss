@@ -106,10 +106,14 @@ html,body,#app {
 }
 
 .app-bottom-fixed-button {
+  background-color: $app-color-item;
+  margin: $app-length-base/2 20px;
+  border-radius: $app-length-base;
   width: calc(100% - 60px);
-  position: fixed;
-  bottom: 60px;
-  padding: 0 30px;
+  position: relative;
+  bottom: 0;
+  padding: 0 10px;
+
   
   button {
     width: calc(100% - 10px);
@@ -147,11 +151,6 @@ html,body,#app {
   height: $app-length-row;
   line-height: $app-length-row;
   text-align: center;
-}
-
-.app-data-container {
-  height: calc(100% - 30px);
-  overflow: auto;
 }
 
 .app-param-form {

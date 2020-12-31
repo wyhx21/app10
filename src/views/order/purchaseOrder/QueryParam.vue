@@ -1,9 +1,6 @@
 <template>
   <app-page-container>
-    <van-form
-      @submit="onSubmit"
-      class="app-param-form app-data-item app-order-param-container"
-    >
+    <van-form @submit="onSubmit" class="app-data-detail">
       <van-divider dashed :style="dividerStyle">订单编号</van-divider>
       <van-field
         v-model="params.orderNo"
@@ -53,10 +50,12 @@
         </div>
       </div>
     </van-form>
-    <div class="app-bottom-fixed-button">
-      <van-button type="primary" plain @click="resetParam">重置</van-button>
-      <van-button type="primary" @click="onSubmit">确认</van-button>
-    </div>
+    <template #footer>
+      <div class="app-bottom-fixed-button">
+        <van-button type="primary" plain @click="resetParam">重置</van-button>
+        <van-button type="primary" @click="onSubmit">确认</van-button>
+      </div>
+    </template>
   </app-page-container>
 </template>
 <script>
