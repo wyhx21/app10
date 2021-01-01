@@ -17,8 +17,8 @@
           v-for="data of dataList"
           :key="data['id']"
           class="app-data-item"
-          :class="{ 'app-data-item_cur': data['id'] == currentDataId }"
-          @click="currentDataId = data['id']"
+          :class="{ 'app-data-item_cur': currentDataIds.includes(data['id']) }"
+          @click="selectRowData(data['id'])"
         >
           <app-row-data :data="data" />
         </div>
@@ -33,6 +33,7 @@
       <app-query-param @refreshData="onRefresh" />
     </van-popup>
     <div class="app-bottom-fixed-search-button">
+      <span>选择</span>
       <span @click="cancelSelect">取消</span>
     </div>
   </app-page-container>
@@ -40,8 +41,8 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
-import AppQueryParam from "./SupplierQueryParam.vue";
-import AppRowData from "./SupplierRowData.vue";
+import AppQueryParam from "./ProductQueryParam.vue";
+import AppRowData from "./ProductRowData.vue";
 export default {
   components: {
     AppPageContainer,
@@ -49,7 +50,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/purchaseSupplier", ["dataList"]),
+    ...mapGetters("page/purchaseProduct", ["dataList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -58,7 +59,7 @@ export default {
       listLoading: true,
       listFinished: false,
       queryInfoShow: false,
-      currentDataId: null
+      currentDataIds: []
     };
   },
   mounted() {
@@ -66,8 +67,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/purchaseSupplier", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/purchaseSupplier", ["queryParam"]),
+    ...mapActions("page/purchaseProduct", ["queryPage", "addNextPage"]),
+    ...mapMutations("page/purchaseProduct", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)
@@ -94,6 +95,13 @@ export default {
     },
     showQueryInfo() {
       this.queryInfoShow = true;
+    },
+    selectRowData(val) {
+      if (this.currentDataIds.includes(val)) {
+        this.currentDataIds = this.currentDataIds.filter(item => item != val);
+      } else {
+        this.currentDataIds.push(val);
+      }
     },
     cancelSelect() {
       this.$router.replace("/order/purchasePersist");

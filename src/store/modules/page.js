@@ -7,6 +7,7 @@ import store from "@store/modules/store/store.js";
 import storeArea from "@store/modules/store/storeArea.js";
 import purchaseOrder from "@store/modules/order/purchaseOrder.js";
 import purchaseSupplier from "@store/modules/order/purchaseSupplier.js";
+import purchaseProduct from "@store/modules/order/purchaseProduct.js";
 
 export default {
   namespaced: true,
@@ -19,7 +20,8 @@ export default {
     store,
     storeArea,
     purchaseOrder,
-    purchaseSupplier
+    purchaseSupplier,
+    purchaseProduct
   },
   state: {
     style: {

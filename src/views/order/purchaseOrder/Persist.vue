@@ -38,10 +38,14 @@
       </div>
     </template>
 
+    <div class="app-data-item" @click="selectProduct" v-if="perPersist">
+      <div class="app-data-item_placeholder"><span>点击添加商品</span></div>
+    </div>
+
     <div class="app-bottom-fixed-search-button" v-if="perPersist">
       <span>保存订单</span>
       <span @click="selectSupplier">选择供应商</span>
-      <span>选择商品</span>
+      <span @click="selectProduct">添加商品</span>
     </div>
   </app-page-container>
 </template>
@@ -67,7 +71,10 @@ export default {
   },
   methods: {
     selectSupplier() {
-      this.$router.push("/order/purchaseSupplier");
+      this.$router.replace("/order/purchaseSupplier");
+    },
+    selectProduct() {
+      this.$router.replace("/order/purchaseProduct");
     }
   }
 };
