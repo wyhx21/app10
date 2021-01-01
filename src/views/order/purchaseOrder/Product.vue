@@ -33,7 +33,7 @@
       <app-query-param @refreshData="onRefresh" />
     </van-popup>
     <div class="app-bottom-fixed-search-button">
-      <span>选择</span>
+      <span @click="confirmSelect">选择</span>
       <span @click="cancelSelect">取消</span>
     </div>
   </app-page-container>
@@ -51,7 +51,16 @@ export default {
   },
   computed: {
     ...mapGetters("page/purchaseProduct", ["dataList"]),
+    ...mapGetters("page/purchaseOrder", ["persistProductList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
+  },
+  watch: {
+    persistProductList: {
+      handler(val) {
+        this.currentDataIds = val.map(item => item["id"]);
+      },
+      immediate: true
+    }
   },
   data() {
     return {
@@ -68,6 +77,9 @@ export default {
   },
   methods: {
     ...mapActions("page/purchaseProduct", ["queryPage", "addNextPage"]),
+    ...mapMutations("page/purchaseOrder", {
+      setProductList: "persistProductList"
+    }),
     ...mapMutations("page/purchaseProduct", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
@@ -104,6 +116,29 @@ export default {
       }
     },
     cancelSelect() {
+      this.$router.replace("/order/purchasePersist");
+    },
+    confirmSelect() {
+      // 查询结果
+      const dataIdList = this.dataList.map(item => item["id"]);
+      // 原有的
+      const oldIdList = this.persistProductList.map(item => item["id"]);
+      // 查询结果内没有的
+      const list1 = this.persistProductList.filter(
+        item => !dataIdList.includes(item["id"])
+      );
+      // 已经选择的(原有的)
+      const list2 = this.persistProductList.filter(item =>
+        this.currentDataIds.includes(item["id"])
+      );
+      // 已经选择的(新增的)
+      const list3 = this.dataList
+        .filter(item => this.currentDataIds.includes(item["id"]))
+        .filter(item => !oldIdList.includes(item["id"]));
+      const res = [...list1, ...list2, ...list3].sort((a, b) =>
+        a["id"] > b["id"] ? 1 : -1
+      );
+      this.setProductList(res);
       this.$router.replace("/order/purchasePersist");
     }
   }

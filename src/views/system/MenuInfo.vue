@@ -40,12 +40,16 @@ export default {
   mounted() {
     this.purchaseOrderParam();
     this.persistSupplier();
+    this.persistProductList();
   },
   methods: {
     ...mapMutations("page/purchaseOrder", {
       purchaseOrderParam: "queryParam"
     }),
-    ...mapMutations("page/purchaseOrder", ["persistSupplier"])
+    ...mapMutations("page/purchaseOrder", [
+      "persistSupplier",
+      "persistProductList"
+    ])
   }
 };
 </script>

@@ -38,12 +38,29 @@
       </div>
     </template>
 
-    <div class="app-data-item" @click="selectProduct" v-if="perPersist">
-      <div class="app-data-item_placeholder"><span>点击添加商品</span></div>
+    <div
+      class="app-data-item"
+      v-if="perPersist && persistProductList.length > 0"
+    >
+      <div
+        v-for="item of persistProductList"
+        :key="item['id']"
+        class="app-data-item_detail"
+      >
+        <app-item-row :data="item" />
+      </div>
+    </div>
+    <div class="app-data-item" v-else-if="perPersist">
+      <div class="app-data-item_placeholder" @click="selectProduct">
+        <span>点击添加商品</span>
+      </div>
+    </div>
+    <div class="app-data-item" v-else>
+      <div class="app-data-item_placeholder"><span>您的权限不足</span></div>
     </div>
 
     <div class="app-bottom-fixed-search-button" v-if="perPersist">
-      <span>保存订单</span>
+      <span @click="persistData">保存订单</span>
       <span @click="selectSupplier">选择供应商</span>
       <span @click="selectProduct">添加商品</span>
     </div>
@@ -54,14 +71,17 @@ import { mapGetters } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 import AppTextShow from "@com/common/Number.vue";
 import AppFianceNum from "@com/common/FianceNum.vue";
+import AppItemRow from "./PersistProductItem.vue";
 export default {
   components: {
     AppPageContainer,
     AppFianceNum,
-    AppTextShow
+    AppTextShow,
+    AppItemRow
   },
   computed: {
-    ...mapGetters("page/purchaseOrder", ["persistSupplier", "perPersist"])
+    ...mapGetters("page/purchaseOrder", ["persistSupplier", "perPersist"]),
+    ...mapGetters("page/purchaseOrder", ["persistProductList"])
   },
   data() {
     return {
@@ -75,6 +95,9 @@ export default {
     },
     selectProduct() {
       this.$router.replace("/order/purchaseProduct");
+    },
+    persistData() {
+      console.log(this.persistProductList);
     }
   }
 };

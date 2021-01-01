@@ -32,7 +32,8 @@ export default {
       { text: "出库", value: "3" },
       { text: "入库", value: "4" }
     ],
-    persistSupplier: {}
+    persistSupplier: {},
+    persistProductList: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -47,6 +48,7 @@ export default {
     orderStatusList: _state => _state.orderStatusList,
     detailList: _state => _state.detailList,
     persistSupplier: _state => _state.persistSupplier,
+    persistProductList: _state => _state.persistProductList,
     perPersist: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
         "h5_order_purchase"
@@ -74,7 +76,20 @@ export default {
     currentData: (_state, data = {}) => (_state.currentData = data),
     detailList: (_state, list = []) => (_state.detailList = list),
     persistSupplier: (_state, supplier = {}) =>
-      (_state.persistSupplier = supplier)
+      (_state.persistSupplier = supplier),
+    persistProductList: (_state, list = []) =>
+      (_state.persistProductList = list),
+    updateProduct: (_state, { id, price = 0, prodNum = 0 }) => {
+      const _persistProductList = _state.persistProductList;
+      const [rowData] = _persistProductList.filter(item => item["id"] == id);
+      const prodAmount = price * prodNum;
+      Object.assign(rowData, { price, prodNum, prodAmount });
+    },
+    updateProdRemark: (_state, { id, itemRemark }) => {
+      const _persistProductList = _state.persistProductList;
+      const [rowData] = _persistProductList.filter(item => item["id"] == id);
+      Object.assign(rowData, { itemRemark });
+    }
   },
   actions: {
     initData: async ({ commit }, initData = false) => {

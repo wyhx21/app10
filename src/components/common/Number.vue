@@ -45,12 +45,12 @@ export default {
       this.$emit("update:modelValue", val);
     },
     onInput(val) {
-      if (!this.modelValue) {
+      if (!this.modelValue && this.modelValue != 0) {
         this.setValue(val);
         return;
       }
       if ("." == val) {
-        const len = [...this.modelValue].filter(o => o == val).length;
+        const len = [...`${this.modelValue}`].filter(o => o == val).length;
         if (len > 0) {
           return;
         }
@@ -62,8 +62,8 @@ export default {
         this.setValue("");
         return;
       }
-      const len = this.modelValue.length;
-      const val = this.modelValue.substring(0, len - 1);
+      const len = `${this.modelValue}`.length;
+      const val = `${this.modelValue}`.substring(0, len - 1);
       this.setValue(val);
     }
   }
