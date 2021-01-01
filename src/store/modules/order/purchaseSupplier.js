@@ -1,4 +1,4 @@
-import { queryPage, orderDetail } from "@axios/order/purchaseOrder.js";
+import { querySupplier } from "@axios/order/purchaseOrder.js";
 const defaultPageSize = 10;
 
 export default {
@@ -13,26 +13,11 @@ export default {
       toalPage: 2
     },
     params: {
-      orderNo: "",
-      cusCode: "",
-      orderAmountMax: "",
-      orderAmountMin: "",
-      orderStatus: "",
-      orderTimeBegin: "",
-      orderTimeEnd: ""
+      supplierCode: "",
+      supplierName: ""
     },
     dataList: [],
-    currentData: {},
-    detailList: [],
-    orderStatusList: [
-      { text: "全部", value: "" },
-      { text: "创建", value: "0" },
-      { text: "生效", value: "1" },
-      { text: "交易", value: "2" },
-      { text: "出库", value: "3" },
-      { text: "入库", value: "4" }
-    ],
-    persistSupplier: {}
+    selectDataList: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -43,22 +28,7 @@ export default {
       const currentPage = _state.pageInfo.page;
       return totalPage > currentPage;
     },
-    currentData: _state => _state.currentData,
-    orderStatusList: _state => _state.orderStatusList,
-    detailList: _state => _state.detailList,
-    persistSupplier: _state => _state.persistSupplier,
-    perPersist: (_state, _getters, _rootState, _rootGetters) => {
-      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
-        "h5_order_purchase"
-      );
-      return arr.includes("h5_order_purchase_persist");
-    },
-    perDetail: (_state, _getters, _rootState, _rootGetters) => {
-      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
-        "h5_order_purchase"
-      );
-      return arr.includes("h5_order_purchase_detail");
-    }
+    selectDataList: _state => _state.selectDataList,
   },
   mutations: {
     pageInfo: (_state, { page = 1, size = defaultPageSize } = {}) =>
@@ -66,15 +36,11 @@ export default {
     pageResult: (_state, { toalPage = 2, total = 1 } = {}) => {
       _state.pageResult = { toalPage, total };
     },
-    queryParam: (_state, params = { orderStatus: "" }) =>
-      (_state.params = params),
+    queryParam: (_state, params = {}) => (_state.params = params),
     nextPage: _state => _state.pageInfo.page++,
     dataClear: _state => (_state.dataList = []),
     dataList: (_state, list = []) => _state.dataList.push(...list),
-    currentData: (_state, data = {}) => (_state.currentData = data),
-    detailList: (_state, list = []) => (_state.detailList = list),
-    persistSupplier: (_state, supplier = {}) =>
-      (_state.persistSupplier = supplier)
+    selectDataList: (_state, data = {}) => (_state.selectDataList = data)
   },
   actions: {
     initData: async ({ commit }, initData = false) => {
@@ -87,7 +53,7 @@ export default {
     queryPage: async ({ commit, getters, dispatch }, initData = false) => {
       await dispatch("initData", initData);
       return new Promise((resolve, reject) => {
-        queryPage(getters.params, getters.pageInfo)
+        querySupplier(getters.params, getters.pageInfo)
           .then(res => {
             commit("pageResult", res);
             commit("dataList", res["data"]);
@@ -111,17 +77,6 @@ export default {
           resolve(false);
         }
       });
-    },
-    loadDetail: async ({ getters, commit }) => {
-      commit("detailList");
-      if (!getters.perDetail) {
-        return;
-      }
-      orderDetail(getters.currentData)
-        .then(res => {
-          commit("detailList", res);
-        })
-        .catch(() => {});
     }
   }
 };

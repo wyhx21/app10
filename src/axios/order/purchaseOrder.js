@@ -6,4 +6,7 @@ const queryPage = (data, { page = 1, size = 10 } = {}) =>
 const orderDetail = ({ id }) =>
   axios.doGet(`/orderInfo/orderDetail/purchase/${id}`);
 
-export { queryPage, orderDetail };
+const querySupplier = (data, { page = 1, size = 10 } = {}) =>
+  axios.doPost("/basic/supplier/supplier", data, { page, size });
+
+export { queryPage, orderDetail, querySupplier };

@@ -43,6 +43,12 @@ export default {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_prod_supplier");
       return arr.includes("h5_prod_supplier_persist");
     },
+    purchasePersist: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_persist");
+    },
     currentData: _state => _state.currentData
   },
   mutations: {

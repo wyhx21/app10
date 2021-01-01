@@ -38,22 +38,36 @@
     </div>
     <div class="app-bottom-fixed-search-button">
       <span @click="editorData" v-if="perMerge">编辑</span>
+      <span
+        @click="persistPurchaseOrder"
+        v-if="purchasePersist && currentData['deleted'] == 1"
+        >采购</span
+      >
     </div>
   </app-page-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 export default {
   components: {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/supplier", ["currentData", "perMerge"])
+    ...mapGetters("page/supplier", [
+      "currentData",
+      "perMerge",
+      "purchasePersist"
+    ])
   },
   methods: {
+    ...mapMutations("page/purchaseOrder", ["persistSupplier"]),
     editorData() {
       this.$router.replace("/base/supplierEditor");
+    },
+    persistPurchaseOrder() {
+      this.persistSupplier(this.currentData);
+      this.$router.push("/order/purchasePersist");
     }
   }
 };
