@@ -1,7 +1,7 @@
 <template>
   <app-page-container>
     <template #header>
-      <div class="app-data-item">
+      <div class="app-data-item" v-if="persistSupplier['id']">
         <table width="100%">
           <tr>
             <td width="35%">
@@ -19,14 +19,19 @@
               />
             </td>
             <td>
-              <app-fiance-num v-model="extraAmount" placeholder="额外金额" />
+              <app-fiance-num
+                :model-value="persistSupplier['extraAmount']"
+                @update:modelValue="updateExtraAmount"
+                placeholder="额外金额"
+              />
             </td>
           </tr>
           <tr>
             <td colspan="3">
               <van-field
                 class="app-data-item_remark"
-                v-model="remark"
+                :model-value="persistSupplier['orderRemark']"
+                @update:modelValue="updateOrderRemark"
                 rows="2"
                 autosize
                 type="textarea"
@@ -35,6 +40,9 @@
             </td>
           </tr>
         </table>
+      </div>
+      <div class="app-data-item" v-else @click="selectSupplier">
+        <div class="app-data-item_placeholder"><span>点击选择供应商</span></div>
       </div>
     </template>
 
@@ -46,6 +54,8 @@
         v-for="item of persistProductList"
         :key="item['id']"
         class="app-data-item_detail"
+        :class="{ 'app-data-item_cur': currentProdId == item['id'] }"
+        @click="currentProdId = item['id']"
       >
         <app-item-row :data="item" />
       </div>
@@ -67,11 +77,12 @@
   </app-page-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 import AppTextShow from "@com/common/Number.vue";
 import AppFianceNum from "@com/common/FianceNum.vue";
 import AppItemRow from "./PersistProductItem.vue";
+import { Confirm, Message } from "@utils/messagerUtil.js";
 export default {
   components: {
     AppPageContainer,
@@ -85,11 +96,16 @@ export default {
   },
   data() {
     return {
-      extraAmount: "0",
-      remark: ""
+      loading: false,
+      currentProdId: null
     };
   },
   methods: {
+    ...mapMutations("page/purchaseOrder", [
+      "persistSupplierAmount",
+      "persistSupplierRemark"
+    ]),
+    ...mapActions("page/purchaseOrder", ["persistOrder"]),
     selectSupplier() {
       this.$router.replace("/order/purchaseSupplier");
     },
@@ -97,7 +113,29 @@ export default {
       this.$router.replace("/order/purchaseProduct");
     },
     persistData() {
-      console.log(this.persistProductList);
+      if (this.loading == true) {
+        Message({ message: "请不要重复点击" });
+      } else {
+        Confirm({ message: "确认保存?" })
+          .then(() => {
+            this.loading = true;
+            this.persistOrder()
+              .then(() => {
+                this.$router.replace("/order/purchase");
+                this.loading = false;
+              })
+              .catch(() => {
+                this.loading = false;
+              });
+          })
+          .catch(() => {});
+      }
+    },
+    updateExtraAmount(extraAmount) {
+      this.persistSupplierAmount(extraAmount);
+    },
+    updateOrderRemark(orderRemark) {
+      this.persistSupplierRemark(orderRemark);
     }
   }
 };

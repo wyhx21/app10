@@ -12,4 +12,7 @@ const querySupplier = (data, { page = 1, size = 10 } = {}) =>
 const queryProduct = (data, { page = 1, size = 10 } = {}) =>
   axios.doPost("/basic/product/purchase", data, { page, size });
 
-export { queryPage, orderDetail, querySupplier, queryProduct };
+const orderPersist = data =>
+  axios.doPost("/orderInfo/purchaseOrder/persist", data);
+
+export { queryPage, orderDetail, querySupplier, queryProduct, orderPersist };

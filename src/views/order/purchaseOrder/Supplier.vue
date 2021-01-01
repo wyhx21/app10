@@ -17,8 +17,7 @@
           v-for="data of dataList"
           :key="data['id']"
           class="app-data-item"
-          :class="{ 'app-data-item_cur': data['id'] == currentDataId }"
-          @click="currentDataId = data['id']"
+          :class="{ 'app-data-item_cur': data['id'] == persistSupplier['id'] }"
         >
           <app-row-data :data="data" />
         </div>
@@ -49,6 +48,7 @@ export default {
     AppRowData
   },
   computed: {
+    ...mapGetters("page/purchaseOrder", ["persistSupplier"]),
     ...mapGetters("page/purchaseSupplier", ["dataList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
@@ -57,8 +57,7 @@ export default {
       isLoading: true,
       listLoading: true,
       listFinished: false,
-      queryInfoShow: false,
-      currentDataId: null
+      queryInfoShow: false
     };
   },
   mounted() {

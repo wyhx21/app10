@@ -1,4 +1,8 @@
-import { queryPage, orderDetail } from "@axios/order/purchaseOrder.js";
+import {
+  queryPage,
+  orderDetail,
+  orderPersist
+} from "@axios/order/purchaseOrder.js";
 const defaultPageSize = 10;
 
 export default {
@@ -75,8 +79,11 @@ export default {
     dataList: (_state, list = []) => _state.dataList.push(...list),
     currentData: (_state, data = {}) => (_state.currentData = data),
     detailList: (_state, list = []) => (_state.detailList = list),
-    persistSupplier: (_state, supplier = {}) =>
-      (_state.persistSupplier = supplier),
+    persistSupplier: (_state, supplier = {}) => {
+      if (_state.persistSupplier["id"] != supplier["id"]) {
+        _state.persistSupplier = supplier;
+      }
+    },
     persistProductList: (_state, list = []) =>
       (_state.persistProductList = list),
     updateProduct: (_state, { id, price = 0, prodNum = 0 }) => {
@@ -89,6 +96,12 @@ export default {
       const _persistProductList = _state.persistProductList;
       const [rowData] = _persistProductList.filter(item => item["id"] == id);
       Object.assign(rowData, { itemRemark });
+    },
+    persistSupplierAmount: (_state, extraAmount) => {
+      Object.assign(_state.persistSupplier, { extraAmount });
+    },
+    persistSupplierRemark: (_state, orderRemark) => {
+      Object.assign(_state.persistSupplier, { orderRemark });
     }
   },
   actions: {
@@ -137,6 +150,34 @@ export default {
           commit("detailList", res);
         })
         .catch(() => {});
+    },
+    persistOrder: async ({ getters, commit }) => {
+      const supplier = getters.persistSupplier;
+      const prodList = getters.persistProductList;
+      const data = {
+        supplierId: supplier["id"],
+        extraAmount: supplier["extraAmount"],
+        remark: supplier["orderRemark"]
+      };
+      const detailList = prodList.map(item => {
+        const [prodId, prodNum, prodPrice, remark] = [
+          item["id"],
+          item["prodNum"],
+          item["price"],
+          item["itemRemark"]
+        ];
+        return { prodId, prodNum, prodPrice, remark };
+      });
+      Object.assign(data, { detailList });
+      return new Promise((resolve, reject) => {
+        orderPersist(data)
+          .then(() => {
+            commit("persistSupplier");
+            commit("persistProductList");
+            resolve();
+          })
+          .catch(err => reject(err));
+      });
     }
   }
 };
