@@ -39,11 +39,13 @@ export default {
   },
   mounted() {
     this.purchaseOrderParam();
+    this.persistSupplier();
   },
   methods: {
     ...mapMutations("page/purchaseOrder", {
       purchaseOrderParam: "queryParam"
-    })
+    }),
+    ...mapMutations("page/purchaseOrder", ["persistSupplier"])
   }
 };
 </script>

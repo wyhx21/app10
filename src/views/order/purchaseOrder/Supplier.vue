@@ -37,8 +37,8 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
-import AppQueryParam from "./QueryParam.vue";
-import AppRowData from "./RowData.vue";
+import AppQueryParam from "./SupplierQueryParam.vue";
+import AppRowData from "./SupplierRowData.vue";
 export default {
   components: {
     AppPageContainer,
@@ -46,7 +46,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/supplier", ["dataList", "perPersist"]),
+    ...mapGetters("page/purchaseSupplier", ["dataList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -63,8 +63,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/supplier", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/supplier", ["queryParam"]),
+    ...mapActions("page/purchaseSupplier", ["queryPage", "addNextPage"]),
+    ...mapMutations("page/purchaseSupplier", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

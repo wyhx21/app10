@@ -16,8 +16,7 @@ export default {
       supplierCode: "",
       supplierName: ""
     },
-    dataList: [],
-    selectDataList: []
+    dataList: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -27,8 +26,7 @@ export default {
       const totalPage = _state.pageResult.toalPage;
       const currentPage = _state.pageInfo.page;
       return totalPage > currentPage;
-    },
-    selectDataList: _state => _state.selectDataList,
+    }
   },
   mutations: {
     pageInfo: (_state, { page = 1, size = defaultPageSize } = {}) =>
@@ -39,8 +37,7 @@ export default {
     queryParam: (_state, params = {}) => (_state.params = params),
     nextPage: _state => _state.pageInfo.page++,
     dataClear: _state => (_state.dataList = []),
-    dataList: (_state, list = []) => _state.dataList.push(...list),
-    selectDataList: (_state, data = {}) => (_state.selectDataList = data)
+    dataList: (_state, list = []) => _state.dataList.push(...list)
   },
   actions: {
     initData: async ({ commit }, initData = false) => {

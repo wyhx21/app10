@@ -40,7 +40,7 @@
 
     <div class="app-bottom-fixed-search-button" v-if="perPersist">
       <span>保存订单</span>
-      <span>选择供应商</span>
+      <span @click="selectSupplier">选择供应商</span>
       <span>选择商品</span>
     </div>
   </app-page-container>
@@ -61,9 +61,14 @@ export default {
   },
   data() {
     return {
-      extraAmount: "",
+      extraAmount: "0",
       remark: ""
     };
+  },
+  methods: {
+    selectSupplier() {
+      this.$router.push("/order/purchaseSupplier");
+    }
   }
 };
 </script>

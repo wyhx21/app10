@@ -18,6 +18,11 @@ const purchaseOrder = [
     path: "/order/purchaseDetail",
     name: "order_purchase_detail",
     component: () => import("@views/order/purchaseOrder/Detail.vue")
+  },
+  {
+    path: "/order/purchaseSupplier",
+    name: "order_purchase_supplier",
+    component: () => import("@views/order/purchaseOrder/Supplier.vue")
   }
 ];
 
