@@ -1,7 +1,10 @@
 import {
   queryPage,
   orderDetail,
-  orderPersist
+  orderPersist,
+  ordeSubmit,
+  orderTransfer,
+  orderDelete
 } from "@axios/order/purchaseOrder.js";
 const defaultPageSize = 10;
 
@@ -64,6 +67,24 @@ export default {
         "h5_order_purchase"
       );
       return arr.includes("h5_order_purchase_detail");
+    },
+    perSubmit: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_submit");
+    },
+    perTransfer: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_transfer");
+    },
+    perDelete: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_delete");
     }
   },
   mutations: {
@@ -182,6 +203,15 @@ export default {
           })
           .catch(err => reject(err));
       });
+    },
+    submitOrder: async (args0, { id }) => {
+      return ordeSubmit(id);
+    },
+    transferOrder: async (args0, { id }) => {
+      return orderTransfer(id);
+    },
+    deleteOrder: async (args0, { id }) => {
+      return orderDelete(id);
     }
   }
 };

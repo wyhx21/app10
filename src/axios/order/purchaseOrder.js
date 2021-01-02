@@ -15,4 +15,20 @@ const queryProduct = (data, { page = 1, size = 10 } = {}) =>
 const orderPersist = data =>
   axios.doPost("/orderInfo/purchaseOrder/persist", data);
 
-export { queryPage, orderDetail, querySupplier, queryProduct, orderPersist };
+const ordeSubmit = id => axios.doGet(`/orderInfo/purchaseOrder/submit/${id}`);
+
+const orderTransfer = id =>
+  axios.doGet(`/orderInfo/purchaseOrder/transfer/${id}`);
+
+const orderDelete = id => axios.doGet(`/orderInfo/purchaseOrder/delete/${id}`);
+
+export {
+  queryPage,
+  orderDetail,
+  querySupplier,
+  queryProduct,
+  orderPersist,
+  ordeSubmit,
+  orderTransfer,
+  orderDelete
+};
