@@ -36,7 +36,6 @@ export default {
       { text: "创建", value: "0" },
       { text: "生效", value: "1" },
       { text: "交易", value: "2" },
-      { text: "出库", value: "3" },
       { text: "入库", value: "4" }
     ],
     persistSupplier: {},
