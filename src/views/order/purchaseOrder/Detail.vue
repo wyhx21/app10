@@ -140,6 +140,3 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-@import "@style/component/order/purchaseOrder.scss";
-</style>
