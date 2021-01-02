@@ -86,6 +86,10 @@ export default {
     },
     persistProductList: (_state, list = []) =>
       (_state.persistProductList = list),
+    deleteProduct: (_state, { id }) => {
+      const list = _state.persistProductList;
+      _state.persistProductList = list.filter(item => item["id"] != id);
+    },
     updateProduct: (_state, { id, price = 0, prodNum = 0 }) => {
       const _persistProductList = _state.persistProductList;
       const [rowData] = _persistProductList.filter(item => item["id"] == id);

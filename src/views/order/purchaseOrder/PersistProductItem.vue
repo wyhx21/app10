@@ -40,6 +40,13 @@
       </td>
     </tr>
   </table>
+
+  <div
+    class="app-data-item_deleted app-data-item_deleted_1"
+    @click="deleteItem"
+  >
+    <van-icon name="cross" size="15" />
+  </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
@@ -57,7 +64,8 @@ export default {
   methods: {
     ...mapMutations("page/purchaseOrder", [
       "updateProduct",
-      "updateProdRemark"
+      "updateProdRemark",
+      "deleteProduct"
     ]),
     updatePrice(price) {
       const id = this.data["id"];
@@ -72,6 +80,9 @@ export default {
     updateRemark(itemRemark) {
       const id = this.data["id"];
       this.updateProdRemark({ id, itemRemark });
+    },
+    deleteItem() {
+      this.deleteProduct(this.data);
     }
   }
 };
