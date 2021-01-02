@@ -39,9 +39,14 @@
     <div class="app-bottom-fixed-search-button">
       <span @click="editorData" v-if="perMerge">编辑</span>
       <span
+        @click="queryPurchaseOrder"
+        v-if="purchaseQuery && currentData['deleted'] == 1"
+        >订单查询</span
+      >
+      <span
         @click="persistPurchaseOrder"
         v-if="purchasePersist && currentData['deleted'] == 1"
-        >采购</span
+        >订单新增</span
       >
     </div>
   </app-page-container>
@@ -57,10 +62,12 @@ export default {
     ...mapGetters("page/supplier", [
       "currentData",
       "perMerge",
-      "purchasePersist"
+      "purchasePersist",
+      "purchaseQuery"
     ])
   },
   methods: {
+    ...mapMutations("page/purchaseOrder", ["queryParam"]),
     ...mapMutations("page/purchaseOrder", ["persistSupplier"]),
     editorData() {
       this.$router.replace("/base/supplierEditor");
@@ -68,6 +75,11 @@ export default {
     persistPurchaseOrder() {
       this.persistSupplier(this.currentData);
       this.$router.push("/order/purchasePersist");
+    },
+    queryPurchaseOrder() {
+      const cusCode = this.currentData["supplierCode"];
+      this.queryParam({ cusCode });
+      this.$router.push("/order/purchase");
     }
   }
 };

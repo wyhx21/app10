@@ -49,6 +49,12 @@ export default {
       );
       return arr.includes("h5_order_purchase_persist");
     },
+    purchaseQuery: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_query");
+    },
     currentData: _state => _state.currentData
   },
   mutations: {
