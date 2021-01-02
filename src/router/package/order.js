@@ -31,4 +31,22 @@ const purchaseOrder = [
   }
 ];
 
-export { purchaseOrder };
+const saleOrder = [
+  {
+    path: "/order/sale",
+    name: "order_sale",
+    component: () => import("@views/order/saleOrder/Index.vue")
+  },
+  {
+    path: "/order/saleParam",
+    name: "order_sale_param",
+    component: () => import("@views/order/saleOrder/QueryParam.vue")
+  },
+  {
+    path: "/order/saleDetail",
+    name: "order_sale_detail",
+    component: () => import("@views/order/saleOrder/Detail.vue")
+  }
+];
+
+export { purchaseOrder, saleOrder };
