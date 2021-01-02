@@ -40,16 +40,22 @@ export default {
   mounted() {
     this.purchaseOrderParam();
     this.persistSupplier();
-    this.persistProductList();
+    this.purchaseProductList();
+    this.persistCustomer();
+    this.saleProductList();
   },
   methods: {
     ...mapMutations("page/purchaseOrder", {
       purchaseOrderParam: "queryParam"
     }),
-    ...mapMutations("page/purchaseOrder", [
-      "persistSupplier",
-      "persistProductList"
-    ])
+    ...mapMutations("page/purchaseOrder", {
+      persistSupplier: "persistSupplier",
+      purchaseProductList: "persistProductList"
+    }),
+    ...mapMutations("page/saleOrder", {
+      persistCustomer: "persistCustomer",
+      saleProductList: "persistProductList"
+    })
   }
 };
 </script>

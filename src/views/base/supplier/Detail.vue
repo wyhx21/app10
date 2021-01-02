@@ -67,8 +67,7 @@ export default {
     ])
   },
   methods: {
-    ...mapMutations("page/purchaseOrder", ["queryParam"]),
-    ...mapMutations("page/purchaseOrder", ["persistSupplier"]),
+    ...mapMutations("page/purchaseOrder", ["queryParam", "persistSupplier"]),
     editorData() {
       this.$router.replace("/base/supplierEditor");
     },
@@ -78,7 +77,8 @@ export default {
     },
     queryPurchaseOrder() {
       const cusCode = this.currentData["supplierCode"];
-      this.queryParam({ cusCode });
+      const orderStatus = "";
+      this.queryParam({ cusCode, orderStatus });
       this.$router.push("/order/purchase");
     }
   }

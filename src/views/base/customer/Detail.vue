@@ -38,22 +38,48 @@
     </div>
     <div class="app-bottom-fixed-search-button">
       <span @click="editorData" v-if="perMerge">编辑</span>
+      <span
+        @click="querySaleOrder"
+        v-if="saleQuery && currentCustomer['deleted'] == 1"
+        >订单查询</span
+      >
+      <span
+        @click="persistSaleOrder"
+        v-if="salePersist && currentCustomer['deleted'] == 1"
+        >订单新增</span
+      >
     </div>
   </app-page-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 export default {
   components: {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/customer", ["currentCustomer", "perMerge"])
+    ...mapGetters("page/customer", [
+      "currentCustomer",
+      "perMerge",
+      "salePersist",
+      "saleQuery"
+    ])
   },
   methods: {
+    ...mapMutations("page/saleOrder", ["queryParam", "persistCustomer"]),
     editorData() {
       this.$router.replace("/base/customerEditor");
+    },
+    persistSaleOrder() {
+      this.persistCustomer(this.currentCustomer);
+      this.$router.push("/order/salePersist");
+    },
+    querySaleOrder() {
+      const cusCode = this.currentCustomer["cusCode"];
+      const orderStatus = "";
+      this.queryParam({ cusCode, orderStatus });
+      this.$router.push("/order/sale");
     }
   }
 };

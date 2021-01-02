@@ -46,6 +46,21 @@ const saleOrder = [
     path: "/order/saleDetail",
     name: "order_sale_detail",
     component: () => import("@views/order/saleOrder/Detail.vue")
+  },
+  {
+    path: "/order/salePersist",
+    name: "order_sale_persist",
+    component: () => import("@views/order/saleOrder/Persist.vue")
+  },
+  {
+    path: "/order/saleCustomer",
+    name: "order_sale_customer",
+    component: () => import("@views/order/saleOrder/Customer.vue")
+  },
+  {
+    path: "/order/saleProduct",
+    name: "order_sale_product",
+    component: () => import("@views/order/saleOrder/Product.vue")
   }
 ];
 

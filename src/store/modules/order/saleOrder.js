@@ -38,7 +38,7 @@ export default {
       { text: "交易", value: "2" },
       { text: "出库", value: "3" }
     ],
-    persistSupplier: {},
+    persistCustomer: {},
     persistProductList: []
   },
   getters: {
@@ -53,7 +53,7 @@ export default {
     currentData: _state => _state.currentData,
     orderStatusList: _state => _state.orderStatusList,
     detailList: _state => _state.detailList,
-    persistSupplier: _state => _state.persistSupplier,
+    persistCustomer: _state => _state.persistCustomer,
     persistProductList: _state => _state.persistProductList,
     perPersist: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_order_sale");
@@ -89,9 +89,9 @@ export default {
     dataList: (_state, list = []) => _state.dataList.push(...list),
     currentData: (_state, data = {}) => (_state.currentData = data),
     detailList: (_state, list = []) => (_state.detailList = list),
-    persistSupplier: (_state, supplier = {}) => {
-      if (_state.persistSupplier["id"] != supplier["id"]) {
-        _state.persistSupplier = supplier;
+    persistCustomer: (_state, customer = {}) => {
+      if (_state.persistCustomer["id"] != customer["id"]) {
+        _state.persistCustomer = customer;
       }
     },
     persistProductList: (_state, list = []) =>
@@ -111,11 +111,11 @@ export default {
       const [rowData] = _persistProductList.filter(item => item["id"] == id);
       Object.assign(rowData, { itemRemark });
     },
-    persistSupplierAmount: (_state, extraAmount) => {
-      Object.assign(_state.persistSupplier, { extraAmount });
+    persistCustomerAmount: (_state, extraAmount) => {
+      Object.assign(_state.persistCustomer, { extraAmount });
     },
-    persistSupplierRemark: (_state, orderRemark) => {
-      Object.assign(_state.persistSupplier, { orderRemark });
+    persistCustomerRemark: (_state, orderRemark) => {
+      Object.assign(_state.persistCustomer, { orderRemark });
     }
   },
   actions: {
@@ -166,12 +166,12 @@ export default {
         .catch(() => {});
     },
     persistOrder: async ({ getters, commit }) => {
-      const supplier = getters.persistSupplier;
+      const customer = getters.persistCustomer;
       const prodList = getters.persistProductList;
       const data = {
-        supplierId: supplier["id"],
-        extraAmount: supplier["extraAmount"],
-        remark: supplier["orderRemark"]
+        cusId: customer["id"],
+        extraAmount: customer["extraAmount"],
+        remark: customer["orderRemark"]
       };
       const detailList = prodList.map(item => {
         const [prodId, prodNum, prodPrice, remark] = [
@@ -186,7 +186,7 @@ export default {
       return new Promise((resolve, reject) => {
         orderPersist(data)
           .then(() => {
-            commit("persistSupplier");
+            commit("persistCustomer");
             commit("persistProductList");
             resolve();
           })

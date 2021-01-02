@@ -17,8 +17,7 @@
           v-for="data of dataList"
           :key="data['id']"
           class="app-data-item"
-          :class="{ 'app-data-item_cur': currentDataIds.includes(data['id']) }"
-          @click="selectRowData(data['id'])"
+          :class="{ 'app-data-item_cur': data['id'] == persistCustomer['id'] }"
         >
           <app-row-data :data="data" />
         </div>
@@ -33,7 +32,6 @@
       <app-query-param @refreshData="onRefresh" />
     </van-popup>
     <div class="app-bottom-fixed-search-button">
-      <span @click="confirmSelect">选择</span>
       <span @click="cancelSelect">取消</span>
     </div>
   </app-page-container>
@@ -41,8 +39,8 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
-import AppQueryParam from "./ProductQueryParam.vue";
-import AppRowData from "./ProductRowData.vue";
+import AppQueryParam from "./CustomerQueryParam.vue";
+import AppRowData from "./CustomerRowData.vue";
 export default {
   components: {
     AppPageContainer,
@@ -50,25 +48,16 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/purchaseProduct", ["dataList"]),
-    ...mapGetters("page/purchaseOrder", ["persistProductList"]),
+    ...mapGetters("page/saleOrder", ["persistCustomer"]),
+    ...mapGetters("page/saleCustomer", ["dataList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
-  },
-  watch: {
-    persistProductList: {
-      handler(val) {
-        this.currentDataIds = val.map(item => item["id"]);
-      },
-      immediate: true
-    }
   },
   data() {
     return {
       isLoading: true,
       listLoading: true,
       listFinished: false,
-      queryInfoShow: false,
-      currentDataIds: []
+      queryInfoShow: false
     };
   },
   mounted() {
@@ -76,11 +65,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/purchaseProduct", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/purchaseOrder", {
-      setProductList: "persistProductList"
-    }),
-    ...mapMutations("page/purchaseProduct", ["queryParam"]),
+    ...mapActions("page/saleCustomer", ["queryPage", "addNextPage"]),
+    ...mapMutations("page/saleCustomer", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)
@@ -108,38 +94,8 @@ export default {
     showQueryInfo() {
       this.queryInfoShow = true;
     },
-    selectRowData(val) {
-      if (this.currentDataIds.includes(val)) {
-        this.currentDataIds = this.currentDataIds.filter(item => item != val);
-      } else {
-        this.currentDataIds.push(val);
-      }
-    },
     cancelSelect() {
-      this.$router.replace("/order/purchasePersist");
-    },
-    confirmSelect() {
-      // 查询结果
-      // const dataIdList = this.dataList.map(item => item["id"]);
-      // 原有的
-      const oldIdList = this.persistProductList.map(item => item["id"]);
-      // 查询结果内没有的
-      // const list1 = this.persistProductList.filter(
-      //   item => !dataIdList.includes(item["id"])
-      // );
-      // 已经选择的(原有的)
-      const list2 = this.persistProductList.filter(item =>
-        this.currentDataIds.includes(item["id"])
-      );
-      // 已经选择的(新增的)
-      const list3 = this.dataList
-        .filter(item => this.currentDataIds.includes(item["id"]))
-        .filter(item => !oldIdList.includes(item["id"]));
-      const res = [...list2, ...list3].sort((a, b) =>
-        a["id"] > b["id"] ? 1 : -1
-      );
-      this.setProductList(res);
-      this.$router.replace("/order/purchasePersist");
+      this.$router.replace("/order/salePersist");
     }
   }
 };

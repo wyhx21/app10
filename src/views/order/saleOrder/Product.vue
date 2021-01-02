@@ -50,8 +50,8 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/purchaseProduct", ["dataList"]),
-    ...mapGetters("page/purchaseOrder", ["persistProductList"]),
+    ...mapGetters("page/saleProduct", ["dataList"]),
+    ...mapGetters("page/saleOrder", ["persistProductList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   watch: {
@@ -76,11 +76,11 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/purchaseProduct", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/purchaseOrder", {
+    ...mapActions("page/saleProduct", ["queryPage", "addNextPage"]),
+    ...mapMutations("page/saleOrder", {
       setProductList: "persistProductList"
     }),
-    ...mapMutations("page/purchaseProduct", ["queryParam"]),
+    ...mapMutations("page/saleProduct", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)
@@ -116,7 +116,7 @@ export default {
       }
     },
     cancelSelect() {
-      this.$router.replace("/order/purchasePersist");
+      this.$router.replace("/order/salePersist");
     },
     confirmSelect() {
       // 查询结果
@@ -125,7 +125,7 @@ export default {
       const oldIdList = this.persistProductList.map(item => item["id"]);
       // 查询结果内没有的
       // const list1 = this.persistProductList.filter(
-      //   item => !dataIdList.includes(item["id"])
+      //  item => !dataIdList.includes(item["id"])
       // );
       // 已经选择的(原有的)
       const list2 = this.persistProductList.filter(item =>
@@ -139,7 +139,7 @@ export default {
         a["id"] > b["id"] ? 1 : -1
       );
       this.setProductList(res);
-      this.$router.replace("/order/purchasePersist");
+      this.$router.replace("/order/salePersist");
     }
   }
 };
