@@ -57,4 +57,17 @@ const outStore = [
   }
 ];
 
-export { storeSetting, inStore, outStore };
+const storeProd = [
+  {
+    path: "/store/storeProd",
+    name: "store_prod",
+    component: () => import("@views/store/storeProd/Index.vue")
+  },
+  {
+    path: "/store/storeProdDetail",
+    name: "store_prod_detail",
+    component: () => import("@views/store/storeProd/Detail.vue")
+  }
+];
+
+export { storeSetting, inStore, outStore, storeProd };
