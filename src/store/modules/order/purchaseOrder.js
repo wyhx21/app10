@@ -6,6 +6,7 @@ import {
   orderTransfer,
   orderDelete
 } from "@axios/order/purchaseOrder.js";
+import { queryByOrderNo } from "@axios/store/storeProd.js";
 const defaultPageSize = 10;
 
 export default {
@@ -39,7 +40,8 @@ export default {
       { text: "入库", value: "4" }
     ],
     persistSupplier: {},
-    persistProductList: []
+    persistProductList: [],
+    orderStoreList: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -55,6 +57,7 @@ export default {
     detailList: _state => _state.detailList,
     persistSupplier: _state => _state.persistSupplier,
     persistProductList: _state => _state.persistProductList,
+    orderStoreList: _state => _state.orderStoreList,
     perPersist: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
         "h5_order_purchase"
@@ -78,6 +81,12 @@ export default {
         "h5_order_purchase"
       );
       return arr.includes("h5_order_purchase_transfer");
+    },
+    perOrderStore: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_order_purchase"
+      );
+      return arr.includes("h5_order_purchase_store");
     },
     perDelete: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
@@ -103,6 +112,7 @@ export default {
     dataList: (_state, list = []) => _state.dataList.push(...list),
     currentData: (_state, data = {}) => (_state.currentData = data),
     detailList: (_state, list = []) => (_state.detailList = list),
+    orderStoreList: (_state, list = []) => (_state.orderStoreList = list),
     persistSupplier: (_state, supplier = {}) => {
       if (_state.persistSupplier["id"] != supplier["id"]) {
         _state.persistSupplier = supplier;
@@ -206,6 +216,14 @@ export default {
           })
           .catch(err => reject(err));
       });
+    },
+    orderStoreInfo: async ({ getters, commit }) => {
+      const { orderNo } = getters.currentData;
+      queryByOrderNo(orderNo)
+        .then(res => {
+          commit("orderStoreList", res);
+        })
+        .catch(() => {});
     },
     submitOrder: async (args0, { id }) => {
       return ordeSubmit(id);

@@ -28,6 +28,11 @@ const purchaseOrder = [
     path: "/order/purchaseProduct",
     name: "order_purchase_product",
     component: () => import("@views/order/purchaseOrder/Product.vue")
+  },
+  {
+    path: "/order/purchaseStore",
+    name: "order_purchase_store",
+    component: () => import("@views/order/purchaseOrder/DetailStore.vue")
   }
 ];
 
@@ -61,6 +66,11 @@ const saleOrder = [
     path: "/order/saleProduct",
     name: "order_sale_product",
     component: () => import("@views/order/saleOrder/Product.vue")
+  },
+  {
+    path: "/order/saleStore",
+    name: "order_sale_store",
+    component: () => import("@views/order/saleOrder/DetailStore.vue")
   }
 ];
 

@@ -40,6 +40,11 @@
         >出库</span
       >
       <span
+        v-else-if="perOrderStore && currentData['orderStatus'] == 3"
+        @click="orderDetailStore"
+        >出库详情</span
+      >
+      <span
         v-if="perDelete && currentData['orderStatus'] == 0"
         @click="orderDelete"
         >删除</span
@@ -66,6 +71,7 @@ export default {
       "perSubmit",
       "perTransfer",
       "perDelete",
+      "perOrderStore",
       "perOutStore",
       "detailList"
     ])
@@ -143,6 +149,9 @@ export default {
           })
           .catch(() => {});
       }
+    },
+    orderDetailStore() {
+      this.$router.push("/order/saleStore");
     },
     orderOutstore() {
       Confirm({ message: "确认前往出库?" })

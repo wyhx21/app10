@@ -40,6 +40,11 @@
         >入库</span
       >
       <span
+        v-else-if="perOrderStore && currentData['orderStatus'] == 4"
+        @click="orderDetailStore"
+        >入库详情</span
+      >
+      <span
         v-if="perDelete && currentData['orderStatus'] == 0"
         @click="orderDelete"
         >删除</span
@@ -67,6 +72,7 @@ export default {
       "perTransfer",
       "perInStore",
       "perDelete",
+      "perOrderStore",
       "detailList"
     ])
   },
@@ -143,6 +149,9 @@ export default {
           })
           .catch(() => {});
       }
+    },
+    orderDetailStore() {
+      this.$router.push("/order/purchaseStore");
     },
     orderInstore() {
       Confirm({ message: "确认前往入库?" })

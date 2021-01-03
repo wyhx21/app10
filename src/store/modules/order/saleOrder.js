@@ -6,6 +6,7 @@ import {
   orderTransfer,
   orderDelete
 } from "@axios/order/saleOrder.js";
+import { queryByOrderNo } from "@axios/store/storeProd.js";
 const defaultPageSize = 10;
 
 export default {
@@ -39,7 +40,8 @@ export default {
       { text: "出库", value: "3" }
     ],
     persistCustomer: {},
-    persistProductList: []
+    persistProductList: [],
+    orderStoreList: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -55,6 +57,7 @@ export default {
     detailList: _state => _state.detailList,
     persistCustomer: _state => _state.persistCustomer,
     persistProductList: _state => _state.persistProductList,
+    orderStoreList: _state => _state.orderStoreList,
     perPersist: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_order_sale");
       return arr.includes("h5_order_sale_persist");
@@ -77,6 +80,10 @@ export default {
       );
       return arr.includes("h5_store_outstore_handler");
     },
+    perOrderStore: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_order_sale");
+      return arr.includes("h5_order_sale_store");
+    },
     perDelete: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_order_sale");
       return arr.includes("h5_order_sale_delete");
@@ -95,6 +102,7 @@ export default {
     dataList: (_state, list = []) => _state.dataList.push(...list),
     currentData: (_state, data = {}) => (_state.currentData = data),
     detailList: (_state, list = []) => (_state.detailList = list),
+    orderStoreList: (_state, list = []) => (_state.orderStoreList = list),
     persistCustomer: (_state, customer = {}) => {
       if (_state.persistCustomer["id"] != customer["id"]) {
         _state.persistCustomer = customer;
@@ -201,6 +209,14 @@ export default {
     },
     submitOrder: async (args0, { id }) => {
       return ordeSubmit(id);
+    },
+    orderStoreInfo: async ({ getters, commit }) => {
+      const { orderNo } = getters.currentData;
+      queryByOrderNo(orderNo)
+        .then(res => {
+          commit("orderStoreList", res);
+        })
+        .catch(() => {});
     },
     transferOrder: async (args0, { id }) => {
       return orderTransfer(id);
