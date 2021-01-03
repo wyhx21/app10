@@ -27,8 +27,8 @@
     </div>
 
     <div class="app-bottom-fixed-search-button">
-      <span @click="confirmInstore">确认</span>
-      <span @click="cancelInstore">取消</span>
+      <span @click="confirmOutstore">确认</span>
+      <span @click="cancelOutstore">取消</span>
     </div>
   </app-page-container>
 </template>
@@ -45,7 +45,7 @@ export default {
     AppDetailItem
   },
   computed: {
-    ...mapGetters("page/instore", ["currentData", "detailList", "storeList"])
+    ...mapGetters("page/outstore", ["currentData", "detailList", "storeList"])
   },
   data() {
     return {
@@ -58,21 +58,21 @@ export default {
     this.detailInit();
   },
   methods: {
-    ...mapActions("page/instore", ["detailInit"]),
-    ...mapActions("page/instore", ["queryStoreArea", "submitInstore"]),
+    ...mapActions("page/outstore", ["detailInit"]),
+    ...mapActions("page/outstore", ["queryStoreArea", "submitOutstore"]),
     selectStore(val) {
       this.queryStoreArea(val);
     },
-    confirmInstore() {
+    confirmOutstore() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });
       } else {
         Confirm({ message: "确认保存?" })
           .then(() => {
             this.loading = true;
-            this.submitInstore()
+            this.submitOutstore()
               .then(() => {
-                this.$router.replace("/store/inStore");
+                this.$router.replace("/store/outStore");
                 this.loading = false;
               })
               .catch(() => {
@@ -82,10 +82,10 @@ export default {
           .catch(() => {});
       }
     },
-    cancelInstore() {
+    cancelOutstore() {
       Confirm({ message: "确认取消保存?" })
         .then(() => {
-          this.$router.push("/store/inStore");
+          this.$router.push("/store/outStore");
         })
         .catch(() => {});
     }
