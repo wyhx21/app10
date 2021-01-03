@@ -71,6 +71,12 @@ export default {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_order_sale");
       return arr.includes("h5_order_sale_transfer");
     },
+    perOutStore: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_store_outstore"
+      );
+      return arr.includes("h5_store_outstore_handler");
+    },
     perDelete: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_order_sale");
       return arr.includes("h5_order_sale_delete");

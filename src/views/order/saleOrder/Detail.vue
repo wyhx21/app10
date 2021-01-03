@@ -35,6 +35,11 @@
         >交易</span
       >
       <span
+        v-else-if="perOutStore && currentData['orderStatus'] == 2"
+        @click="orderOutstore"
+        >出库</span
+      >
+      <span
         v-if="perDelete && currentData['orderStatus'] == 0"
         @click="orderDelete"
         >删除</span
@@ -43,7 +48,7 @@
   </app-page-container>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 import AppRowData from "./RowData.vue";
 import AppOrderDetail from "./OrderDetail.vue";
@@ -61,6 +66,7 @@ export default {
       "perSubmit",
       "perTransfer",
       "perDelete",
+      "perOutStore",
       "detailList"
     ])
   },
@@ -74,6 +80,7 @@ export default {
     this.loadDetail();
   },
   methods: {
+    ...mapMutations("page/outstore", ["currentOrderId"]),
     ...mapActions("page/saleOrder", [
       "loadDetail",
       "submitOrder",
@@ -136,6 +143,14 @@ export default {
           })
           .catch(() => {});
       }
+    },
+    orderOutstore() {
+      Confirm({ message: "确认前往出库?" })
+        .then(() => {
+          this.currentOrderId(this.currentData);
+          this.$router.push("/store/outStoreDetail");
+        })
+        .catch(() => {});
     }
   }
 };
