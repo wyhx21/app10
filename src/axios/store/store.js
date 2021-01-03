@@ -15,11 +15,17 @@ const areaMerge = (data = {}) => axios.doPost("/store/storeArea/merge", data);
 const areaPersist = (data = {}) =>
   axios.doPost("/store/storeArea/persist", data);
 
+const sysStore = () => axios.doGet("/store/store/sysStore");
+
+const storeArea = storeId => axios.doGet(`/store/storeArea/sysArea/${storeId}`);
+
 export {
   queryPage,
   storeMerge,
   storePersist,
   areaList,
   areaMerge,
-  areaPersist
+  areaPersist,
+  sysStore,
+  storeArea
 };

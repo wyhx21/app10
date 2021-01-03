@@ -5,7 +5,10 @@
         <span>{{ data["orderNo"] }}</span>
       </td>
       <td rowspan="2">
-        <span class="app-link" @click="gotoDetail()" v-if="perPersist"
+        <span
+          class="app-link"
+          @click="gotoDetail()"
+          v-if="perPersist && showDetail"
           >详情</span
         >
       </td>
@@ -36,14 +39,21 @@
 <script>
 import { mapMutations, mapGetters } from "vuex";
 export default {
-  props: ["data"],
+  props: {
+    data: {
+      default: {}
+    },
+    showDetail: {
+      default: true
+    }
+  },
   computed: {
     ...mapGetters("page/instore", ["perPersist"])
   },
   methods: {
-    ...mapMutations("page/instore", ["currentData"]),
+    ...mapMutations("page/instore", ["currentOrderId"]),
     gotoDetail() {
-      this.currentData(this.data);
+      this.currentOrderId(this.data);
       this.$router.push("/store/inStoreDetail");
     }
   }

@@ -36,6 +36,11 @@ const inStore = [
     path: "/store/inStore",
     name: "store_instore",
     component: () => import("@views/store/instore/Index.vue")
+  },
+  {
+    path: "/store/inStoreDetail",
+    name: "store_instore_detail",
+    component: () => import("@views/store/instore/Detail.vue")
   }
 ];
 
