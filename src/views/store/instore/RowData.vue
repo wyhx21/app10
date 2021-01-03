@@ -9,7 +9,7 @@
           class="app-link"
           @click="gotoDetail()"
           v-if="perPersist && showDetail"
-          >详情</span
+          >入库</span
         >
       </td>
     </tr>

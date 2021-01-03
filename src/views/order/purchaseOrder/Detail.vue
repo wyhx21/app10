@@ -35,6 +35,11 @@
         >交易</span
       >
       <span
+        v-else-if="perInStore && currentData['orderStatus'] == 2"
+        @click="orderInstore"
+        >入库</span
+      >
+      <span
         v-if="perDelete && currentData['orderStatus'] == 0"
         @click="orderDelete"
         >删除</span
@@ -43,7 +48,7 @@
   </app-page-container>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 import AppRowData from "./RowData.vue";
 import AppOrderDetail from "./OrderDetail.vue";
@@ -60,6 +65,7 @@ export default {
       "perDetail",
       "perSubmit",
       "perTransfer",
+      "perInStore",
       "perDelete",
       "detailList"
     ])
@@ -80,6 +86,7 @@ export default {
       "transferOrder",
       "deleteOrder"
     ]),
+    ...mapMutations("page/instore", ["currentOrderId"]),
     orderSubmit() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });
@@ -136,6 +143,14 @@ export default {
           })
           .catch(() => {});
       }
+    },
+    orderInstore() {
+      Confirm({ message: "确认前往入库?" })
+        .then(() => {
+          this.currentOrderId(this.currentData);
+          this.$router.push("/store/inStoreDetail");
+        })
+        .catch(() => {});
     }
   }
 };

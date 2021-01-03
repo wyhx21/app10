@@ -84,6 +84,10 @@ export default {
         "h5_order_purchase"
       );
       return arr.includes("h5_order_purchase_delete");
+    },
+    perInStore: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_store_instore");
+      return arr.includes("h5_store_instore_handler");
     }
   },
   mutations: {
