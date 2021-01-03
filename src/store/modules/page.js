@@ -4,6 +4,7 @@ import supplier from "@store/modules/base/supplier.js";
 import prodType from "@store/modules/dict/prodType.js";
 import verifyType from "@store/modules/dict/verifyType.js";
 import store from "@store/modules/store/store.js";
+import instore from "@store/modules/store/instore.js";
 import storeArea from "@store/modules/store/storeArea.js";
 import purchaseOrder from "@store/modules/order/purchaseOrder.js";
 import purchaseSupplier from "@store/modules/order/purchaseSupplier.js";
@@ -21,6 +22,7 @@ export default {
     prodType,
     verifyType,
     store,
+    instore,
     storeArea,
     purchaseOrder,
     purchaseSupplier,

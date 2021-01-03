@@ -31,4 +31,12 @@ const storeSetting = [
   }
 ];
 
-export { storeSetting };
+const inStore = [
+  {
+    path: "/store/inStore",
+    name: "store_instore",
+    component: () => import("@views/store/instore/Index.vue")
+  }
+];
+
+export { storeSetting, inStore };

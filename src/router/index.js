@@ -3,7 +3,7 @@ import store from "@store/index.js";
 import { system } from "@router/package/common.js";
 import { product, customer, supplier } from "@router/package/base.js";
 import { prodType, verifyType } from "@router/package/dict.js";
-import { storeSetting } from "@router/package/store.js";
+import { storeSetting, inStore } from "@router/package/store.js";
 import { purchaseOrder, saleOrder } from "@router/package/order.js";
 
 const routes = [
@@ -14,6 +14,7 @@ const routes = [
   ...prodType,
   ...verifyType,
   ...storeSetting,
+  ...inStore,
   ...purchaseOrder,
   ...saleOrder
 ];
