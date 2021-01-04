@@ -9,20 +9,21 @@
       />
     </van-dropdown-menu>
 
-    <van-divider dashed :style="dividerStyle">选择区域</van-divider>
+    <van-divider dashed :style="dividerStyle">类型</van-divider>
     <van-dropdown-menu>
-      <van-dropdown-item
-        :model-value="areaId"
-        @update:modelValue="selectAreaId"
-        :options="allStroeAreaList"
-      />
+      <van-dropdown-item v-model="verifiCode" :options="typeOptions" />
     </van-dropdown-menu>
 
-    <van-divider dashed :style="dividerStyle">商品编码</van-divider>
+    <van-divider dashed :style="dividerStyle">订单状态</van-divider>
+    <van-dropdown-menu>
+      <van-dropdown-item v-model="verifiStatus" :options="verifyOptions" />
+    </van-dropdown-menu>
+
+    <van-divider dashed :style="dividerStyle">订单编号</van-divider>
     <van-field
-      v-model="prodCode"
-      name="prodCode"
-      placeholder="商品编码"
+      v-model="orderNo"
+      name="orderNo"
+      placeholder="订单编号"
       clearable
     />
 
@@ -38,37 +39,39 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapGetters("appStore/storeAreaParam", [
-      "allStoreList",
-      "allStroeAreaList",
-      "storeId",
-      "areaId"
-    ]),
+    ...mapGetters("appStore/storeAreaParam", ["allStoreList", "storeId"]),
+    ...mapGetters("appStore/storeVerify", ["verifyOptions", "typeOptions"]),
     ...mapGetters("page", ["dividerStyle"])
   },
   data() {
     return {
-      prodCode: ""
+      orderNo: "",
+      verifiStatus: "",
+      verifiCode: ""
     };
   },
   beforeMount() {
-    this.querySysStore(true);
+    this.querySysStore();
+    this.initVerifyOptions();
   },
   methods: {
-    ...mapMutations("appStore/storeAreaParam", ["selectAreaId"]),
     ...mapActions("appStore/storeAreaParam", ["querySysStore", "selectStore"]),
-    ...mapMutations("appStore/storeProd", ["queryParam"]),
+    ...mapActions("appStore/storeVerify", ["initVerifyOptions"]),
+    ...mapMutations("appStore/storeVerify", ["queryParam"]),
     onSubmit() {
       const param = {
-        areaId: this.areaId,
         storeId: this.storeId,
-        prodCode: this.prodCode
+        verifiStatus: this.verifiStatus,
+        orderNo: this.orderNo,
+        verifiCode: this.verifiCode
       };
       this.queryParam(param);
       this.$emit("refreshData");
     },
     resetParam() {
-      this.prodCode = "";
+      this.orderNo = "";
+      this.verifiStatus = "";
+      this.verifiCode = "";
       this.selectStore();
       this.queryParam();
     }

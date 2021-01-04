@@ -1,4 +1,5 @@
-import { queryPage } from "@axios/store/storeVerify.js";
+import { queryPage, queryDetail } from "@axios/store/storeVerify.js";
+import { verifyTypeList } from "@axios/dict/verifyType.js";
 const defaultPageSize = 10;
 
 export default {
@@ -19,7 +20,15 @@ export default {
       orderNo: ""
     },
     dataList: [],
-    currentData: {}
+    currentData: {},
+    detailList: [],
+    verifyOptions: [
+      { text: "全部", value: "" },
+      { text: "创建", value: "0" },
+      { text: "确认", value: "1" },
+      { text: "失效", value: "2" }
+    ],
+    typeOptions: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -31,6 +40,9 @@ export default {
       return totalPage > currentPage;
     },
     currentData: _state => _state.currentData,
+    detailList: _state => _state.detailList,
+    verifyOptions: _state => _state.verifyOptions,
+    typeOptions: _state => _state.typeOptions,
     perPersist: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_store_verify");
       return arr.includes("h5_store_verify_persist");
@@ -55,10 +67,12 @@ export default {
       _state.pageResult = { toalPage, total };
     },
     queryParam: (_state, params = {}) => (_state.params = params),
+    typeOptions: (_state, list = []) => (_state.typeOptions = list),
     nextPage: _state => _state.pageInfo.page++,
     dataClear: _state => (_state.dataList = []),
     dataList: (_state, list = []) => _state.dataList.push(...list),
-    currentData: (_state, data = {}) => (_state.currentData = data)
+    currentData: (_state, data = {}) => (_state.currentData = data),
+    detailList: (_state, list = []) => (_state.detailList = list)
   },
   actions: {
     initData: async ({ commit }, initData = false) => {
@@ -95,6 +109,27 @@ export default {
           resolve(false);
         }
       });
+    },
+    loadDetail: async ({ getters, commit }) => {
+      const { id } = getters.currentData;
+      queryDetail(id)
+        .then(res => {
+          commit("detailList", res);
+        })
+        .catch(() => {});
+    },
+    initVerifyOptions: async ({ commit }) => {
+      verifyTypeList()
+        .then(res => {
+          const all = { text: "全部", value: "" };
+          const result = res.map(item => {
+            let text = item["value"];
+            let value = item["code"];
+            return { text, value };
+          });
+          commit("typeOptions", [all, ...result]);
+        })
+        .catch(() => {});
     }
   }
 };

@@ -70,4 +70,23 @@ const storeProd = [
   }
 ];
 
-export default [...storeSetting, ...inStore, ...outStore, ...storeProd];
+const storeVerify = [
+  {
+    path: "/store/verify",
+    name: "store_verify",
+    component: () => import("@views/store/verify/Index.vue")
+  },
+  {
+    path: "/store/verifyDetail",
+    name: "store_verify_detail",
+    component: () => import("@views/store/verify/Detail.vue")
+  }
+];
+
+export default [
+  ...storeSetting,
+  ...inStore,
+  ...outStore,
+  ...storeProd,
+  ...storeVerify
+];

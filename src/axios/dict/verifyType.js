@@ -9,4 +9,6 @@ const verifyTypeMerge = (data = {}) =>
 const verifyTypePersist = (data = {}) =>
   axios.doPost("/system/dic/verifyType/persist", data);
 
-export { queryPage, verifyTypeMerge, verifyTypePersist };
+const verifyTypeList = () => axios.doGet("/system/dic/sysDic/verifiType");
+
+export { queryPage, verifyTypeMerge, verifyTypePersist, verifyTypeList };

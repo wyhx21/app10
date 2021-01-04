@@ -7,7 +7,8 @@ export default {
     storeList: [],
     storeAreaList: [],
     selectStoreId: null,
-    selectAreaId: null
+    selectAreaId: null,
+    areaAble: false
   },
   getters: {
     storeList: _state => _state.storeList,
@@ -19,16 +20,19 @@ export default {
       return [_state.all, ..._state.storeAreaList];
     },
     storeId: _state => _state.selectStoreId,
-    areaId: _state => _state.selectAreaId
+    areaId: _state => _state.selectAreaId,
+    areaAble: _state => _state.areaAble
   },
   mutations: {
     storeList: (_state, list = []) => (_state.storeList = list),
     storeAreaList: (_state, list = []) => (_state.storeAreaList = list),
     selectStoreId: (_state, storeId = "") => (_state.selectStoreId = storeId),
-    selectAreaId: (_state, areaId = "") => (_state.selectAreaId = areaId)
+    selectAreaId: (_state, areaId = "") => (_state.selectAreaId = areaId),
+    areaAble: (_state, flag = false) => (_state.areaAble = flag)
   },
   actions: {
-    querySysStore: async ({ commit }) => {
+    querySysStore: async ({ commit }, areaAble = false) => {
+      commit("areaAble", areaAble);
       commit("storeList");
       commit("storeAreaList");
       commit("selectStoreId");
@@ -44,22 +48,24 @@ export default {
         })
         .catch(() => {});
     },
-    selectStore: async ({ commit }, storeId = "") => {
+    selectStore: async ({ commit, getters }, storeId = "") => {
       commit("selectStoreId");
       commit("storeAreaList");
       commit("selectAreaId");
       if (storeId != "" && null != storeId) {
-        storeArea(storeId)
-          .then(res => {
-            const result = res.map(item => {
-              let text = item["value"];
-              let value = item["code"];
-              return { text, value };
-            });
-            commit("selectStoreId", storeId);
-            commit("storeAreaList", result);
-          })
-          .catch(() => {});
+        commit("selectStoreId", storeId);
+        if (getters.areaAble) {
+          storeArea(storeId)
+            .then(res => {
+              const result = res.map(item => {
+                let text = item["value"];
+                let value = item["code"];
+                return { text, value };
+              });
+              commit("storeAreaList", result);
+            })
+            .catch(() => {});
+        }
       }
     }
   }
