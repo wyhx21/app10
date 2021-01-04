@@ -28,7 +28,7 @@ import { mapMutations } from "vuex";
 export default {
   props: ["data"],
   methods: {
-    ...mapMutations("page/store", ["currentData"]),
+    ...mapMutations("store/store", ["currentData"]),
     gotoDetail() {
       this.currentData(this.data);
       this.$router.push("/store/storeDetail");

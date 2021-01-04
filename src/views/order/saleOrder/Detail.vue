@@ -86,7 +86,7 @@ export default {
     this.loadDetail();
   },
   methods: {
-    ...mapMutations("page/outstore", ["currentOrderId"]),
+    ...mapMutations("store/outstore", ["currentOrderId"]),
     ...mapActions("page/saleOrder", [
       "loadDetail",
       "submitOrder",

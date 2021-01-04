@@ -43,8 +43,8 @@ export default {
     AppDetailData
   },
   computed: {
-    ...mapGetters("page/storeProd", ["currentData"]),
-    ...mapGetters("page/storeProdDetail", ["dataList"]),
+    ...mapGetters("store/storeProd", ["currentData"]),
+    ...mapGetters("store/storeProdDetail", ["dataList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -60,8 +60,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/storeProdDetail", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/storeProdDetail", ["queryParam"]),
+    ...mapActions("store/storeProdDetail", ["queryPage", "addNextPage"]),
+    ...mapMutations("store/storeProdDetail", ["queryParam"]),
     initParam() {
       const { areaId, prodId } = this.currentData;
       this.queryParam({ areaId, prodId });

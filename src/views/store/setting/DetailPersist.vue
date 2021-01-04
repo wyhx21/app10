@@ -36,8 +36,8 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/store", ["currentData"]),
-    ...mapGetters("page/storeArea", ["perAreaPersist"])
+    ...mapGetters("store/store", ["currentData"]),
+    ...mapGetters("store/storeArea", ["perAreaPersist"])
   },
   data() {
     return {
@@ -49,7 +49,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("page/storeArea", ["areaPersist"]),
+    ...mapActions("store/storeArea", ["areaPersist"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });

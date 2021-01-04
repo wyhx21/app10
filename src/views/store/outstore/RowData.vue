@@ -48,10 +48,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("page/outstore", ["perPersist"])
+    ...mapGetters("store/outstore", ["perPersist"])
   },
   methods: {
-    ...mapMutations("page/outstore", ["currentOrderId"]),
+    ...mapMutations("store/outstore", ["currentOrderId"]),
     gotoDetail() {
       this.currentOrderId(this.data);
       this.$router.push("/store/outStoreDetail");

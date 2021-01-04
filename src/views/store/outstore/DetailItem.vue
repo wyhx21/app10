@@ -41,7 +41,7 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapGetters("page/outstore", ["storeAreaList"])
+    ...mapGetters("store/outstore", ["storeAreaList"])
   },
   props: {
     data: {
@@ -52,7 +52,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions("page/outstore", ["selectStoreArea"]),
+    ...mapActions("store/outstore", ["selectStoreArea"]),
     updateStoreArea(areaId) {
       const id = this.data["id"];
       this.selectStoreArea({ id, areaId });

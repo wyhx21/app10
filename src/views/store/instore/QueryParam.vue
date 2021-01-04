@@ -37,7 +37,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("page/instore", ["queryParam"]),
+    ...mapMutations("store/instore", ["queryParam"]),
     onSubmit(val) {
       this.queryParam(val);
       this.$emit("refreshData");

@@ -38,7 +38,7 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapGetters("page/storeAreaParam", [
+    ...mapGetters("store/storeAreaParam", [
       "allStoreList",
       "allStroeAreaList",
       "storeId",
@@ -55,9 +55,9 @@ export default {
     this.querySysStore();
   },
   methods: {
-    ...mapMutations("page/storeAreaParam", ["selectAreaId"]),
-    ...mapActions("page/storeAreaParam", ["querySysStore", "selectStore"]),
-    ...mapMutations("page/storeProd", ["queryParam"]),
+    ...mapMutations("store/storeAreaParam", ["selectAreaId"]),
+    ...mapActions("store/storeAreaParam", ["querySysStore", "selectStore"]),
+    ...mapMutations("store/storeProd", ["queryParam"]),
     onSubmit() {
       const param = {
         areaId: this.areaId,

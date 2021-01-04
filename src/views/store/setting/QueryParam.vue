@@ -44,7 +44,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("page/store", ["queryParam"]),
+    ...mapMutations("store/store", ["queryParam"]),
     onSubmit(val) {
       val.deleted = this.deleted;
       this.queryParam(val);

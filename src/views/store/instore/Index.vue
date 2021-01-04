@@ -46,7 +46,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/instore", ["dataList"]),
+    ...mapGetters("store/instore", ["dataList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -63,8 +63,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/instore", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/instore", ["queryParam"]),
+    ...mapActions("store/instore", ["queryPage", "addNextPage"]),
+    ...mapMutations("store/instore", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

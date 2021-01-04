@@ -38,7 +38,7 @@
 import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
-    ...mapGetters("page/instore", ["storeAreaList"])
+    ...mapGetters("store/instore", ["storeAreaList"])
   },
   props: {
     data: {
@@ -49,7 +49,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapMutations("page/instore", ["selectStoreArea"]),
+    ...mapMutations("store/instore", ["selectStoreArea"]),
     updateStoreArea(areaId) {
       const id = this.data["id"];
       this.selectStoreArea({ id, areaId });
