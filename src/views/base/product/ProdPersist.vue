@@ -81,7 +81,7 @@ export default {
     AppFianceNum
   },
   computed: {
-    ...mapGetters("page/product", ["prodTypes", "perPersist"])
+    ...mapGetters("appBase/product", ["prodTypes", "perPersist"])
   },
   data() {
     return {
@@ -95,7 +95,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("page/product", ["prodPersist"]),
+    ...mapActions("appBase/product", ["prodPersist"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });

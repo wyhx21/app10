@@ -39,7 +39,7 @@
 import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
-    ...mapGetters("page/product", ["prodTypeList"]),
+    ...mapGetters("appBase/product", ["prodTypeList"]),
     ...mapGetters("page", ["dividerStyle"])
   },
   data() {
@@ -51,7 +51,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("page/product", ["queryParam"]),
+    ...mapMutations("appBase/product", ["queryParam"]),
     onSubmit(val) {
       val.prodType = this.prodType;
       val.deleted = this.deleted;

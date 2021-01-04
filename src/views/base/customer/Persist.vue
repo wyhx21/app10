@@ -60,7 +60,7 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/customer", ["perPersist"])
+    ...mapGetters("appBase/customer", ["perPersist"])
   },
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("page/customer", ["dataPersist"]),
+    ...mapActions("appBase/customer", ["dataPersist"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });

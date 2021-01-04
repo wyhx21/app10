@@ -68,7 +68,7 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/supplier", ["currentData"])
+    ...mapGetters("appBase/supplier", ["currentData"])
   },
   data() {
     return {
@@ -87,7 +87,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("page/supplier", ["dataMerge"]),
+    ...mapActions("appBase/supplier", ["dataMerge"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });

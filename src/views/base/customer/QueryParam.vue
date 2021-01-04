@@ -62,7 +62,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("page/customer", ["queryParam"]),
+    ...mapMutations("appBase/customer", ["queryParam"]),
     onSubmit(val) {
       val.deleted = this.deleted;
       this.queryParam(val);

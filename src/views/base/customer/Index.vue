@@ -49,7 +49,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/customer", ["customerList", "perPersist"]),
+    ...mapGetters("appBase/customer", ["customerList", "perPersist"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -66,8 +66,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/customer", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/customer", ["queryParam"]),
+    ...mapActions("appBase/customer", ["queryPage", "addNextPage"]),
+    ...mapMutations("appBase/customer", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

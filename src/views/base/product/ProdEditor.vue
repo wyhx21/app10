@@ -77,7 +77,7 @@ export default {
     AppFianceNum
   },
   computed: {
-    ...mapGetters("page/product", ["currentProduct", "prodTypes"])
+    ...mapGetters("appBase/product", ["currentProduct", "prodTypes"])
   },
   data() {
     return {
@@ -98,7 +98,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("page/product", ["prodMerge"]),
+    ...mapActions("appBase/product", ["prodMerge"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });

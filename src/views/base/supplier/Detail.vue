@@ -59,7 +59,7 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/supplier", [
+    ...mapGetters("appBase/supplier", [
       "currentData",
       "perMerge",
       "purchasePersist",

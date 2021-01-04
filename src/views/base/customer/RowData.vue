@@ -37,7 +37,7 @@ import { mapMutations } from "vuex";
 export default {
   props: ["data"],
   methods: {
-    ...mapMutations("page/customer", ["currentCustomer"]),
+    ...mapMutations("appBase/customer", ["currentCustomer"]),
     gotoDetail() {
       this.currentCustomer(this.data);
       this.$router.push("/base/customerDetail");

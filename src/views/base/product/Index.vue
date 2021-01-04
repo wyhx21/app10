@@ -82,7 +82,7 @@ export default {
     AppQueryParam
   },
   computed: {
-    ...mapGetters("page/product", ["productList", "perPersist"]),
+    ...mapGetters("appBase/product", ["productList", "perPersist"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -100,12 +100,12 @@ export default {
     this.queryProdType();
   },
   methods: {
-    ...mapActions("page/product", [
+    ...mapActions("appBase/product", [
       "queryPage",
       "addNextPage",
       "queryProdType"
     ]),
-    ...mapMutations("page/product", ["queryParam", "currentProduct"]),
+    ...mapMutations("appBase/product", ["queryParam", "currentProduct"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

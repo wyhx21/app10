@@ -73,7 +73,7 @@ export default {
     AppFianceNum
   },
   computed: {
-    ...mapGetters("page/product", ["currentProduct", "perMerge"])
+    ...mapGetters("appBase/product", ["currentProduct", "perMerge"])
   },
   methods: {
     editorProd() {
