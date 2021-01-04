@@ -6,6 +6,7 @@ import page from "@store/modules/page.js";
 import appStore from "@store/modules/store.js";
 import appBase from "@store/modules/base.js";
 import appOrder from "@store/modules/order.js";
+import appDict from "@store/modules/dict.js";
 
 const store = createStore({
   modules: {
@@ -14,7 +15,8 @@ const store = createStore({
     page,
     appBase,
     appStore,
-    appOrder
+    appOrder,
+    appDict
   },
   plugins: [
     new VuexPersistence({

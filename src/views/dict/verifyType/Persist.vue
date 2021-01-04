@@ -51,7 +51,7 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/verifyType", ["perPersist"])
+    ...mapGetters("appDict/verifyType", ["perPersist"])
   },
   data() {
     return {
@@ -65,7 +65,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("page/verifyType", ["dataPersist"]),
+    ...mapActions("appDict/verifyType", ["dataPersist"]),
     confirmEditor() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });

@@ -49,7 +49,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/verifyType", ["dataList", "perPersist"]),
+    ...mapGetters("appDict/verifyType", ["dataList", "perPersist"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -66,8 +66,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/verifyType", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/verifyType", ["queryParam"]),
+    ...mapActions("appDict/verifyType", ["queryPage", "addNextPage"]),
+    ...mapMutations("appDict/verifyType", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

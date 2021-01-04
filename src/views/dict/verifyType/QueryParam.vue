@@ -37,7 +37,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("page/verifyType", ["queryParam"]),
+    ...mapMutations("appDict/verifyType", ["queryParam"]),
     onSubmit(val) {
       this.queryParam(val);
       this.$emit("refreshData");

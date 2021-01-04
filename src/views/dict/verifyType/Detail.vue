@@ -39,7 +39,7 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("page/verifyType", ["currentData", "perMerge"])
+    ...mapGetters("appDict/verifyType", ["currentData", "perMerge"])
   },
   methods: {
     editorData() {
