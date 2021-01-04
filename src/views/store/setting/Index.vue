@@ -49,7 +49,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("store/store", ["dataList", "perPersist"]),
+    ...mapGetters("appStore/store", ["dataList", "perPersist"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -66,8 +66,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("store/store", ["queryPage", "addNextPage"]),
-    ...mapMutations("store/store", ["queryParam"]),
+    ...mapActions("appStore/store", ["queryPage", "addNextPage"]),
+    ...mapMutations("appStore/store", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

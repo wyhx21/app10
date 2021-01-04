@@ -75,8 +75,8 @@ export default {
     AppDetailItem
   },
   computed: {
-    ...mapGetters("store/store", ["currentData", "perMerge"]),
-    ...mapGetters("store/storeArea", [
+    ...mapGetters("appStore/store", ["currentData", "perMerge"]),
+    ...mapGetters("appStore/storeArea", [
       "perAreaList",
       "perAreaPersist",
       "perAreaMerge",
@@ -92,8 +92,8 @@ export default {
     this.areaListQuery();
   },
   methods: {
-    ...mapActions("store/storeArea", ["queryAreaList"]),
-    ...mapMutations("store/storeArea", ["currentAreaData"]),
+    ...mapActions("appStore/storeArea", ["queryAreaList"]),
+    ...mapMutations("appStore/storeArea", ["currentAreaData"]),
     editorData() {
       this.$router.replace("/store/storeEditor");
     },

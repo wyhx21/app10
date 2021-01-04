@@ -45,7 +45,11 @@ export default {
     AppDetailItem
   },
   computed: {
-    ...mapGetters("store/outstore", ["currentData", "detailList", "storeList"])
+    ...mapGetters("appStore/outstore", [
+      "currentData",
+      "detailList",
+      "storeList"
+    ])
   },
   data() {
     return {
@@ -58,8 +62,8 @@ export default {
     this.detailInit();
   },
   methods: {
-    ...mapActions("store/outstore", ["detailInit"]),
-    ...mapActions("store/outstore", ["queryStoreArea", "submitOutstore"]),
+    ...mapActions("appStore/outstore", ["detailInit"]),
+    ...mapActions("appStore/outstore", ["queryStoreArea", "submitOutstore"]),
     selectStore(val) {
       this.queryStoreArea(val);
     },

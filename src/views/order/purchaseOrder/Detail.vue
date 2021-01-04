@@ -92,7 +92,7 @@ export default {
       "transferOrder",
       "deleteOrder"
     ]),
-    ...mapMutations("store/instore", ["currentOrderId"]),
+    ...mapMutations("appStore/instore", ["currentOrderId"]),
     orderSubmit() {
       if (this.loading == true) {
         Message({ message: "请不要重复点击" });

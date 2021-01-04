@@ -37,7 +37,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("store/instore", ["queryParam"]),
+    ...mapMutations("appStore/instore", ["queryParam"]),
     onSubmit(val) {
       this.queryParam(val);
       this.$emit("refreshData");

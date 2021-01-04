@@ -36,7 +36,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("store/storeProd", ["currentData"]),
+    ...mapMutations("appStore/storeProd", ["currentData"]),
     gotoDetail() {
       if (this.showDetail) {
         this.currentData(this.data);

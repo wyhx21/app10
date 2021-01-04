@@ -44,7 +44,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("store/store", ["queryParam"]),
+    ...mapMutations("appStore/store", ["queryParam"]),
     onSubmit(val) {
       val.deleted = this.deleted;
       this.queryParam(val);

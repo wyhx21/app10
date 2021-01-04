@@ -3,16 +3,16 @@ import VuexPersistence from "vuex-persist";
 import account from "@store/modules/account.js";
 import userRoleAuth from "@store/modules/userRoleAuth.js";
 import page from "@store/modules/page.js";
-import store from "@store/modules/store.js";
+import appStore from "@store/modules/store.js";
 import appBase from "@store/modules/base.js";
 
-const appStore = createStore({
+const store = createStore({
   modules: {
     account,
     userRoleAuth,
     page,
     appBase,
-    store
+    appStore
   },
   plugins: [
     new VuexPersistence({
@@ -22,4 +22,4 @@ const appStore = createStore({
   ]
 });
 
-export default appStore;
+export default store;
