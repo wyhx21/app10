@@ -65,7 +65,7 @@ export default {
     AppOrderDetail
   },
   computed: {
-    ...mapGetters("page/saleOrder", [
+    ...mapGetters("appOrder/saleOrder", [
       "currentData",
       "perDetail",
       "perSubmit",
@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     ...mapMutations("appStore/outstore", ["currentOrderId"]),
-    ...mapActions("page/saleOrder", [
+    ...mapActions("appOrder/saleOrder", [
       "loadDetail",
       "submitOrder",
       "transferOrder",

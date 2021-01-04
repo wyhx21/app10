@@ -91,8 +91,8 @@ export default {
     AppItemRow
   },
   computed: {
-    ...mapGetters("page/saleOrder", ["persistCustomer", "perPersist"]),
-    ...mapGetters("page/saleOrder", ["persistProductList"])
+    ...mapGetters("appOrder/saleOrder", ["persistCustomer", "perPersist"]),
+    ...mapGetters("appOrder/saleOrder", ["persistProductList"])
   },
   data() {
     return {
@@ -101,11 +101,11 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("page/saleOrder", [
+    ...mapMutations("appOrder/saleOrder", [
       "persistCustomerAmount",
       "persistCustomerRemark"
     ]),
-    ...mapActions("page/saleOrder", ["persistOrder"]),
+    ...mapActions("appOrder/saleOrder", ["persistOrder"]),
     selectCustomer() {
       this.$router.replace("/order/saleCustomer");
     },

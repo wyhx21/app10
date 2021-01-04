@@ -62,7 +62,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapMutations("page/saleOrder", [
+    ...mapMutations("appOrder/saleOrder", [
       "updateProduct",
       "updateProdRemark",
       "deleteProduct"

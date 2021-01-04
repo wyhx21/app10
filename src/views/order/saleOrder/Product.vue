@@ -50,8 +50,8 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/saleProduct", ["dataList"]),
-    ...mapGetters("page/saleOrder", ["persistProductList"]),
+    ...mapGetters("appOrder/saleProduct", ["dataList"]),
+    ...mapGetters("appOrder/saleOrder", ["persistProductList"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   watch: {
@@ -76,11 +76,11 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/saleProduct", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/saleOrder", {
+    ...mapActions("appOrder/saleProduct", ["queryPage", "addNextPage"]),
+    ...mapMutations("appOrder/saleOrder", {
       setProductList: "persistProductList"
     }),
-    ...mapMutations("page/saleProduct", ["queryParam"]),
+    ...mapMutations("appOrder/saleProduct", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

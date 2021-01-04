@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     ...mapGetters("page", ["dividerStyle"]),
-    ...mapGetters("page/saleOrder", {
+    ...mapGetters("appOrder/saleOrder", {
       orderStatusList: "orderStatusList",
       currentParam: "params"
     })
@@ -98,7 +98,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("page/saleOrder", ["queryParam"]),
+    ...mapMutations("appOrder/saleOrder", ["queryParam"]),
     onSubmit() {
       Object.assign(this.params, {
         orderTimeBegin: this.dataRange[0],

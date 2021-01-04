@@ -45,14 +45,14 @@ export default {
     this.saleProductList();
   },
   methods: {
-    ...mapMutations("page/purchaseOrder", {
+    ...mapMutations("appOrder/purchaseOrder", {
       purchaseOrderParam: "queryParam"
     }),
-    ...mapMutations("page/purchaseOrder", {
+    ...mapMutations("appOrder/purchaseOrder", {
       persistSupplier: "persistSupplier",
       purchaseProductList: "persistProductList"
     }),
-    ...mapMutations("page/saleOrder", {
+    ...mapMutations("appOrder/saleOrder", {
       persistCustomer: "persistCustomer",
       saleProductList: "persistProductList"
     })

@@ -40,7 +40,7 @@ export default {
     AppOrderDetail
   },
   computed: {
-    ...mapGetters("page/purchaseOrder", [
+    ...mapGetters("appOrder/purchaseOrder", [
       "orderStoreList",
       "perOrderStore",
       "currentData"
@@ -55,7 +55,7 @@ export default {
     this.orderStoreInfo();
   },
   methods: {
-    ...mapActions("page/purchaseOrder", ["orderStoreInfo"]),
+    ...mapActions("appOrder/purchaseOrder", ["orderStoreInfo"]),
     goBack() {
       this.$router.push("/order/purchaseDetail");
     }

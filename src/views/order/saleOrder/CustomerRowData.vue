@@ -32,7 +32,7 @@ import { mapMutations } from "vuex";
 export default {
   props: ["data"],
   methods: {
-    ...mapMutations("page/saleOrder", ["persistCustomer"]),
+    ...mapMutations("appOrder/saleOrder", ["persistCustomer"]),
     selectRecode() {
       this.persistCustomer(this.data);
       this.$router.push("/order/salePersist");

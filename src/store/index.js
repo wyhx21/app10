@@ -5,6 +5,7 @@ import userRoleAuth from "@store/modules/userRoleAuth.js";
 import page from "@store/modules/page.js";
 import appStore from "@store/modules/store.js";
 import appBase from "@store/modules/base.js";
+import appOrder from "@store/modules/order.js";
 
 const store = createStore({
   modules: {
@@ -12,7 +13,8 @@ const store = createStore({
     userRoleAuth,
     page,
     appBase,
-    appStore
+    appStore,
+    appOrder
   },
   plugins: [
     new VuexPersistence({

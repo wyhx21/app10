@@ -39,7 +39,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("page/purchaseOrder", ["dataList", "perPersist"]),
+    ...mapGetters("appOrder/purchaseOrder", ["dataList", "perPersist"]),
     ...mapGetters("page", ["finishedText"])
   },
   data() {
@@ -54,8 +54,8 @@ export default {
     this.onRefresh();
   },
   methods: {
-    ...mapActions("page/purchaseOrder", ["queryPage", "addNextPage"]),
-    ...mapMutations("page/purchaseOrder", ["queryParam"]),
+    ...mapActions("appOrder/purchaseOrder", ["queryPage", "addNextPage"]),
+    ...mapMutations("appOrder/purchaseOrder", ["queryParam"]),
     onRefresh() {
       this.listLoading = true;
       this.queryPage(true)

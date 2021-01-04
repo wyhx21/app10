@@ -67,7 +67,10 @@ export default {
     ])
   },
   methods: {
-    ...mapMutations("page/purchaseOrder", ["queryParam", "persistSupplier"]),
+    ...mapMutations("appOrder/purchaseOrder", [
+      "queryParam",
+      "persistSupplier"
+    ]),
     editorData() {
       this.$router.replace("/base/supplierEditor");
     },

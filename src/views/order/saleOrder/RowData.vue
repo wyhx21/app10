@@ -61,10 +61,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("page/saleOrder", ["perDetail"])
+    ...mapGetters("appOrder/saleOrder", ["perDetail"])
   },
   methods: {
-    ...mapMutations("page/saleOrder", ["currentData"]),
+    ...mapMutations("appOrder/saleOrder", ["currentData"]),
     gotoDetail() {
       if (this.showDetail) {
         this.currentData(this.data);

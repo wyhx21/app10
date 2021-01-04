@@ -65,7 +65,7 @@ export default {
     AppOrderDetail
   },
   computed: {
-    ...mapGetters("page/purchaseOrder", [
+    ...mapGetters("appOrder/purchaseOrder", [
       "currentData",
       "perDetail",
       "perSubmit",
@@ -86,7 +86,7 @@ export default {
     this.loadDetail();
   },
   methods: {
-    ...mapActions("page/purchaseOrder", [
+    ...mapActions("appOrder/purchaseOrder", [
       "loadDetail",
       "submitOrder",
       "transferOrder",
