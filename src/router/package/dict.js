@@ -44,4 +44,4 @@ const verifyType = [
   }
 ];
 
-export { prodType, verifyType };
+export default [...prodType, ...verifyType];

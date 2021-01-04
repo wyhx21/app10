@@ -67,4 +67,4 @@ const supplier = [
   }
 ];
 
-export { product, customer, supplier };
+export default [...product, ...customer, ...supplier];

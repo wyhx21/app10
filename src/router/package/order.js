@@ -74,4 +74,4 @@ const saleOrder = [
   }
 ];
 
-export { purchaseOrder, saleOrder };
+export default [...purchaseOrder, ...saleOrder];

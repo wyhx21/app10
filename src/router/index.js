@@ -1,29 +1,17 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import store from "@store/index.js";
-import { system } from "@router/package/common.js";
-import { product, customer, supplier } from "@router/package/base.js";
-import { prodType, verifyType } from "@router/package/dict.js";
-import {
-  storeSetting,
-  inStore,
-  outStore,
-  storeProd
-} from "@router/package/store.js";
-import { purchaseOrder, saleOrder } from "@router/package/order.js";
+import commonRouter from "@router/package/common.js";
+import baseRouter from "@router/package/base.js";
+import dictRouter from "@router/package/dict.js";
+import storeRouter from "@router/package/store.js";
+import orderRouter from "@router/package/order.js";
 
 const routes = [
-  ...system,
-  ...product,
-  ...customer,
-  ...supplier,
-  ...prodType,
-  ...verifyType,
-  ...storeSetting,
-  ...inStore,
-  ...outStore,
-  ...storeProd,
-  ...purchaseOrder,
-  ...saleOrder
+  ...commonRouter,
+  ...baseRouter,
+  ...dictRouter,
+  ...storeRouter,
+  ...orderRouter
 ];
 
 const route = createRouter({

@@ -70,4 +70,4 @@ const storeProd = [
   }
 ];
 
-export { storeSetting, inStore, outStore, storeProd };
+export default [...storeSetting, ...inStore, ...outStore, ...storeProd];
