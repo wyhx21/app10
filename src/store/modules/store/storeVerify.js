@@ -1,7 +1,9 @@
 import {
   queryPage,
   queryDetail,
-  persistRecord
+  persistRecord,
+  deleteRecord,
+  confirmRecord
 } from "@axios/store/storeVerify.js";
 import { verifyTypeList } from "@axios/dict/verifyType.js";
 import { queryProdList } from "@axios/store/storeProd.js";
@@ -287,6 +289,12 @@ export default {
             reject();
           });
       });
+    },
+    deleteRecord: async ({ getters }) => {
+      return deleteRecord(getters.currentData["id"]);
+    },
+    confirmRecord: async ({ getters }) => {
+      return confirmRecord(getters.currentData["id"]);
     }
   }
 };
