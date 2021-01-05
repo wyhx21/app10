@@ -25,16 +25,12 @@
 
     <div class="app-bottom-fixed-search-button">
       <span
-        v-if="currentData['verifiStatus'] == 0 && perConfirm"
+        v-if="currentData['disPacherStatus'] == 0 && perConfirm"
         @click="confirmData"
         >确认</span
       >
       <span
-        v-if="
-          perDelete &&
-            (currentData['verifiStatus'] == 0 ||
-              currentData['verifiStatus'] == 2)
-        "
+        v-if="perDelete && currentData['disPacherStatus'] == 0"
         @click="deleteData"
         >删除</span
       >
@@ -55,7 +51,7 @@ export default {
     AppDetailData
   },
   computed: {
-    ...mapGetters("appStore/storeVerify", [
+    ...mapGetters("appStore/storeDispatch", [
       "currentData",
       "detailList",
       "perDetail",
@@ -73,13 +69,13 @@ export default {
     this.loadDetail();
   },
   methods: {
-    ...mapActions("appStore/storeVerify", [
+    ...mapActions("appStore/storeDispatch", [
       "loadDetail",
       "deleteRecord",
       "confirmRecord"
     ]),
     gotBack() {
-      this.$router.push("/store/verify");
+      this.$router.push("/store/dispatch");
     },
     deleteData() {
       if (this.loading == true) {
@@ -91,7 +87,7 @@ export default {
           this.loading = true;
           this.deleteRecord()
             .then(() => {
-              this.$router.push("/store/verify");
+              this.$router.push("/store/dispatch");
               this.loading = false;
             })
             .catch(() => {
@@ -110,7 +106,7 @@ export default {
           this.loading = true;
           this.confirmRecord()
             .then(() => {
-              this.$router.push("/store/verify");
+              this.$router.push("/store/dispatch");
               this.loading = false;
             })
             .catch(() => {

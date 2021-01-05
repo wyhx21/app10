@@ -88,10 +88,24 @@ const storeVerify = [
   }
 ];
 
+const storeDispatch = [
+  {
+    path: "/store/dispatch",
+    name: "store_dispatch",
+    component: () => import("@views/store/dispatch/Index.vue")
+  },
+  {
+    path: "/store/dispatchDetail",
+    name: "store_dispatch_detail",
+    component: () => import("@views/store/dispatch/Detail.vue")
+  }
+];
+
 export default [
   ...storeSetting,
   ...inStore,
   ...outStore,
   ...storeProd,
-  ...storeVerify
+  ...storeVerify,
+  ...storeDispatch
 ];

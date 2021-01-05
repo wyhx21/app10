@@ -6,6 +6,7 @@ import store from "@store/modules/store/store.js";
 import storeArea from "@store/modules/store/storeArea.js";
 import instore from "@store/modules/store/instore.js";
 import outstore from "@store/modules/store/outstore.js";
+import storeDispatch from "@store/modules/store/storeDispatch.js";
 
 export default {
   namespaced: true,
@@ -17,6 +18,7 @@ export default {
     store,
     storeArea,
     instore,
-    outstore
+    outstore,
+    storeDispatch
   }
 };
