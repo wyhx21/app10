@@ -2,9 +2,9 @@ import {
   queryPage,
   queryById,
   queryDetail,
-  outStore,
-  queryAreaProdNum
+  outStore
 } from "@axios/store/outstore.js";
+import { queryAreaProdNum } from "@axios/store/storeProd.js";
 import { sysStore, storeArea } from "@axios/store/store.js";
 const defaultPageSize = 10;
 
@@ -188,13 +188,9 @@ export default {
           });
         })
         .catch(() => {
-          const storeNum = 0;
-          const storeProdId = null;
-          Object.assign(rowData, {
-            areaId,
-            storeNum,
-            storeProdId
-          });
+          delete rowData["areaId"];
+          delete rowData["storeNum"];
+          delete rowData["storeProdId"];
         });
     },
     submitOutstore: async ({ getters }) => {

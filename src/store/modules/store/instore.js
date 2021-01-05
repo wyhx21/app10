@@ -4,6 +4,7 @@ import {
   queryDetail,
   inStore
 } from "@axios/store/instore.js";
+import { queryAreaProdNum } from "@axios/store/storeProd.js";
 import { sysStore, storeArea } from "@axios/store/store.js";
 const defaultPageSize = 10;
 
@@ -66,10 +67,12 @@ export default {
     storeList: (_state, list = []) => (_state.storeList = list),
     storeAreaList: (_state, list = []) => (_state.storeAreaList = list),
     slectStoreId: (_state, storeId) => (_state.slectStoreId = storeId),
-    selectStoreArea: (_state, { id, areaId }) => {
-      _state.detailList
-        .filter(item => item["id"] == id)
-        .map(item => (item["areaId"] = areaId));
+    selectStoreArea: (_state, { id, areaId, storeNum }) => {
+      const [rowData] = _state.detailList.filter(item => item["id"] == id);
+      Object.assign(rowData, {
+        areaId,
+        storeNum
+      });
     },
     clearStoreArea: _state => {
       _state.detailList.map(item => delete item["areaId"]);
@@ -185,6 +188,18 @@ export default {
           .then(res => resolve(res))
           .catch(err => reject(err));
       });
+    },
+    selectStoreArea: ({ getters, commit }, { id, areaId }) => {
+      const [{ prodId: productId }] = getters.detailList.filter(
+        item => item["id"] == id
+      );
+      queryAreaProdNum({ areaId, productId })
+        .then(({ prodNum: storeNum }) => {
+          commit("selectStoreArea", { id, areaId, storeNum });
+        })
+        .catch(() => {
+          commit("selectStoreArea", { id, areaId, storeNum: 0 });
+        });
     }
   }
 };

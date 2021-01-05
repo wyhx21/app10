@@ -1,7 +1,7 @@
 <template>
   <table width="100%">
     <tr>
-      <td width="40%">
+      <td width="50%">
         <span>{{ data["prodCode"] }}</span>
       </td>
       <td>
@@ -17,7 +17,7 @@
       </td>
     </tr>
     <tr>
-      <td colspan="2">
+      <td>
         <van-dropdown-menu>
           <van-dropdown-item
             :model-value="data['areaId']"
@@ -25,6 +25,9 @@
             :options="storeAreaList"
           />
         </van-dropdown-menu>
+      </td>
+      <td>
+        <span>{{ data["storeNum"] }}</span>
       </td>
     </tr>
     <tr>
@@ -35,7 +38,7 @@
   </table>
 </template>
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters("appStore/instore", ["storeAreaList"])
@@ -49,7 +52,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapMutations("appStore/instore", ["selectStoreArea"]),
+    ...mapActions("appStore/instore", ["selectStoreArea"]),
     updateStoreArea(areaId) {
       const id = this.data["id"];
       this.selectStoreArea({ id, areaId });

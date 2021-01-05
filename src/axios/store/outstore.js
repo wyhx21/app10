@@ -9,7 +9,4 @@ const queryById = id => axios.doGet(`/orderInfo/saleOrder/findByOrderId/${id}`);
 
 const queryDetail = id => axios.doGet(`/orderInfo/orderDetail/outstore/${id}`);
 
-const queryAreaProdNum = ({ areaId, productId }) =>
-  axios.doGet(`/store/storeProd/findAreaProd/${areaId}/${productId}`);
-
-export { queryPage, outStore, queryById, queryDetail, queryAreaProdNum };
+export { queryPage, outStore, queryById, queryDetail };
