@@ -18,7 +18,16 @@
     </tr>
     <tr>
       <td>
+        <span>核销数量</span>
+      </td>
+      <td>
         <span>{{ data["prodNum"] }}({{ data["prodUnit"] }})</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span>改变数量</span>
       </td>
       <td>
         <span>{{ data["changeNum"] }}({{ data["prodUnit"] }})</span>

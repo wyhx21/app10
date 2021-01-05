@@ -3,11 +3,13 @@
     v-if="modelValue.length < 1"
     class="app-data-placeholder"
     @click="showKeyboard = true"
+    :class="$attrs.class"
   >
     {{ placeholder }}
   </div>
   <div v-else @click="showKeyboard = true" :class="$attrs.class">
-    <span>{{ modelValue }}</span>
+    <span class="app-com-munber-num">{{ modelValue }}</span>
+    <span class="app-com-munber-suffer">{{ suffer }}</span>
   </div>
 
   <van-number-keyboard
@@ -33,6 +35,9 @@ export default {
     },
     disabled: {
       default: true
+    },
+    suffer: {
+      default: ""
     }
   },
   data() {

@@ -1,6 +1,11 @@
-import { queryPage, queryDetail } from "@axios/store/storeVerify.js";
+import {
+  queryPage,
+  queryDetail,
+  persistRecord
+} from "@axios/store/storeVerify.js";
 import { verifyTypeList } from "@axios/dict/verifyType.js";
 import { queryProdList } from "@axios/store/storeProd.js";
+import { Message } from "@utils/messagerUtil.js";
 const defaultPageSize = 10;
 
 export default {
@@ -88,7 +93,108 @@ export default {
         item => item["rowId"] != rowId
       );
     },
-    clearAddDetail: _state => (_state.addDetailList = [])
+    clearAddDetail: _state => (_state.addDetailList = []),
+
+    prodListSelect: (_state, { rowId, prodList = [], areaId }) => {
+      const [rowData] = _state.addDetailList.filter(
+        item => item["rowId"] == rowId
+      );
+      if (!rowData) {
+        return;
+      }
+      const prodOptions = prodList.map(item => {
+        const { id, prodName } = item;
+        return { value: id, text: prodName };
+      });
+      Object.assign(rowData, {
+        prodList,
+        prodOptions,
+        areaId
+      });
+      delete rowData["storeProdId"];
+      delete rowData["prodNum"];
+      delete rowData["prodUnit"];
+      delete rowData["verifyNum"];
+      delete rowData["verifyRemark"];
+    },
+    prodListError: (_state, { rowId }) => {
+      const [rowData] = _state.addDetailList.filter(
+        item => item["rowId"] == rowId
+      );
+      if (!rowData) {
+        return;
+      }
+      delete rowData["prodList"];
+      delete rowData["prodOptions"];
+      delete rowData["areaId"];
+      delete rowData["storeProdId"];
+      delete rowData["prodNum"];
+      delete rowData["prodUnit"];
+      delete rowData["verifyNum"];
+      delete rowData["verifyRemark"];
+    },
+    selectProd: (_state, { rowId, storeProdId }) => {
+      const [oldData] = _state.addDetailList.filter(
+        item => item["storeProdId"] == storeProdId
+      );
+      if (oldData) {
+        Message({ message: "该商品已选择，请不要重复选择" });
+        return;
+      }
+      const [rowData] = _state.addDetailList.filter(
+        item => item["rowId"] == rowId
+      );
+      if (!rowData) {
+        return;
+      }
+      const [{ prodNum, prodUnit }] = rowData["prodList"].filter(
+        item => item["id"] == storeProdId
+      );
+      if (!prodNum) {
+        return;
+      }
+      Object.assign(rowData, {
+        storeProdId,
+        prodNum,
+        prodUnit
+      });
+
+      delete rowData["verifyNum"];
+      delete rowData["verifyRemark"];
+    },
+    selectVerifyType: (_state, { rowId, verifyType }) => {
+      const [rowData] = _state.addDetailList.filter(
+        item => item["rowId"] == rowId
+      );
+      if (!rowData) {
+        return;
+      }
+      Object.assign(rowData, {
+        verifyType
+      });
+    },
+    selectVerifyNum: (_state, { rowId, verifyNum }) => {
+      const [rowData] = _state.addDetailList.filter(
+        item => item["rowId"] == rowId
+      );
+      if (!rowData) {
+        return;
+      }
+      Object.assign(rowData, {
+        verifyNum
+      });
+    },
+    selectVerifyRemark: (_state, { rowId, verifyRemark }) => {
+      const [rowData] = _state.addDetailList.filter(
+        item => item["rowId"] == rowId
+      );
+      if (!rowData) {
+        return;
+      }
+      Object.assign(rowData, {
+        verifyRemark
+      });
+    }
   },
   actions: {
     initData: async ({ commit }, initData = false) => {
@@ -147,8 +253,40 @@ export default {
         })
         .catch(() => {});
     },
-    queryProdList: async (args0, areaId) => {
-      return queryProdList(areaId);
+    queryProdList: async ({ commit }, { areaId, rowId }) => {
+      queryProdList(areaId)
+        .then(prodList => {
+          commit("prodListSelect", { rowId, prodList, areaId });
+        })
+        .catch(() => {
+          commit("prodListError", { rowId });
+        });
+    },
+    persistData: async (
+      { getters, commit },
+      { storeId, verifyCode, remark }
+    ) => {
+      const details = getters.addDetailList.map(item => {
+        const {
+          areaId,
+          storeProdId,
+          verifyNum: prodNum,
+          verifyRemark: remark,
+          verifyType: verifiType
+        } = item;
+        return { areaId, storeProdId, prodNum, remark, verifiType };
+      });
+      const req = { storeId, remark, verifiCode: verifyCode, details };
+      return new Promise((resolve, reject) => {
+        persistRecord(req)
+          .then(() => {
+            commit("clearAddDetail");
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
     }
   }
 };

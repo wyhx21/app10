@@ -2,6 +2,7 @@
   <div
     v-if="modelValue.length < 1"
     class="app-fiance-num app-data-placeholder"
+    :class="$attrs.class"
     @click="showKeyboard = true"
   >
     {{ placeholder }}
