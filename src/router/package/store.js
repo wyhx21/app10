@@ -80,6 +80,11 @@ const storeVerify = [
     path: "/store/verifyDetail",
     name: "store_verify_detail",
     component: () => import("@views/store/verify/Detail.vue")
+  },
+  {
+    path: "/store/verifyPersist",
+    name: "store_verify_persist",
+    component: () => import("@views/store/verify/Persist.vue")
   }
 ];
 

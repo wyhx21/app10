@@ -6,7 +6,12 @@
   >
     {{ placeholder }}
   </div>
-  <div class="app-fiance-num" v-else @click="showKeyboard = true">
+  <div
+    class="app-fiance-num"
+    :class="$attrs.class"
+    v-else
+    @click="showKeyboard = true"
+  >
     <span class="app-fiance_currency">{{ currency }}</span>
     <span class="app_fiance_integer">{{ numInteger }}</span>
     <span>.</span>

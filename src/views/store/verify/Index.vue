@@ -3,6 +3,9 @@
     <template #header>
       <div class="app-top-tobar-search">
         <span class="app-link" @click="showQueryInfo">筛选</span>
+        <span class="app-link" @click="persistData" v-if="perPersist"
+          >新增</span
+        >
       </div>
     </template>
 
@@ -46,7 +49,7 @@ export default {
     AppRowData
   },
   computed: {
-    ...mapGetters("appStore/storeVerify", ["dataList"]),
+    ...mapGetters("appStore/storeVerify", ["dataList", "perPersist"]),
     ...mapGetters("page", ["finishedText", "popupQueryParamStyle"])
   },
   data() {
@@ -91,6 +94,11 @@ export default {
     },
     showQueryInfo() {
       this.queryInfoShow = true;
+    },
+    persistData() {
+      if (this.perPersist) {
+        this.$router.push("/store/verifyPersist");
+      }
     }
   }
 };

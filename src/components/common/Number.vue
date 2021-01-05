@@ -6,7 +6,7 @@
   >
     {{ placeholder }}
   </div>
-  <div v-else @click="showKeyboard = true">
+  <div v-else @click="showKeyboard = true" :class="$attrs.class">
     <span>{{ modelValue }}</span>
   </div>
 
