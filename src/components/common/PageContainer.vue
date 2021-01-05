@@ -2,11 +2,7 @@
   <div class="app-container">
     <slot name="head">
       <div>
-        <van-nav-bar
-          left-arrow
-          :title="system['value']"
-          @click-left="goPrePage"
-        >
+        <van-nav-bar left-arrow :title="pageName" @click-left="goPrePage">
           <template #left>
             <van-icon name="arrow-left" size="20" />返回</template
           >
@@ -45,7 +41,7 @@ export default {
   components: {},
   computed: {
     ...mapGetters("account", ["userName"]),
-    ...mapGetters("userRoleAuth", ["system"])
+    ...mapGetters("page", ["pageName"])
   },
   data() {
     return {
