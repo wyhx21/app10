@@ -93,6 +93,24 @@ html,body,#app {
   padding: 0;
 }
 
+.app-data-item-table {
+  width: 100%;
+  td {
+    em {
+      display: none;
+    }
+
+    &:active em{
+      display: inline;
+      position: absolute;
+      color:$app-back-primary;
+      font-size: 1em;
+      font-weight: 900;
+      top: -1em;
+    }
+  }
+}
+
 .app-top-tobar-search {
   height: $app-length-base*3;
   line-height: $app-length-base*3;
