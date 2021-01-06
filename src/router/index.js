@@ -22,7 +22,7 @@ const route = createRouter({
 route.beforeEach((to, from, next) => {
   store.commit("page/pageName", to);
   if (to.name === "login") {
-    store.commit("account/loginInfo", {});
+    store.commit("account/loginInfo");
     return next();
   } else if (to.matched.length < 1) {
     return next("/container");
