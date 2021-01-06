@@ -1,5 +1,5 @@
 <template>
-  <table width="100%">
+  <table class="app-data-item-table">
     <tr>
       <td width="35%">
         <span>{{ data["prodCode"] }}</span>
@@ -14,12 +14,14 @@
     <tr>
       <td>
         <app-fiance-num
+          placeholder="请输入单价"
           :model-value="data['price']"
           @update:modelValue="updatePrice"
         />
       </td>
       <td>
         <app-number
+          placeholder="请输入数量"
           :model-value="data['prodNum']"
           @update:modelValue="updateNum"
         />

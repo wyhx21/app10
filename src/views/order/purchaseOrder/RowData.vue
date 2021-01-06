@@ -1,7 +1,8 @@
 <template>
-  <table width="100%">
+  <table class="app-data-item-table">
     <tr>
       <td colspan="2">
+        <em>订单号</em>
         <span>{{ data["orderNo"] }}</span>
       </td>
       <td rowspan="2">
@@ -15,26 +16,37 @@
     </tr>
     <tr>
       <td width="40%">
+        <em>供应商编码</em>
         <span>{{ data["supplierCode"] }}</span>
       </td>
       <td width="40%">
+        <em>供应商名称</em>
         <span>{{ data["supplierName"] }}</span>
       </td>
     </tr>
     <tr>
-      <td><app-fiance-num :modelValue="data['orderAmount']" disabled /></td>
+      <td>
+        <em>订单金额</em>
+        <app-fiance-num :modelValue="data['orderAmount']" disabled />
+      </td>
       <td colspan="2">
+        <em>创建时间</em>
         <span>{{ data["createdDate"] }}</span>
       </td>
     </tr>
     <tr>
-      <td><app-fiance-num :modelValue="data['extraAmount']" disabled /></td>
+      <td>
+        <em>额外金额</em>
+        <app-fiance-num :modelValue="data['extraAmount']" disabled />
+      </td>
       <td colspan="2">
+        <em>生效时间</em>
         <span>{{ data["orderTime"] }}</span>
       </td>
     </tr>
     <tr v-if="!showDetail">
       <td colspan="3">
+        <em>备注</em>
         <p class="app-data-item_remark">{{ data["remark"] }}</p>
       </td>
     </tr>

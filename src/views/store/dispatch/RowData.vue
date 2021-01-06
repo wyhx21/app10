@@ -44,7 +44,7 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="3">
         <em>备注</em>
         <p class="app-data-item_remark">{{ data["toStoreName"] }}</p>
       </td>
