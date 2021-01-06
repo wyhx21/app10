@@ -32,7 +32,11 @@ export default {
       { text: "全部", value: "" },
       { text: "创建", value: "0" },
       { text: "确认", value: "1" }
-    ]
+    ],
+    // persist
+    addDetailList: [],
+    sourceAreaOptions: [],
+    toAreaOptions: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -48,6 +52,10 @@ export default {
     detailList: _state => _state.detailList,
     // *****************
     dispatchOptions: _state => _state.dispatchOptions,
+    // persist
+    addDetailList: _state => _state.addDetailList,
+    sourceAreaOptions: _state => _state.sourceAreaOptions,
+    toAreaOptions: _state => _state.toAreaOptions,
     // *****************
     perDetail: (_state, _getters, _rootState, _rootGetters) => {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
@@ -66,6 +74,12 @@ export default {
         "h5_store_dispatch"
       );
       return arr.includes("h5_store_dispatch_delete");
+    },
+    perPersist: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"](
+        "h5_store_dispatch"
+      );
+      return arr.includes("h5_store_dispatch_persist");
     }
   },
   mutations: {
@@ -80,7 +94,19 @@ export default {
     dataList: (_state, list = []) => _state.dataList.push(...list),
     currentData: (_state, data = {}) => (_state.currentData = data),
     // ***************
-    detailList: (_state, list = []) => (_state.detailList = list)
+    detailList: (_state, list = []) => (_state.detailList = list),
+    // persist
+    setSourceAreaOptions: (_state, list = []) =>
+      (_state.sourceAreaOptions = list),
+    setToAreaOptions: (_state, list = []) => (_state.toAreaOptions = list),
+    cleanAddDetail: _state => (_state.addDetailList = []),
+    addPersistRowData: (_state, { rowId }) =>
+      _state.addDetailList.push({ rowId }),
+    deletePersistRowData: (_state, { rowId }) => {
+      _state.addDetailList = _state.addDetailList.filter(
+        item => item["rowId"] != rowId
+      );
+    }
   },
   actions: {
     initData: async ({ commit }, initData = false) => {

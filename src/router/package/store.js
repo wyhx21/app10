@@ -115,6 +115,12 @@ const storeDispatch = [
     name: "store_dispatch_detail",
     meta: { pageName: "库存调度-详情" },
     component: () => import("@views/store/dispatch/Detail.vue")
+  },
+  {
+    path: "/store/dispatchPersist",
+    name: "store_dispatch_persist",
+    meta: { pageName: "库存调度-新增" },
+    component: () => import("@views/store/dispatch/Persist.vue")
   }
 ];
 

@@ -21,7 +21,8 @@ export default {
     },
     storeId: _state => _state.selectStoreId,
     areaId: _state => _state.selectAreaId,
-    areaAble: _state => _state.areaAble
+    areaAble: _state => _state.areaAble,
+    all: _state => _state.all
   },
   mutations: {
     storeList: (_state, list = []) => (_state.storeList = list),
@@ -67,6 +68,24 @@ export default {
             .catch(() => {});
         }
       }
+    },
+    selectStreArea: async ({ getters }, { storeId = "", withAll = false }) => {
+      return new Promise((resolve, reject) => {
+        const all = withAll ? [getters.all] : [];
+        if (storeId == "" || null == storeId) {
+          return resolve(all);
+        }
+        storeArea(storeId)
+          .then(res => {
+            const options = res.map(item => {
+              let text = item["value"];
+              let value = item["code"];
+              return { text, value };
+            });
+            resolve([...all, ...options]);
+          })
+          .catch(() => reject(all));
+      });
     }
   }
 };

@@ -69,7 +69,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
-import AppRowData from "./AddRowData.vue";
+import AppRowData from "./PersistRowData.vue";
 import { Confirm, Message } from "@utils/messagerUtil.js";
 export default {
   components: {
