@@ -84,6 +84,14 @@ html,body,#app {
   background-color: $app-back-primary;
 }
 
+.app-data-item_header {
+  color:$app-font-color-remark;
+  font-size: .8em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
 .app-data-item_remark {
   color:$app-font-color-remark;
   margin: 0;

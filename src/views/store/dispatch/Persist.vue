@@ -104,6 +104,7 @@ export default {
       "querySysStore",
       "selectStreArea"
     ]),
+    ...mapActions("appStore/storeDispatch", ["persistDispatch"]),
     ...mapMutations("appStore/storeDispatch", [
       "cleanAddDetail",
       "setSourceAreaOptions",
@@ -145,7 +146,34 @@ export default {
       const rowId = this.rowId;
       this.addPersistRowData({ rowId });
     },
-    persistRecord() {},
+    persistRecord() {
+      if (!this.sourceStoreId) {
+        Message({ message: "请选择调出仓库" });
+        return;
+      }
+      if (!this.toStoreId) {
+        Message({ message: "请选择调入仓库" });
+        return;
+      }
+      if (!this.disabled) {
+        Message({ message: "至少添加一条记录" });
+        return;
+      }
+      const param = {
+        sourceStoreId: this.sourceStoreId,
+        toStoreId: this.toStoreId,
+        remark: this.remark
+      };
+      Confirm({ message: "确认保存该记录?" })
+        .then(() => {
+          this.persistDispatch(param)
+            .then(() => {
+              this.$router.replace("/store/dispatch");
+            })
+            .catch(() => {});
+        })
+        .catch(() => {});
+    },
     cancelRecord() {
       Confirm({ message: "确认离开该页面?" })
         .then(() => {
