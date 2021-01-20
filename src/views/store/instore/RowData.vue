@@ -7,9 +7,15 @@
       <td rowspan="2">
         <span
           class="app-link"
-          @click="gotoDetail()"
-          v-if="perPersist && showDetail"
+          @click="gotoEdit()"
+          v-if="perPersist && showDetail && data['orderStatus'] == 2"
           >入库</span
+        >
+        <span
+          class="app-link"
+          @click="gotoDetail()"
+          v-else-if="perDetail && showDetail && data['orderStatus'] == 4"
+          >详情</span
         >
       </td>
     </tr>
@@ -35,6 +41,10 @@
       </td>
     </tr>
   </table>
+
+  <span class="app-data-item_deleted app-data-item_deleted_1">{{
+    data["statusValue"]
+  }}</span>
 </template>
 <script>
 import { mapMutations, mapGetters } from "vuex";
@@ -48,13 +58,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("appStore/instore", ["perPersist"])
+    ...mapGetters("appStore/instore", ["perPersist", "perDetail"])
   },
   methods: {
     ...mapMutations("appStore/instore", ["currentOrderId"]),
+    gotoEdit() {
+      this.currentOrderId(this.data);
+      this.$router.push("/store/instoreEdit");
+    },
     gotoDetail() {
       this.currentOrderId(this.data);
-      this.$router.push("/store/inStoreDetail");
+      this.$router.push("/store/instoreDetail");
     }
   }
 };

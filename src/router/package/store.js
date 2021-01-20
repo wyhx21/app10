@@ -45,9 +45,15 @@ const inStore = [
     component: () => import("@views/store/instore/Index.vue")
   },
   {
-    path: "/store/inStoreDetail",
-    name: "store_instore_detail",
+    path: "/store/instoreEdit",
+    name: "store_instore_edit",
     meta: { pageName: "订单入库-操作" },
+    component: () => import("@views/store/instore/Edit.vue")
+  },
+  {
+    path: "/store/instoreDetail",
+    name: "store_instore_detail",
+    meta: { pageName: "订单入库-详情" },
     component: () => import("@views/store/instore/Detail.vue")
   }
 ];

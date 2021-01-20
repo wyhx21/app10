@@ -4,7 +4,7 @@ import {
   queryDetail,
   inStore
 } from "@axios/store/instore.js";
-import { queryAreaProdNum } from "@axios/store/storeProd.js";
+import { queryAreaProdNum, queryByOrderNo } from "@axios/store/storeProd.js";
 import { sysStore, storeArea } from "@axios/store/store.js";
 const defaultPageSize = 10;
 
@@ -29,7 +29,8 @@ export default {
     detailList: [],
     storeList: [],
     storeAreaList: [],
-    slectStoreId: null
+    slectStoreId: null,
+    orderStoreList: []
   },
   getters: {
     dataList: _state => _state.dataList,
@@ -44,12 +45,17 @@ export default {
       const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_store_instore");
       return arr.includes("h5_store_instore_handler");
     },
+    perDetail: (_state, _getters, _rootState, _rootGetters) => {
+      const arr = _rootGetters["userRoleAuth/pageRoleAuth"]("h5_store_instore");
+      return arr.includes("h5_store_instore_detail");
+    },
     currentOrderId: _state => _state.currentOrderId,
     currentData: _state => _state.currentData,
     detailList: _state => _state.detailList,
     storeList: _state => _state.storeList,
     slectStoreId: _state => _state.slectStoreId,
-    storeAreaList: _state => _state.storeAreaList
+    storeAreaList: _state => _state.storeAreaList,
+    orderStoreList: _state => _state.orderStoreList
   },
   mutations: {
     pageInfo: (_state, { page = 1, size = defaultPageSize } = {}) =>
@@ -64,6 +70,7 @@ export default {
     currentData: (_state, data = {}) => (_state.currentData = data),
     currentOrderId: (_state, { id }) => (_state.currentOrderId = id),
     detailList: (_state, list = []) => (_state.detailList = list),
+    orderStoreList: (_state, list = []) => (_state.orderStoreList = list),
     storeList: (_state, list = []) => (_state.storeList = list),
     storeAreaList: (_state, list = []) => (_state.storeAreaList = list),
     slectStoreId: (_state, storeId) => (_state.slectStoreId = storeId),
@@ -114,6 +121,11 @@ export default {
         }
       });
     },
+    storeDetailInit: async ({ dispatch, commit }) => {
+      commit("orderStoreList");
+      await dispatch("queryCurrentData");
+      dispatch("orderStoreInfo");
+    },
     detailInit: async ({ dispatch }) => {
       dispatch("queryCurrentData");
       dispatch("queryDetailData");
@@ -121,14 +133,29 @@ export default {
     },
     queryCurrentData: async ({ getters, commit }) => {
       commit("currentData");
-      if (getters.perPersist) {
-        const orderId = getters.currentOrderId;
-        queryById(orderId)
-          .then(res => {
-            commit("currentData", res);
-          })
-          .catch(() => {});
-      }
+      return new Promise((resolve, reject) => {
+        if (getters.perPersist) {
+          const orderId = getters.currentOrderId;
+          queryById(orderId)
+            .then(res => {
+              commit("currentData", res);
+              resolve();
+            })
+            .catch(() => {
+              reject();
+            });
+        }
+      });
+    },
+    orderStoreInfo: async ({ getters, commit }) => {
+      commit("orderStoreList");
+      const { orderNo } = getters.currentData;
+      const detailType = 0;
+      queryByOrderNo({ orderNo, detailType })
+        .then(res => {
+          commit("orderStoreList", res);
+        })
+        .catch(() => {});
     },
     queryDetailData: async ({ getters, commit }) => {
       commit("detailList");

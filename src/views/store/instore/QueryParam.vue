@@ -1,5 +1,10 @@
 <template>
   <van-form @submit="onSubmit" class="app-param-form">
+    <van-divider dashed :style="dividerStyle">订单状态</van-divider>
+    <van-dropdown-menu>
+      <van-dropdown-item v-model="orderStatus" :options="statusList" />
+    </van-dropdown-menu>
+
     <van-divider dashed :style="dividerStyle">订单编号</van-divider>
     <van-field
       v-model="orderNo"
@@ -33,17 +38,26 @@ export default {
   data() {
     return {
       cusCode: "",
-      orderNo: ""
+      orderNo: "",
+      orderStatus: "",
+      statusList: [
+        { text: "全部", value: "" },
+        { text: "交易", value: "2" },
+        { text: "入库", value: "4" }
+      ]
     };
   },
   methods: {
     ...mapMutations("appStore/instore", ["queryParam"]),
     onSubmit(val) {
+      const orderStatus = this.orderStatus;
+      Object.assign(val, { orderStatus });
       this.queryParam(val);
       this.$emit("refreshData");
     },
     resetParam() {
       this.queryParam();
+      this.orderStatus = "";
       this.cusCode = "";
       this.orderNo = "";
     }
