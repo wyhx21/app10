@@ -6,8 +6,10 @@ const queryPage = (data, { page = 1, size = 10 } = {}) =>
 const queryDetail = (data, { page = 1, size = 10 } = {}) =>
   axios.doPost("/store/storeProdDetail/detail", data, { page, size });
 
-const queryByOrderNo = orderNo =>
-  axios.doGet(`/store/storeProdDetail/orderNo/${orderNo}`);
+const queryByOrderNo = ({ orderNo, detailType }) =>
+  axios.doGet(
+    `/store/storeProdDetail/orderStoreDetail/${detailType}/${orderNo}`
+  );
 
 const queryProdList = areaId =>
   axios.doGet(`/store/storeProd/prodList/${areaId}`);

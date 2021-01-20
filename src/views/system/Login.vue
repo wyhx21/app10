@@ -38,8 +38,8 @@ import { toMainPage } from "@router/routerHelper.js";
 export default {
   data() {
     return {
-      userCode: "admin",
-      passWord: "admin",
+      userCode: "tag",
+      passWord: "123456",
       loading: false,
       rules: {
         userCode: [

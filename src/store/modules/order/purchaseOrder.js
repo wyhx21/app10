@@ -219,7 +219,8 @@ export default {
     },
     orderStoreInfo: async ({ getters, commit }) => {
       const { orderNo } = getters.currentData;
-      queryByOrderNo(orderNo)
+      const detailType = 0;
+      queryByOrderNo({ orderNo, detailType })
         .then(res => {
           commit("orderStoreList", res);
         })
