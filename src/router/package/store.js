@@ -66,9 +66,15 @@ const outStore = [
     component: () => import("@views/store/outstore/Index.vue")
   },
   {
+    path: "/store/outStoreEdit",
+    name: "store_outstore_edit",
+    meta: { pageName: "订单出库-操作" },
+    component: () => import("@views/store/outstore/Edit.vue")
+  },
+  {
     path: "/store/outStoreDetail",
     name: "store_outstore_detail",
-    meta: { pageName: "订单出库-操作" },
+    meta: { pageName: "订单出库-详情" },
     component: () => import("@views/store/outstore/Detail.vue")
   }
 ];

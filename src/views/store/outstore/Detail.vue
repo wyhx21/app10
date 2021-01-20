@@ -3,19 +3,12 @@
     <template #header>
       <div class="app-data-item">
         <app-row-data :data="currentData" showDetail />
-        <van-dropdown-menu>
-          <van-dropdown-item
-            v-model="storeId"
-            :options="storeList"
-            @change="selectStore"
-          />
-        </van-dropdown-menu>
       </div>
     </template>
-    <div v-if="detailList" class="app-data-item">
+    <div v-if="orderStoreList" class="app-data-item">
       <div
         class="app-data-item_detail"
-        v-for="item of detailList"
+        v-for="item of orderStoreList"
         :key="item['id']"
         :class="{
           'app-data-item_cur': currentDetailId == item['id']
@@ -27,8 +20,7 @@
     </div>
 
     <div class="app-bottom-fixed-search-button">
-      <span @click="confirmOutstore">确认</span>
-      <span @click="cancelOutstore">取消</span>
+      <span @click="cancelInstore">返回</span>
     </div>
   </app-page-container>
 </template>
@@ -37,7 +29,6 @@ import { mapGetters, mapActions } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 import AppRowData from "./RowData.vue";
 import AppDetailItem from "./DetailItem.vue";
-import { Confirm, Message } from "@utils/messagerUtil.js";
 export default {
   components: {
     AppPageContainer,
@@ -45,53 +36,20 @@ export default {
     AppDetailItem
   },
   computed: {
-    ...mapGetters("appStore/outstore", [
-      "currentData",
-      "detailList",
-      "storeList"
-    ])
+    ...mapGetters("appStore/outstore", ["currentData", "orderStoreList"])
   },
   data() {
     return {
-      currentDetailId: null,
-      storeId: null,
-      loading: false
+      currentDetailId: null
     };
   },
   beforeMount() {
-    this.detailInit();
+    this.storeDetailInit();
   },
   methods: {
-    ...mapActions("appStore/outstore", ["detailInit"]),
-    ...mapActions("appStore/outstore", ["queryStoreArea", "submitOutstore"]),
-    selectStore(val) {
-      this.queryStoreArea(val);
-    },
-    confirmOutstore() {
-      if (this.loading == true) {
-        Message({ message: "请不要重复点击" });
-      } else {
-        Confirm({ message: "确认保存?" })
-          .then(() => {
-            this.loading = true;
-            this.submitOutstore()
-              .then(() => {
-                this.$router.replace("/store/outStore");
-                this.loading = false;
-              })
-              .catch(() => {
-                this.loading = false;
-              });
-          })
-          .catch(() => {});
-      }
-    },
-    cancelOutstore() {
-      Confirm({ message: "确认取消保存?" })
-        .then(() => {
-          this.$router.push("/store/outStore");
-        })
-        .catch(() => {});
+    ...mapActions("appStore/outstore", ["storeDetailInit"]),
+    cancelInstore() {
+      this.$router.push("/store/outStore");
     }
   }
 };

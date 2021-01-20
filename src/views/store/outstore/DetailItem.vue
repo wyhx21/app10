@@ -2,61 +2,24 @@
   <table width="100%">
     <tr>
       <td width="50%">
-        <span>{{ data["prodCode"] }}</span>
+        <span>{{ data["prodName"] }}({{ data["prodCode"] }})</span>
       </td>
       <td>
-        <span>{{ data["prodName"] }}</span>
+        <span>{{ data["changeNum"] }}({{ data["prodUnit"] }})</span>
       </td>
     </tr>
     <tr>
       <td>
-        <span>{{ data["prodUnit"] }}</span>
+        <span>{{ data["storeName"] }}({{ data["storeCode"] }})</span>
       </td>
       <td>
-        <span>{{ data["prodNum"] }}</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <van-dropdown-menu>
-          <van-dropdown-item
-            :model-value="data['areaId']"
-            @update:modelValue="updateStoreArea"
-            :options="storeAreaList"
-          />
-        </van-dropdown-menu>
-      </td>
-      <td>
-        <span>{{ data["storeNum"] }}</span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <p class="app-data-item_remark">{{ data["remark"] }}</p>
+        <span>{{ data["areaName"] }}({{ data["areaCode"] }})</span>
       </td>
     </tr>
   </table>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
 export default {
-  computed: {
-    ...mapGetters("appStore/outstore", ["storeAreaList"])
-  },
-  props: {
-    data: {
-      default: {}
-    }
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    ...mapActions("appStore/outstore", ["selectStoreArea"]),
-    updateStoreArea(areaId) {
-      const id = this.data["id"];
-      this.selectStoreArea({ id, areaId });
-    }
-  }
+  props: ["data"]
 };
 </script>
