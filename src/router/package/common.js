@@ -15,7 +15,7 @@ const system = [
         path: "",
         name: "messager",
         meta: { pageName: "主页" },
-        component: () => import("@views/system/Messager.vue")
+        component: () => import("@views/system/message/Index.vue")
       },
       {
         path: "menu",
