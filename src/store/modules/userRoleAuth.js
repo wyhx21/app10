@@ -2,7 +2,8 @@ import {
   userRole,
   userMenu,
   userAuth,
-  roleChange
+  roleChange,
+  queryMsg
 } from "@axios/system/account.js";
 
 export default {
@@ -11,7 +12,7 @@ export default {
     roleInfo: [],
     roleMenu: {},
     roleAuth: {},
-    turnsMsg: "aaa"
+    turnsMsg: null
   },
   getters: {
     turnsMsg: _state => _state.turnsMsg,
@@ -74,6 +75,7 @@ export default {
     }
   },
   mutations: {
+    turnsMsg: (_state, turnsMsg) => (_state.turnsMsg = turnsMsg),
     roleInfo: (_state, roleInfo) => (_state.roleInfo = roleInfo),
     roleMenu: (_state, roleMenu) => (_state.roleMenu = roleMenu),
     roleAuth: (_state, roleAuth) => (_state.roleAuth = roleAuth)
@@ -84,6 +86,7 @@ export default {
       dispatch("systemRole");
       dispatch("systemMenu");
       dispatch("systemAuth");
+      dispatch("queryMsg");
     },
     // 修改角色
     roleChange: async ({ commit, dispatch }, { roleId }) => {
@@ -132,6 +135,19 @@ export default {
           })
           .catch(() => {});
       });
+    },
+    // 轮播图
+    queryMsg: async ({ commit }) => {
+      queryMsg(1)
+        .then(res => {
+          const { data } = res;
+          if (!data || data.length < 1) {
+            return;
+          }
+          const msg = data.map(item => item["content"]).join("    ");
+          commit("turnsMsg", msg);
+        })
+        .catch(() => {});
     }
   }
 };

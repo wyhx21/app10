@@ -1,11 +1,7 @@
 <template>
   <app-page-container>
     <template #header>
-      <van-notice-bar
-        left-icon="volume-o"
-        v-if="showTurnMsg"
-        :text="turnsMsg"
-      />
+      <van-notice-bar left-icon="volume-o" :text="turnsMsg" />
     </template>
 
     <router-view />
@@ -19,10 +15,7 @@ export default {
     AppPageContainer
   },
   computed: {
-    ...mapGetters("userRoleAuth", ["turnsMsg"]),
-    showTurnMsg() {
-      return this.turnsMsg && this.turnsMsg.length > 0;
-    }
+    ...mapGetters("userRoleAuth", ["turnsMsg"])
   },
   data() {
     return {};
