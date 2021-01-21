@@ -10,9 +10,11 @@ export default {
   state: {
     roleInfo: [],
     roleMenu: {},
-    roleAuth: {}
+    roleAuth: {},
+    turnsMsg: "aaa"
   },
   getters: {
+    turnsMsg: _state => _state.turnsMsg,
     system: (_state, _getters, _rootState, _rootGetters) => {
       const _sysId = _rootGetters["account/sysId"];
       const _roleInfo = _state.roleInfo;

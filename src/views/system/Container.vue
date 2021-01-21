@@ -3,8 +3,8 @@
     <template #header>
       <van-notice-bar
         left-icon="volume-o"
-        v-if="showNoticeMsg"
-        :text="noticeMsg"
+        v-if="showTurnMsg"
+        :text="turnsMsg"
       />
     </template>
 
@@ -12,26 +12,23 @@
   </app-page-container>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import AppPageContainer from "@com/common/PageContainer.vue";
 export default {
   components: {
     AppPageContainer
   },
   computed: {
-    showNoticeMsg() {
-      return this.noticeMsg && this.noticeMsg.length > 0;
+    ...mapGetters("userRoleAuth", ["turnsMsg"]),
+    showTurnMsg() {
+      return this.turnsMsg && this.turnsMsg.length > 0;
     }
   },
   data() {
-    return {
-      noticeMsg: "在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。"
-    };
+    return {};
   },
   mounted() {
-    this.accountInit()
-      .then(() => {})
-      .catch(() => {});
+    this.accountInit();
   },
   methods: {
     ...mapActions("userRoleAuth", ["accountInit"])
