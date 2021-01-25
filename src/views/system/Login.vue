@@ -17,6 +17,15 @@
         placeholder="密码"
         :rules="rules.passWord"
       />
+      <van-field name="saveData" label="记住密码">
+        <template #input>
+          <van-checkbox
+            :modelValue="saveData"
+            @update:modelValue="setSaveData"
+            shape="square"
+          />
+        </template>
+      </van-field>
       <div style="margin: 16px;">
         <van-button
           round
@@ -33,12 +42,24 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import { toMainPage } from "@router/routerHelper.js";
 export default {
+  computed: {
+    ...mapGetters("account", ["saveData", "userInfo"])
+  },
+  watch: {
+    userInfo: {
+      handler(val) {
+        this.userCode = val?.userCode;
+        this.passWord = val?.passWord;
+      },
+      immediate: true
+    }
+  },
   data() {
     return {
-      userCode: "tag",
+      userCode: "wyh",
       passWord: "123456",
       loading: false,
       rules: {
@@ -59,6 +80,9 @@ export default {
   },
   methods: {
     ...mapActions("account", ["loginSubmit"]),
+    ...mapMutations("account", {
+      setSaveData: "saveData"
+    }),
     onSubmit(values) {
       this.loading = true;
       this.loginSubmit(values)

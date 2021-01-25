@@ -27,7 +27,9 @@ import {
   DropdownItem,
   NumberKeyboard,
   DatetimePicker,
-  Calendar
+  Calendar,
+  Checkbox,
+  CheckboxGroup
 } from "vant";
 
 const app = createApp(App);
@@ -56,6 +58,8 @@ app.use(RadioGroup);
 app.use(NumberKeyboard);
 app.use(DatetimePicker);
 app.use(Calendar);
+app.use(CheckboxGroup);
+app.use(Checkbox);
 
 app.use(store);
 app.use(router);
