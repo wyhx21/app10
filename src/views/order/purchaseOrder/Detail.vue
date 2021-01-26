@@ -157,7 +157,7 @@ export default {
       Confirm({ message: "确认前往入库?" })
         .then(() => {
           this.currentOrderId(this.currentData);
-          this.$router.push("/store/inStoreDetail");
+          this.$router.push("/store/inStoreEdit");
         })
         .catch(() => {});
     }
